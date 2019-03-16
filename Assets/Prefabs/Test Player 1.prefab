@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1152038002807615409}
   - component: {fileID: 1152038002807615414}
   - component: {fileID: 1562411513060711916}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Test Player 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -103,10 +103,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1152038002807615410}
     m_Modifications:
-    - target: {fileID: 100004, guid: b4b5f44b2d628cb4caa8623dc68818d8, type: 3}
-      propertyPath: m_Name
-      value: MainPlayer_Mesh
-      objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: b4b5f44b2d628cb4caa8623dc68818d8, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0
@@ -150,6 +146,22 @@ PrefabInstance:
     - target: {fileID: 400004, guid: b4b5f44b2d628cb4caa8623dc68818d8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100004, guid: b4b5f44b2d628cb4caa8623dc68818d8, type: 3}
+      propertyPath: m_Name
+      value: MainPlayer_Mesh
+      objectReference: {fileID: 0}
+    - target: {fileID: 100004, guid: b4b5f44b2d628cb4caa8623dc68818d8, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: b4b5f44b2d628cb4caa8623dc68818d8, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: b4b5f44b2d628cb4caa8623dc68818d8, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b4b5f44b2d628cb4caa8623dc68818d8, type: 3}
