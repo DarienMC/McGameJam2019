@@ -87,7 +87,7 @@ public class PropManager : MonoBehaviour
             if (isSpawingLine <= spawingObjectSliceChance)
             {
                 //getting a preset
-                int typeOfTerrain = Random.Range(0, nbrPresets);
+                int typeOfTerrain = Random.Range(0, nbrPresets - 1);
 
                 for (int i = 0; i < maxObjectsOnASlice; i++)
                 {
