@@ -27,11 +27,12 @@ public class GManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        timePassed += Time.time;
+        timePassed += Time.deltaTime;
         playerDistance = chaser.transform.position.z - runner.transform.position.z;
 
         //Win States
         if (playerDistance <= separationForChaserVictory) {
+            Debug.Log("Chaser wins by catching up!");
             PlayerDeath();
         }
 
@@ -40,6 +41,7 @@ public class GManager : MonoBehaviour
         }
 
         if (timerLimit <= timePassed) {
+            Debug.Log("Chaser wins by time!");
             PlayerDeath();
         }
 
