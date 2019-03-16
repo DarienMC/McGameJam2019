@@ -8,6 +8,8 @@ public class ScrollingTerrain : MonoBehaviour
     public int numberOfSlices = 2;
     public GameObject terrainSlice;
 
+    private Player2Movement player2Movement;
+
     private float sliceLength;
     private float scrollSpeedMultiplier = 1;
     private bool scrollSpeedModified = false;
@@ -15,6 +17,8 @@ public class ScrollingTerrain : MonoBehaviour
 
     void Start()
     {
+        player2Movement = FindObjectOfType<Player2Movement>();
+
         for (int i = 1; i <= numberOfSlices; ++i)
         {
             InstantiateSlice();
@@ -64,10 +68,17 @@ public class ScrollingTerrain : MonoBehaviour
         instance.transform.SetParent(transform);
     }
 
-    public void ModifyScrollSpeed(float speedMultiplier, float time)
+    public void ModifyScrollSpeed(float speedMultiplier, float time, bool speedUp)
     {
         scrollSpeedMultiplier = speedMultiplier;
         scrollSpeedModified = true;
         scrollSpeedModifiedTimer = time;
+
+        if (speedUp)
+            player2Movement.MoveForwards(time);
+        else
+        {
+            player2Movement.MoveBackwards(time);
+        }
     }
 }

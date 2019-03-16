@@ -139,4 +139,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speedUpMultiplier: 10
+  slowDownMultiplier: 0.5
   speedUpTime: 5

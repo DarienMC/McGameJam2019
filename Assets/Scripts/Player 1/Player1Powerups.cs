@@ -5,6 +5,7 @@ using UnityEngine;
 public class Player1Powerups : MonoBehaviour
 {
     public float speedUpMultiplier;
+    public float slowDownMultiplier;
     public float speedUpTime;
 
     private ScrollingTerrain scrollingTerrain;
@@ -22,10 +23,20 @@ public class Player1Powerups : MonoBehaviour
         {
             SpeedUp();
         }
+
+        if (Input.GetButtonDown("Test Button 2"))
+        {
+            SlowDown();
+        }
     }
 
     void SpeedUp()
     {
-        scrollingTerrain.ModifyScrollSpeed(speedUpMultiplier, speedUpTime);
+        scrollingTerrain.ModifyScrollSpeed(speedUpMultiplier, speedUpTime, true);
+    }
+
+    void SlowDown()
+    {
+        scrollingTerrain.ModifyScrollSpeed(slowDownMultiplier, speedUpTime, false);
     }
 }
