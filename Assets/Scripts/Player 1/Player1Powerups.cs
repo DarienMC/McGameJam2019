@@ -7,6 +7,7 @@ public class Player1Powerups : MonoBehaviour, DelegateTimer
     public float speedUpMultiplier;
     public float slowDownMultiplier;
     public float speedUpTime;
+    public GameObject obstacleHitVFX;
 
     private ScrollingTerrain scrollingTerrain;
     private bool poweredUp = false;
@@ -75,6 +76,7 @@ public class Player1Powerups : MonoBehaviour, DelegateTimer
         {
             Destroy(other.gameObject);
             SlowDown();
+            Instantiate(obstacleHitVFX, other.transform.position, Quaternion.identity);
         }
     }
 
