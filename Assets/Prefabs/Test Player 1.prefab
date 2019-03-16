@@ -95,6 +95,7 @@ MonoBehaviour:
   speedUpMultiplier: 10
   slowDownMultiplier: 0.5
   speedUpTime: 5
+  obstacleHitVFX: {fileID: 100018, guid: a40b64bf23366dc42a892af2c6ff6140, type: 3}
 --- !u!1001 &4040201223916003891
 PrefabInstance:
   m_ObjectHideFlags: 0
