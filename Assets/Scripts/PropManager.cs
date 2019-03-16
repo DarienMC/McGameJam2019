@@ -9,18 +9,19 @@ public class PropManager : MonoBehaviour
     public GameObject cone;
     public GameObject powerUp;
     public GameObject texture;
-    public int maxObjectsOnASlice;
-    private int nbrPresets = 20;
     //must be in pourcentage
     public int spawingObjectSliceChance;
+    public int lengthSpawningArea;
 
-    private float widthTerrain = 20.0f;
+    private int maxObjectsOnASlice = 7;
+    private int nbrPresets = 30;
+    private float widthTerrain;
     private enum Obstacle { beer, jumpObs1, jumpObs2, avoidObs, nothing, jumpBeerObs };
 
 
     Obstacle[,] array = new Obstacle[,]
     {
-        {Obstacle.beer, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing},
+        {Obstacle.beer, Obstacle.nothing, Obstacle.nothing, Obstacle.jumpObs2, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing},
         {Obstacle.nothing, Obstacle.beer, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing},
         {Obstacle.nothing, Obstacle.nothing, Obstacle.beer, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing},
         {Obstacle.nothing, Obstacle.nothing, Obstacle.nothing, Obstacle.beer, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing},
@@ -29,7 +30,7 @@ public class PropManager : MonoBehaviour
         {Obstacle.nothing, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing, Obstacle.beer},
         {Obstacle.beer, Obstacle.nothing, Obstacle.nothing, Obstacle.beer, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing},
         {Obstacle.nothing, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing, Obstacle.beer, Obstacle.nothing, Obstacle.beer},
-        {Obstacle.nothing, Obstacle.nothing, Obstacle.nothing, Obstacle.beer, Obstacle.beer, Obstacle.nothing, Obstacle.nothing},
+        {Obstacle.beer, Obstacle.nothing, Obstacle.nothing, Obstacle.beer, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing},
         {Obstacle.jumpObs2, Obstacle.nothing, Obstacle.avoidObs, Obstacle.avoidObs, Obstacle.avoidObs, Obstacle.avoidObs, Obstacle.avoidObs},
         {Obstacle.avoidObs, Obstacle.jumpObs1,  Obstacle.nothing, Obstacle.nothing, Obstacle.nothing, Obstacle.avoidObs,  Obstacle.avoidObs},
         {Obstacle.nothing, Obstacle.avoidObs,  Obstacle.avoidObs, Obstacle.avoidObs, Obstacle.avoidObs, Obstacle.avoidObs,  Obstacle.jumpBeerObs},
@@ -42,6 +43,12 @@ public class PropManager : MonoBehaviour
         {Obstacle.beer, Obstacle.nothing,  Obstacle.avoidObs, Obstacle.beer, Obstacle.nothing, Obstacle.nothing,  Obstacle.nothing},
         {Obstacle.nothing, Obstacle.nothing,  Obstacle.nothing, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing,  Obstacle.nothing},
         {Obstacle.nothing, Obstacle.nothing,  Obstacle.nothing, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing,  Obstacle.nothing},
+        {Obstacle.nothing, Obstacle.nothing,  Obstacle.nothing, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing,  Obstacle.nothing},
+        {Obstacle.nothing, Obstacle.nothing,  Obstacle.nothing, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing,  Obstacle.nothing},
+        {Obstacle.nothing, Obstacle.nothing,  Obstacle.nothing, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing,  Obstacle.nothing},
+        {Obstacle.nothing, Obstacle.nothing,  Obstacle.nothing, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing,  Obstacle.nothing},
+        {Obstacle.nothing, Obstacle.nothing,  Obstacle.nothing, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing,  Obstacle.nothing},
+        {Obstacle.nothing, Obstacle.nothing,  Obstacle.nothing, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing,  Obstacle.nothing},
         {Obstacle.nothing, Obstacle.nothing,  Obstacle.nothing, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing,  Obstacle.nothing}
     };
 
@@ -50,6 +57,10 @@ public class PropManager : MonoBehaviour
     void Start()
     {
         terrain = GetComponent<ScrollingTerrain>();
+        widthTerrain = texture.GetComponent<Renderer>().bounds.size.z * maxObjectsOnASlice;
+
+        
+
         StartCoroutine(GenerateProps());
     }
 
@@ -58,13 +69,21 @@ public class PropManager : MonoBehaviour
     IEnumerator GenerateProps()
     {
         widthTerrain = texture.GetComponent<Renderer>().bounds.size.z*maxObjectsOnASlice;
-        
+
+        //initiate terrain
+        for (int i = 0; i <= lengthSpawningArea; i++)
+        {
+            GenerateEmptySlice(widthTerrain);
+
+            yield return new WaitForSeconds(1.75f);
+        }
+
+
         while (true)
         {
-            yield return new WaitForSeconds(1.0f);
             int isSpawingLine = Random.Range(0, 100);
-            
 
+            //spawn obstacles
             if (isSpawingLine <= spawingObjectSliceChance)
             {
                 //getting a preset
@@ -73,53 +92,91 @@ public class PropManager : MonoBehaviour
                 for (int i = 0; i < maxObjectsOnASlice; i++)
                 {
                     //position of object
-                    float scaledWidth = (widthTerrain * terrain.terrainSlice.transform.localScale.x);
-                    float offset = (float)(((i) * (widthTerrain / maxObjectsOnASlice)) - (widthTerrain / 2) + (float)(widthTerrain / maxObjectsOnASlice)/2);
-                   
-                    
+                    float offset = (float)(((i) * (widthTerrain / maxObjectsOnASlice)) - (widthTerrain / 2) + (float)(widthTerrain / maxObjectsOnASlice) / 2);
 
                     if (array[typeOfTerrain, i] == Obstacle.jumpObs1)
-                    {   
-                        GameObject instance = Instantiate(porthole1, new Vector3(offset, -0.45f, -20), porthole1.transform.rotation);
-                        terrain.AttachProp(instance.transform);
+                    {
+                        GenerateFloor(porthole1, offset);
                     }
 
-                    else if(array[typeOfTerrain, i] == Obstacle.jumpObs2)
+                    else if (array[typeOfTerrain, i] == Obstacle.jumpObs2)
                     {
-                        GameObject instance = Instantiate(porthole2, new Vector3(offset, -0.40f, -20), porthole2.transform.rotation);
+                        GameObject instance = Instantiate(porthole2, new Vector3(offset + (float)(texture.GetComponent<Renderer>().bounds.size.x), 0f, -20 +(float)(texture.GetComponent<Renderer>().bounds.size.z)), porthole2.transform.rotation);
                         terrain.AttachProp(instance.transform);
+                        i++;
                     }
 
                     else if (array[typeOfTerrain, i] == Obstacle.avoidObs)
                     {
-                        GameObject instance = Instantiate(cone, new Vector3(offset, 0, -20), cone.transform.rotation);
-                        //instance.transform.rotation = 
-                        terrain.AttachProp(instance.transform);
+                        GenerateFloor(texture, offset);
+                        GenerateObstacle(cone, offset);
                     }
 
                     else if (array[typeOfTerrain, i] == Obstacle.beer)
                     {
-                        GameObject instance = Instantiate(powerUp, new Vector3(offset, 0.2F, -20), Quaternion.identity);
-                        terrain.AttachProp(instance.transform);
+                        GenerateFloor(texture, offset);
+                        GenerateObstacle(powerUp, offset);
                     }
 
                     else if (array[typeOfTerrain, i] == Obstacle.jumpBeerObs)
                     {
-                        GameObject instance = Instantiate(porthole1, new Vector3(offset, -0.45F, -20), porthole1.transform.rotation);
-                        terrain.AttachProp(instance.transform);
+                       
+                        GenerateFloor(porthole1, offset);
                         GameObject instance2 = Instantiate(powerUp, new Vector3(offset, 2, -20), Quaternion.identity);
                         terrain.AttachProp(instance2.transform);
                     }
                     else
                     {
-                        GameObject instance = Instantiate(texture, new Vector3(offset, -0.50f, -20), texture.transform.rotation);
-                        terrain.AttachProp(instance.transform);
+                        GenerateFloor(texture, offset);
                     }
 
                 }
-                yield return new WaitForSeconds(2.0f);
+                //spawing 2 empty slices to give the player a chance to react in between slices
+                yield return new WaitForSeconds(1.75f);
+                GenerateEmptySlice(widthTerrain);
+
+                yield return new WaitForSeconds(1.75f);
+                GenerateEmptySlice(widthTerrain);
+
+                yield return new WaitForSeconds(1.75f);
             }
+
+            //spawn empty slice
+            else
+            {
+                GenerateEmptySlice(widthTerrain);
+
+                yield return new WaitForSeconds(1.75f);
+            }
+        }
+
+        void GenerateEmptySlice(float width)
+        {
+
+            for (int i = 0; i < maxObjectsOnASlice; i++)
+            {
+                //position of object
+                float offset = (float)(((i) * (width / maxObjectsOnASlice)) - (width / 2) + (float)(width / maxObjectsOnASlice) / 2);
+
+                GameObject instance = Instantiate(texture, new Vector3(offset, 0f, -20), texture.transform.rotation);
+                terrain.AttachProp(instance.transform);
+
+            }
+
+        }
+
+        void GenerateObstacle(GameObject gameobject, float offset)
+        {
+                GameObject instance = Instantiate(gameobject, new Vector3(offset, 0.2f, -20), gameobject.transform.rotation);
+                terrain.AttachProp(instance.transform);
             
+        }
+
+        void GenerateFloor(GameObject gameobject, float offset)
+        {
+                GameObject instance = Instantiate(gameobject, new Vector3(offset, 0f, -20), gameobject.transform.rotation);
+                terrain.AttachProp(instance.transform);
+
         }
     }
 }
