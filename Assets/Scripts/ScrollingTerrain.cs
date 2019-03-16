@@ -9,7 +9,7 @@ public class ScrollingTerrain : MonoBehaviour
     public GameObject terrainSlice;
 
     private float sliceLength;
-    private GameObject upcomingSlice;
+    public GameObject upcomingSlice;
 
     void Start()
     {
@@ -54,6 +54,9 @@ public class ScrollingTerrain : MonoBehaviour
     // Attach the prop to the terrain so that it moves along with it.
     public void AttachProp(Transform prop)
     {
+       // Vector3 actualScale = prop.transform.localScale;
         prop.SetParent(upcomingSlice.transform);
+        prop.transform.position = new Vector3(prop.transform.position.x * upcomingSlice.transform.localScale.x, prop.transform.position.y, prop.transform.position.z);
+       // prop.transform.localScale = new Vector3( prop.transform.localScale.x * upcomingSlice.transform.localScale.x , prop.transform.localScale.y, prop.transform.localScale.z);
     }
 }

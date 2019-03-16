@@ -7,19 +7,24 @@ public class PropManager : MonoBehaviour
     public GameObject obstacle;
     public GameObject obstacle2;
     public GameObject powerUp;
-    int terrainSlots = 3;
+    public int maxObjectsOnASlice;
+    private int nbrPresets = 9;
+    //must be in pourcentage
+    public int spawingObjectSliceChance;
+
+    private float widthTerrain = 10.0F;
 
     int[,] array = new int[,]
     {
-        {1, 0, 0, 0, 0},
-        {0, 1, 0, 0, 0},
-        {0, 0, 1, 0, 0},
-        {2, 0, 0, 0, 0},
-        {0, 2, 0, 0, 0},
-        {0, 0, 2, 0, 0},
-        {2, 0, 0, 0, 0},
-        {0, 2, 0, 0, 0},
-        {0, 0, 2, 0, 0},
+        {3, 1, 1, 1, 2, 1, 1},
+        {0, 1, 0, 0, 1, 1, 1},
+        {0, 0, 1, 1, 0, 1, 1},
+        {2, 0, 0, 0, 0, 1, 1},
+        {0, 2, 3, 0, 0, 1, 1},
+        {0, 0, 2, 3, 0, 1, 1},
+        {2, 0, 0, 3, 0, 1, 1},
+        {0, 3, 0, 0, 0, 1, 1},
+        {0, 0, 3, 0, 0, 1, 1},
     };
 
     ScrollingTerrain terrain;
@@ -30,40 +35,6 @@ public class PropManager : MonoBehaviour
         StartCoroutine(GenerateProps());
     }
 
-    /*void GenerateLine(GameObject child)
-    {
-        //if type of line == 0, line is empty, ow add obstacles
-        int typeOfLine = Random.Range(0, 2);
-
-        if (typeOfLine == 1)
-        {
-            //getting a preset
-            int typeOfTerrain = Random.Range(0, 9);
-
-            //places blox 2 units from each other from the chosen preset
-            for (int i = -1; i < terrainSlots-1; i++)
-            {
-                if (array[typeOfTerrain, i+1] == 1)
-                {
-                    GameObject instance = Instantiate(obstacle, new Vector3(0, 2, 0), Quaternion.identity);
-                    float offset = sliceLength * (numberOfSlices - transform.childCount - 2);
-                    instance.transform.Translate(Vector3.forward);
-                    //child.transform.SetAsLastSibling(instance);
-
-                }
-                //Instantiate(obstacle, transform.position+new Vector3(i * 2.0F, 1F, 0), Quaternion.identity);
-                else if (array[typeOfTerrain, i+1] == 2)
-                {
-                    GameObject instance = Instantiate(powerUp, new Vector3(0, 2, 0), Quaternion.identity);
-                    float offset = sliceLength * (numberOfSlices - transform.childCount - 2);
-                    instance.transform.Translate(Vector3.forward);
-                }
-
-
-            }
-
-        }
-    }*/
 
     // Generate props (obstacles and powerups) at regular intervals.
     IEnumerator GenerateProps()
@@ -71,9 +42,43 @@ public class PropManager : MonoBehaviour
         yield return new WaitForSeconds(1.0f);
         while (true)
         {
-            GameObject instance = Instantiate(obstacle, new Vector3(0, 2, -20), Quaternion.identity);
-            terrain.AttachProp(instance.transform);
-            yield return new WaitForSeconds(5.0f);
+            int typeOfLine = Random.Range(0, 100);
+            
+
+            if (typeOfLine < spawingObjectSliceChance)
+            {
+                //getting a preset
+                int typeOfTerrain = Random.Range(0, nbrPresets);
+
+                for (int i = 0; i < maxObjectsOnASlice; i++)
+                {
+                    //position of object
+                    float scaledWidth = (widthTerrain * terrain.terrainSlice.transform.localScale.x);
+                    float offset = (float)(((i) * (widthTerrain / maxObjectsOnASlice)) - (widthTerrain / 2) + (float)(widthTerrain / maxObjectsOnASlice)/2);
+                    Debug.Log(offset +", " + ((float)(widthTerrain / (maxObjectsOnASlice*2))));
+                    
+
+                    if (array[typeOfTerrain, i] == 1)
+                    {   
+                        GameObject instance = Instantiate(obstacle, new Vector3(offset, 2, -20), Quaternion.identity);
+                        terrain.AttachProp(instance.transform);
+                    }
+
+                    else if (array[typeOfTerrain, i] == 2)
+                    {
+                        GameObject instance = Instantiate(obstacle2, new Vector3(offset, 2, -20), Quaternion.identity);
+                        terrain.AttachProp(instance.transform);
+                    }
+
+                    else if (array[typeOfTerrain, i] == 3)
+                    {
+                        GameObject instance = Instantiate(powerUp, new Vector3(offset, 2, -20), Quaternion.identity);
+                        terrain.AttachProp(instance.transform);
+                    }
+
+                }
+            }
+            yield return new WaitForSeconds(1.0f);
         }
     }
 }
