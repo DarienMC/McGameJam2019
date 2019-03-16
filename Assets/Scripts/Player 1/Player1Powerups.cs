@@ -14,6 +14,7 @@ public class Player1Powerups : MonoBehaviour, DelegateTimer
     public AudioClip hitByLaserSound;
     public AudioClip hitByObstacleSound;
     public AudioClip hitByConeSound;
+    public AudioClip hitByPotholeSound;
     public AudioClip powerUpSound;
 
     private ScrollingTerrain scrollingTerrain;

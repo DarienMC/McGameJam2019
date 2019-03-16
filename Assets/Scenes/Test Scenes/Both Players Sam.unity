@@ -1069,6 +1069,11 @@ PrefabInstance:
       propertyPath: hitByConeSound
       value: 
       objectReference: {fileID: 8300000, guid: 8c3db4baa4e348e4cb67d56b0ea20f47, type: 3}
+    - target: {fileID: 1562411513060711916, guid: 511e586056a37ac49a893d184fa89ced,
+        type: 3}
+      propertyPath: hitByPotholeSound
+      value: 
+      objectReference: {fileID: 8300000, guid: e637a5cbd32f9fa40ada016187d8d5bc, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 511e586056a37ac49a893d184fa89ced, type: 3}
 --- !u!4 &1152038003228749688 stripped
