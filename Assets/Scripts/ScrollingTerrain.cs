@@ -78,7 +78,7 @@ public class ScrollingTerrain : MonoBehaviour
     {
        // Vector3 actualScale = prop.transform.localScale;
         prop.SetParent(upcomingSlice.transform);
-        prop.transform.position = new Vector3(prop.transform.position.x * upcomingSlice.transform.localScale.x, prop.transform.position.y, prop.transform.position.z);
+        prop.transform.position = new Vector3(prop.transform.position.x * upcomingSlice.transform.localScale.x, prop.transform.position.y * upcomingSlice.transform.localScale.y, prop.transform.position.z * upcomingSlice.transform.localScale.z);
         prop.transform.localScale = new Vector3(1.0F, 1.0F, 1.0F);
         // prop.transform.localScale = new Vector3( prop.transform.localScale.x * upcomingSlice.transform.localScale.x , prop.transform.localScale.y, prop.transform.localScale.z);
     }

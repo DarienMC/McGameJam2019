@@ -6,11 +6,11 @@ public class PropManager : MonoBehaviour
 {
     public GameObject porthole1;
     public GameObject porthole2;
-    public GameObject snowBank1;
     public GameObject cone;
     public GameObject powerUp;
+    public GameObject texture;
     public int maxObjectsOnASlice;
-    private int nbrPresets = 1;
+    private int nbrPresets = 20;
     //must be in pourcentage
     public int spawingObjectSliceChance;
 
@@ -20,7 +20,7 @@ public class PropManager : MonoBehaviour
 
     Obstacle[,] array = new Obstacle[,]
     {
-        {Obstacle.jumpObs2, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing},
+        {Obstacle.beer, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing},
         {Obstacle.nothing, Obstacle.beer, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing},
         {Obstacle.nothing, Obstacle.nothing, Obstacle.beer, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing},
         {Obstacle.nothing, Obstacle.nothing, Obstacle.nothing, Obstacle.beer, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing},
@@ -30,20 +30,19 @@ public class PropManager : MonoBehaviour
         {Obstacle.beer, Obstacle.nothing, Obstacle.nothing, Obstacle.beer, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing},
         {Obstacle.nothing, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing, Obstacle.beer, Obstacle.nothing, Obstacle.beer},
         {Obstacle.nothing, Obstacle.nothing, Obstacle.nothing, Obstacle.beer, Obstacle.beer, Obstacle.nothing, Obstacle.nothing},
-        {Obstacle.jumpObs1, Obstacle.jumpObs1, Obstacle.avoidObs, Obstacle.avoidObs, Obstacle.avoidObs, Obstacle.avoidObs, Obstacle.avoidObs},
-        {Obstacle.jumpObs2, Obstacle.nothing,  Obstacle.nothing, Obstacle.avoidObs, Obstacle.avoidObs, Obstacle.avoidObs,  Obstacle.nothing},
-        {Obstacle.jumpObs2, Obstacle.nothing,  Obstacle.nothing, Obstacle.avoidObs, Obstacle.avoidObs, Obstacle.avoidObs,  Obstacle.nothing},
-        {Obstacle.jumpObs1, Obstacle.nothing,  Obstacle.nothing, Obstacle.avoidObs, Obstacle.avoidObs, Obstacle.avoidObs,  Obstacle.nothing},
-        {Obstacle.jumpObs1, Obstacle.nothing,  Obstacle.nothing, Obstacle.avoidObs, Obstacle.avoidObs, Obstacle.avoidObs,  Obstacle.nothing},
-        {Obstacle.jumpObs2, Obstacle.nothing,  Obstacle.nothing, Obstacle.avoidObs, Obstacle.avoidObs, Obstacle.avoidObs,  Obstacle.nothing},
-        {Obstacle.jumpObs2, Obstacle.nothing,  Obstacle.nothing, Obstacle.avoidObs, Obstacle.avoidObs, Obstacle.avoidObs,  Obstacle.nothing},
-        {Obstacle.jumpObs1, Obstacle.nothing,  Obstacle.nothing, Obstacle.avoidObs, Obstacle.avoidObs, Obstacle.avoidObs,  Obstacle.nothing},
-        {Obstacle.jumpObs1, Obstacle.nothing,  Obstacle.nothing, Obstacle.avoidObs, Obstacle.avoidObs, Obstacle.avoidObs,  Obstacle.nothing},
-        {Obstacle.jumpObs2, Obstacle.nothing,  Obstacle.nothing, Obstacle.avoidObs, Obstacle.avoidObs, Obstacle.avoidObs,  Obstacle.nothing},
-        {Obstacle.jumpObs2, Obstacle.nothing,  Obstacle.nothing, Obstacle.avoidObs, Obstacle.avoidObs, Obstacle.avoidObs,  Obstacle.nothing},
-        {Obstacle.jumpObs1, Obstacle.nothing,  Obstacle.nothing, Obstacle.avoidObs, Obstacle.avoidObs, Obstacle.avoidObs,  Obstacle.nothing},
-        {Obstacle.jumpObs1, Obstacle.nothing,  Obstacle.nothing, Obstacle.avoidObs, Obstacle.avoidObs, Obstacle.avoidObs,  Obstacle.nothing},
-
+        {Obstacle.jumpObs2, Obstacle.nothing, Obstacle.avoidObs, Obstacle.avoidObs, Obstacle.avoidObs, Obstacle.avoidObs, Obstacle.avoidObs},
+        {Obstacle.avoidObs, Obstacle.jumpObs1,  Obstacle.nothing, Obstacle.nothing, Obstacle.nothing, Obstacle.avoidObs,  Obstacle.avoidObs},
+        {Obstacle.nothing, Obstacle.avoidObs,  Obstacle.avoidObs, Obstacle.avoidObs, Obstacle.avoidObs, Obstacle.avoidObs,  Obstacle.jumpBeerObs},
+        {Obstacle.nothing, Obstacle.avoidObs,  Obstacle.avoidObs, Obstacle.avoidObs, Obstacle.avoidObs, Obstacle.avoidObs,  Obstacle.jumpBeerObs},
+        {Obstacle.jumpObs2, Obstacle.nothing,  Obstacle.avoidObs, Obstacle.avoidObs, Obstacle.nothing, Obstacle.nothing,  Obstacle.nothing},
+        {Obstacle.avoidObs, Obstacle.avoidObs,  Obstacle.jumpObs1, Obstacle.nothing, Obstacle.avoidObs, Obstacle.nothing,  Obstacle.avoidObs},
+        {Obstacle.avoidObs, Obstacle.nothing,  Obstacle.nothing, Obstacle.avoidObs, Obstacle.jumpObs1, Obstacle.jumpObs2,  Obstacle.nothing},
+        {Obstacle.jumpBeerObs, Obstacle.jumpObs1,  Obstacle.jumpObs2, Obstacle.avoidObs, Obstacle.avoidObs, Obstacle.nothing,  Obstacle.nothing},
+        {Obstacle.avoidObs, Obstacle.nothing,  Obstacle.avoidObs, Obstacle.nothing, Obstacle.avoidObs, Obstacle.nothing,  Obstacle.nothing},
+        {Obstacle.beer, Obstacle.nothing,  Obstacle.avoidObs, Obstacle.beer, Obstacle.nothing, Obstacle.nothing,  Obstacle.nothing},
+        {Obstacle.nothing, Obstacle.nothing,  Obstacle.nothing, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing,  Obstacle.nothing},
+        {Obstacle.nothing, Obstacle.nothing,  Obstacle.nothing, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing,  Obstacle.nothing},
+        {Obstacle.nothing, Obstacle.nothing,  Obstacle.nothing, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing,  Obstacle.nothing}
     };
 
     ScrollingTerrain terrain;
@@ -58,13 +57,14 @@ public class PropManager : MonoBehaviour
     // Generate props (obstacles and powerups) at regular intervals.
     IEnumerator GenerateProps()
     {
-        yield return new WaitForSeconds(1.0f);
+        
         while (true)
         {
-            int typeOfLine = Random.Range(0, 100);
+            yield return new WaitForSeconds(1.0f);
+            int isSpawingLine = Random.Range(0, 100);
             
 
-            if (typeOfLine < spawingObjectSliceChance)
+            if (isSpawingLine <= spawingObjectSliceChance)
             {
                 //getting a preset
                 int typeOfTerrain = Random.Range(0, nbrPresets);
@@ -104,15 +104,21 @@ public class PropManager : MonoBehaviour
 
                     else if (array[typeOfTerrain, i] == Obstacle.jumpBeerObs)
                     {
-                        GameObject instance = Instantiate(porthole1, new Vector3(offset, 0, -20), Quaternion.identity);
+                        GameObject instance = Instantiate(porthole1, new Vector3(offset, -0.45F, -20), Quaternion.identity);
                         terrain.AttachProp(instance.transform);
                         GameObject instance2 = Instantiate(powerUp, new Vector3(offset, 2, -20), Quaternion.identity);
                         terrain.AttachProp(instance2.transform);
                     }
+                    else
+                    {
+                        GameObject instance = Instantiate(texture, new Vector3(offset, -0.50f, -20), Quaternion.identity);
+                        terrain.AttachProp(instance.transform);
+                    }
 
                 }
+                yield return new WaitForSeconds(2.0f);
             }
-            yield return new WaitForSeconds(2.0f);
+            
         }
     }
 }
