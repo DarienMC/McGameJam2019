@@ -12,6 +12,7 @@ public class ScrollingTerrain : MonoBehaviour
 
     private Player2Movement player2Movement;
 
+    public enum ScrollModificationType { SpeedUp, SlowDown, BackToNormal}
     private float sliceLength;
     
     private float scrollSpeedMultiplier = 1;
@@ -83,17 +84,21 @@ public class ScrollingTerrain : MonoBehaviour
         // prop.transform.localScale = new Vector3( prop.transform.localScale.x * upcomingSlice.transform.localScale.x , prop.transform.localScale.y, prop.transform.localScale.z);
     }
 
-    public void ModifyScrollSpeed(float speedMultiplier, float time, bool speedUp)
+    public void ModifyScrollSpeed(float speedMultiplier, float time, ScrollModificationType speedModificationType, DelegateTimer timerCallback)
     {
         scrollSpeedMultiplier = speedMultiplier;
         scrollSpeedModified = true;
         scrollSpeedModifiedTimer = time;
 
-        if (speedUp)
-            player2Movement.MoveForwards(time);
-        else
+        if (ScrollModificationType.SpeedUp == speedModificationType)
+            player2Movement.MoveForwards(time, timerCallback);
+        else if(ScrollModificationType.SlowDown == speedModificationType)
         {
-            player2Movement.MoveBackwards(time);
+            player2Movement.MoveBackwards(time, timerCallback);
+        }
+        else if(ScrollModificationType.BackToNormal == speedModificationType)
+        {
+            player2Movement.BackToNormal();
         }
     }
 }

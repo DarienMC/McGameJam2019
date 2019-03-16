@@ -10,6 +10,7 @@ public class Player2Movement : MonoBehaviour
 
     private bool movingBackwards = false;
     private bool movingForwards = false;
+    private DelegateTimer timerCallbackObject;
 
     private float moveTimer = 0;
 
@@ -40,21 +41,31 @@ public class Player2Movement : MonoBehaviour
             {
                 movingBackwards = false;
                 movingForwards = false;
+                timerCallbackObject.TimerFinishedCallback();
             }
         }
     }
 
-    public void MoveBackwards(float time)
+    public void MoveBackwards(float time, DelegateTimer timerCallback)
     {
         movingBackwards = true;
         movingForwards = false;
         moveTimer = time;
+        timerCallbackObject = timerCallback;
     }
 
-    public void MoveForwards(float time)
+    public void MoveForwards(float time, DelegateTimer timerCallback)
     {
         movingBackwards = false;
         movingForwards = true;
         moveTimer = time;
+        timerCallbackObject = timerCallback;
+    }
+
+    public void BackToNormal()
+    {
+        movingBackwards = false;
+        movingForwards = false;
+        moveTimer = 0;
     }
 }
