@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.5748171, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -188,7 +188,7 @@ PrefabInstance:
         type: 3}
       propertyPath: reticle
       value: 
-      objectReference: {fileID: 1526152645}
+      objectReference: {fileID: 0}
     - target: {fileID: 7229503924886477622, guid: 0ca942f1363f87d47b12c84bd4ada5d5,
         type: 3}
       propertyPath: player
@@ -199,6 +199,16 @@ PrefabInstance:
       propertyPath: fireChaserBulletSound
       value: 
       objectReference: {fileID: 8300000, guid: 1119b2c455944e24b97452a7ded2a437, type: 3}
+    - target: {fileID: 7229503924886477622, guid: 0ca942f1363f87d47b12c84bd4ada5d5,
+        type: 3}
+      propertyPath: fireLaserSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 32d07eb0d6d74c84a903973d1fb496c1, type: 3}
+    - target: {fileID: 7229503924886477622, guid: 0ca942f1363f87d47b12c84bd4ada5d5,
+        type: 3}
+      propertyPath: killPlayerSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 9f7cd89f5fdb27541818fae10ff1ce94, type: 3}
     - target: {fileID: 3351911464456017104, guid: 0ca942f1363f87d47b12c84bd4ada5d5,
         type: 3}
       propertyPath: m_Enabled
@@ -658,18 +668,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1152038003228749687}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1526152645 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5874255749566055769, guid: 653895c453868964588a8fbd8ea0c3de,
-    type: 3}
-  m_PrefabInstance: {fileID: 894117620}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1924724539
 GameObject:
   m_ObjectHideFlags: 0
@@ -991,6 +989,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Test Player 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1152038002807615409, guid: 511e586056a37ac49a893d184fa89ced,
+        type: 3}
+      propertyPath: jumpSound
+      value: 
+      objectReference: {fileID: 8300000, guid: fc47cf78e9c09de41a963f441d43062e, type: 3}
     - target: {fileID: 1152038002807615410, guid: 511e586056a37ac49a893d184fa89ced,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1046,6 +1049,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1562411513060711916, guid: 511e586056a37ac49a893d184fa89ced,
+        type: 3}
+      propertyPath: powerUpSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 9fe88a2401f8d2241809ac4955fbebc9, type: 3}
+    - target: {fileID: 1562411513060711916, guid: 511e586056a37ac49a893d184fa89ced,
+        type: 3}
+      propertyPath: hitByLaserSound
+      value: 
+      objectReference: {fileID: 8300000, guid: bfe98a6dd44a2124eada2fe980150fb9, type: 3}
+    - target: {fileID: 1562411513060711916, guid: 511e586056a37ac49a893d184fa89ced,
+        type: 3}
+      propertyPath: hitByObstacleSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 9dad3673bf486b940bb6c2ed0ad6cec6, type: 3}
+    - target: {fileID: 1562411513060711916, guid: 511e586056a37ac49a893d184fa89ced,
+        type: 3}
+      propertyPath: hitByConeSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 8c3db4baa4e348e4cb67d56b0ea20f47, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 511e586056a37ac49a893d184fa89ced, type: 3}
 --- !u!4 &1152038003228749688 stripped

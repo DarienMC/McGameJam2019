@@ -8,6 +8,9 @@ TagManager:
   - Terrain
   - PowerUp
   - Obstacle
+  - FxTemporaire
+  - Laser
+  - Cone
   layers:
   - Default
   - TransparentFX

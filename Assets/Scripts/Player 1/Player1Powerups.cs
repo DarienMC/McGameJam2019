@@ -11,7 +11,9 @@ public class Player1Powerups : MonoBehaviour, DelegateTimer
 
     //Audio Clips
     public AudioClip hitByChaserBulletSound;
+    public AudioClip hitByLaserSound;
     public AudioClip hitByObstacleSound;
+    public AudioClip hitByConeSound;
     public AudioClip powerUpSound;
 
     private ScrollingTerrain scrollingTerrain;
@@ -88,18 +90,43 @@ public class Player1Powerups : MonoBehaviour, DelegateTimer
             Instantiate(obstacleHitVFX, other.transform.position, Quaternion.identity);
             audioSource.PlayOneShot(hitByObstacleSound);
         }
-     
+
+        if (other.transform.tag == "Laser")
+        {
+            Destroy(other.gameObject);
+            SlowDown();
+            audioSource.PlayOneShot(hitByLaserSound);
+            Debug.Log("Player was hit by Laser");
+        }
+
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.transform.tag == "ChaserBullet")
         {
-            audioSource.PlayOneShot(hitByChaserBulletSound);
-            Debug.Log("Player was hit by ChaserBullet");
             Destroy(collision.gameObject);
             SlowDown();
+            audioSource.PlayOneShot(hitByChaserBulletSound);
+            Debug.Log("Player was hit by ChaserBullet");
+
         }
+        else if (collision.transform.tag == "Obstacle")
+        {
+            Destroy(collision.gameObject);
+            SlowDown();
+            Instantiate(obstacleHitVFX, collision.transform.position, Quaternion.identity);
+            audioSource.PlayOneShot(hitByObstacleSound);
+        }
+
+        else if (collision.transform.tag == "Cone")
+        {
+            Destroy(collision.gameObject);
+            SlowDown();
+            Instantiate(obstacleHitVFX, collision.transform.position, Quaternion.identity);
+            audioSource.PlayOneShot(hitByConeSound);
+        }
+
     }
 
     public void TimerFinishedCallback()

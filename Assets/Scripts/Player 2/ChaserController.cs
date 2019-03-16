@@ -17,6 +17,8 @@ public class ChaserController : MonoBehaviour
     
     //Audio Clips
     public AudioClip fireChaserBulletSound;
+    public AudioClip fireLaserSound;
+    public AudioClip killPlayerSound;
 
     // Aiming parameters
     public float maxAimSpeed = 200;
@@ -86,10 +88,12 @@ public class ChaserController : MonoBehaviour
             if (canFireLaser)
             {
                 FireLaser();
+                audioSource.PlayOneShot(fireLaserSound);
             }
             else
             {
                 Shoot();
+                audioSource.PlayOneShot(fireChaserBulletSound);
             }
         }
 
@@ -163,12 +167,12 @@ public class ChaserController : MonoBehaviour
         instance.GetComponent<Laser>().Set(instance.transform.position, targetPosition);
         reticle.Charge(fireDelay);
 
-        audioSource.PlayOneShot(fireChaserBulletSound);
     }
 
     void KillPlayer()
     {
         animator.SetTrigger("killPlayer");
+        audioSource.PlayOneShot(killPlayerSound);
         gManager.PlayerDeath();
     }
 
