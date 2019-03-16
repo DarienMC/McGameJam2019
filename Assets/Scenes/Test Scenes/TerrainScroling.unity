@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -255,11 +255,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0cdcc0a5f929c394ac0a8d3851cd27c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  obstacle: {fileID: 4373243737097853209, guid: 588a8e79a68c18142bcacd1e0d72df09,
+  obstacle: {fileID: 1926705196396374740, guid: d5e058d56bf1e224db80c4dd5b9cb4da,
     type: 3}
-  obstacle2: {fileID: 491403955009135054, guid: 7796852c5dc8b614186f58b09c9851ea,
+  obstacle2: {fileID: 5394210651598569019, guid: b96d397ef49f0654588d29dba4fe3066,
     type: 3}
-  powerUp: {fileID: 1165479827385020534, guid: cbafbe55a3b74c54fb652c71f2a8d3be, type: 3}
+  powerUp: {fileID: 8387887026925275966, guid: 5953525ab47fe7641a346940a227c0fa, type: 3}
   maxObjectsOnASlice: 5
   spawingObjectSliceChance: 50
 --- !u!1 &2118693123
