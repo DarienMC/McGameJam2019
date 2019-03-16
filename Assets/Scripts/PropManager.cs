@@ -73,7 +73,7 @@ public class PropManager : MonoBehaviour
         //initiate terrain
         for (int i = 0; i <= lengthSpawningArea; i++)
         {
-            GenerateEmptySlice(widthTerrain);
+            GenerateEmptyLine(widthTerrain);
 
             yield return new WaitForSeconds(1.75f);
         }
@@ -101,7 +101,7 @@ public class PropManager : MonoBehaviour
 
                     else if (array[typeOfTerrain, i] == Obstacle.jumpObs2)
                     {
-                        GameObject instance = Instantiate(porthole2, new Vector3(offset + (float)(texture.GetComponent<Renderer>().bounds.size.x), 0f, -20 +(float)(texture.GetComponent<Renderer>().bounds.size.z)), porthole2.transform.rotation);
+                        GameObject instance = Instantiate(porthole2, new Vector3(offset + (float)(texture.GetComponent<Renderer>().bounds.size.x), 0f, -5 +(float)(texture.GetComponent<Renderer>().bounds.size.z)), porthole2.transform.rotation);
                         terrain.AttachProp(instance.transform);
                         i++;
                     }
@@ -122,7 +122,7 @@ public class PropManager : MonoBehaviour
                     {
                        
                         GenerateFloor(porthole1, offset);
-                        GameObject instance2 = Instantiate(powerUp, new Vector3(offset, 2, -20), Quaternion.identity);
+                        GameObject instance2 = Instantiate(powerUp, new Vector3(offset, 2, -55), Quaternion.identity);
                         terrain.AttachProp(instance2.transform);
                     }
                     else
@@ -133,10 +133,10 @@ public class PropManager : MonoBehaviour
                 }
                 //spawing 2 empty slices to give the player a chance to react in between slices
                 yield return new WaitForSeconds(1.75f);
-                GenerateEmptySlice(widthTerrain);
+                GenerateEmptyLine(widthTerrain);
 
                 yield return new WaitForSeconds(1.75f);
-                GenerateEmptySlice(widthTerrain);
+                GenerateEmptyLine(widthTerrain);
 
                 yield return new WaitForSeconds(1.75f);
             }
@@ -144,13 +144,13 @@ public class PropManager : MonoBehaviour
             //spawn empty slice
             else
             {
-                GenerateEmptySlice(widthTerrain);
+                GenerateEmptyLine(widthTerrain);
 
                 yield return new WaitForSeconds(1.75f);
             }
         }
 
-        void GenerateEmptySlice(float width)
+        void GenerateEmptyLine(float width)
         {
 
             for (int i = 0; i < maxObjectsOnASlice; i++)
@@ -158,7 +158,7 @@ public class PropManager : MonoBehaviour
                 //position of object
                 float offset = (float)(((i) * (width / maxObjectsOnASlice)) - (width / 2) + (float)(width / maxObjectsOnASlice) / 2);
 
-                GameObject instance = Instantiate(texture, new Vector3(offset, 0f, -20), texture.transform.rotation);
+                GameObject instance = Instantiate(texture, new Vector3(offset, 0f, -5), texture.transform.rotation);
                 terrain.AttachProp(instance.transform);
 
             }
@@ -167,14 +167,14 @@ public class PropManager : MonoBehaviour
 
         void GenerateObstacle(GameObject gameobject, float offset)
         {
-                GameObject instance = Instantiate(gameobject, new Vector3(offset, 0.2f, -20), gameobject.transform.rotation);
+                GameObject instance = Instantiate(gameobject, new Vector3(offset, 0.2f, -5), gameobject.transform.rotation);
                 terrain.AttachProp(instance.transform);
             
         }
 
         void GenerateFloor(GameObject gameobject, float offset)
         {
-                GameObject instance = Instantiate(gameobject, new Vector3(offset, 0f, -20), gameobject.transform.rotation);
+                GameObject instance = Instantiate(gameobject, new Vector3(offset, 0f, -5), gameobject.transform.rotation);
                 terrain.AttachProp(instance.transform);
 
         }
