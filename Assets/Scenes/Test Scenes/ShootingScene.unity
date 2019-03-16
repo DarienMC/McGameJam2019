@@ -670,7 +670,7 @@ GameObject:
   - component: {fileID: 1664758629}
   - component: {fileID: 1664758628}
   - component: {fileID: 1664758627}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -855,6 +855,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputAxis: Horizontal
   inputFire: Fire1
+  player: {fileID: 1664758630}
   canvas: {fileID: 1459307132}
   reticle: {fileID: 892445186}
   maxAimSpeed: 250
@@ -865,4 +866,4 @@ MonoBehaviour:
   bulletOffset: {x: 0, y: 2, z: -1}
   bulletSpeed: 25
   fireDelay: 1
-  player: {fileID: 1664758630}
+  laser: {fileID: 5175098786157381628, guid: 62a421eab4cb44ca99a8c4fe5704b910, type: 3}
