@@ -8,8 +8,8 @@ public class ChaserController : MonoBehaviour
     public Canvas canvas;
     public Image reticle;
     public float maxAimSpeed = 200;
-    public float aimAccelaration = 50;
-    public float aimDecelaration = 0.75f;
+    public float aimAccelaration = 100;
+    public float aimDecelaration = 0.02f;
     public float maxReticlePosition = 500f;
 
     private Rigidbody rb;
@@ -24,27 +24,16 @@ public class ChaserController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         float x = Input.GetAxis("Horizontal");
-
-        if (Mathf.Approximately(x, 0))
-        {
-            aimSpeed *= aimDecelaration * Time.deltaTime;
-        }
-        else
-        {
-            aimSpeed += x * aimAccelaration * Time.deltaTime;
-            aimSpeed = Mathf.Min(aimSpeed, maxAimSpeed);
-            aimSpeed = Mathf.Max(aimSpeed, -maxAimSpeed);
-        }
+        aimSpeed *= (1 - (1 - aimDecelaration) * Time.deltaTime);
+        aimSpeed += x * aimAccelaration * Time.deltaTime;
+        aimSpeed = Mathf.Min(aimSpeed, maxAimSpeed);
+        aimSpeed = Mathf.Max(aimSpeed, -maxAimSpeed);
         
-
         reticle.rectTransform.anchoredPosition += new Vector2(aimSpeed*Time.deltaTime, 0);
-
-        float xCoord = Mathf.Min(reticle.rectTransform.anchoredPosition.x, maxReticlePosition);
+        float xCoord = reticle.rectTransform.anchoredPosition.x;
+        xCoord = Mathf.Min(xCoord, maxReticlePosition);
         xCoord = Mathf.Max(xCoord, -maxReticlePosition);
         reticle.rectTransform.anchoredPosition = new Vector2(xCoord, 0);
-
-
     }
 }
