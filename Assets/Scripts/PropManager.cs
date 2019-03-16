@@ -77,13 +77,14 @@ public class PropManager : MonoBehaviour
 
                     if (array[typeOfTerrain, i] == Obstacle.jumpObs)
                     {   
-                        GameObject instance = Instantiate(obstacle, new Vector3(offset, 2, -20), Quaternion.identity);
+                        GameObject instance = Instantiate(obstacle, new Vector3(offset, -1, -20), Quaternion.identity);
                         terrain.AttachProp(instance.transform);
                     }
 
                     else if (array[typeOfTerrain, i] == Obstacle.avoidObs)
                     {
-                        GameObject instance = Instantiate(obstacle2, new Vector3(offset, 2, -20), Quaternion.identity);
+                        GameObject instance = Instantiate(obstacle2, new Vector3(offset, 0, -20), obstacle2.transform.rotation);
+                        //instance.transform.rotation = 
                         terrain.AttachProp(instance.transform);
                     }
 
@@ -95,7 +96,7 @@ public class PropManager : MonoBehaviour
 
                     else if (array[typeOfTerrain, i] == Obstacle.jumpBeerObs)
                     {
-                        GameObject instance = Instantiate(obstacle, new Vector3(offset, 2, -20), Quaternion.identity);
+                        GameObject instance = Instantiate(obstacle, new Vector3(offset, -1, -20), Quaternion.identity);
                         terrain.AttachProp(instance.transform);
                         GameObject instance2 = Instantiate(powerUp, new Vector3(offset, 2, -20), Quaternion.identity);
                         terrain.AttachProp(instance2.transform);
