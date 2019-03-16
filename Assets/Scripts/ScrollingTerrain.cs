@@ -9,6 +9,9 @@ public class ScrollingTerrain : MonoBehaviour
     public GameObject terrainSlice;
 
     private float sliceLength;
+    private float scrollSpeedMultiplier = 1;
+    private bool scrollSpeedModified = false;
+    private float scrollSpeedModifiedTimer;
 
     void Start()
     {
@@ -18,12 +21,25 @@ public class ScrollingTerrain : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        if (scrollSpeedModified)
+        {
+            scrollSpeedModifiedTimer -= Time.deltaTime;
+            if(scrollSpeedModifiedTimer < 0)
+            {
+                scrollSpeedModified = false;
+                scrollSpeedMultiplier = 1;
+            }
+        }
+    }
+
     void FixedUpdate()
     {
         foreach (Transform child in transform)
         {
             // Scrolling
-            child.Translate(0, 0, -scrollingSpeed * Time.deltaTime);
+            child.Translate(0, 0, -scrollingSpeed * Time.deltaTime * scrollSpeedMultiplier);
             
             // Check if beyond sight range
             if (child.transform.position.z > sliceLength * (numberOfSlices - 1))
@@ -41,10 +57,17 @@ public class ScrollingTerrain : MonoBehaviour
         GameObject instance = Instantiate(terrainSlice);
         if (transform.childCount == 0)
         {
-            sliceLength = instance.GetComponent<Collider>().bounds.size.z;
+            sliceLength = instance.GetComponent<BoxCollider>().bounds.size.z;
         }
         float offset = sliceLength * (numberOfSlices - transform.childCount - 2);
         instance.transform.Translate(Vector3.forward * offset);
         instance.transform.SetParent(transform);
+    }
+
+    public void ModifyScrollSpeed(float speedMultiplier, float time)
+    {
+        scrollSpeedMultiplier = speedMultiplier;
+        scrollSpeedModified = true;
+        scrollSpeedModifiedTimer = time;
     }
 }

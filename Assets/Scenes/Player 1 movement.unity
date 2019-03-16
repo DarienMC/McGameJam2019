@@ -112,6 +112,26 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &291965638 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1152038002807615415, guid: 511e586056a37ac49a893d184fa89ced,
+    type: 3}
+  m_PrefabInstance: {fileID: 1152038003228749687}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &291965645
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 291965638}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbe52ed35d0de674a862624c1dbaff63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speedUpMultiplier: 10
+  speedUpTime: 5
 --- !u!1001 &320941397
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -179,6 +199,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2512515201579813395, guid: 79703e4cc537ba54ea3bf2a29a37b9e7,
+        type: 3}
+      propertyPath: numberOfSlices
+      value: 15
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 79703e4cc537ba54ea3bf2a29a37b9e7, type: 3}
 --- !u!1 &545473503
@@ -213,7 +238,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scrollingSpeed: -3
-  numberOfSlices: 5
+  numberOfSlices: 15
   terrainSlice: {fileID: 4303972411548769825, guid: 45f706ace22f4f1d4adbc90293859287,
     type: 3}
 --- !u!4 &545473505

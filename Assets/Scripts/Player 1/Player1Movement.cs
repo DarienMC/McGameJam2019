@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
-public class Player1 : MonoBehaviour
+public class Player1Movement : MonoBehaviour
 {
     public float speed;
     public float jumpForce;

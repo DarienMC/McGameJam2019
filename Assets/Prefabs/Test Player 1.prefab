@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1152038002807615413}
   - component: {fileID: 1152038002807615409}
   - component: {fileID: 1152038002807615414}
+  - component: {fileID: 1562411513060711916}
   m_Layer: 0
   m_Name: Test Player 1
   m_TagString: Untagged
@@ -106,7 +107,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 50
-  jumpForce: 400
+  jumpForce: 300
   fallMultiplier: 5
   lowJumpMultiplier: 4
 --- !u!54 &1152038002807615414
@@ -125,3 +126,17 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 1
+--- !u!114 &1562411513060711916
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1152038002807615415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbe52ed35d0de674a862624c1dbaff63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speedUpMultiplier: 10
+  speedUpTime: 5
