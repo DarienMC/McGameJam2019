@@ -55,7 +55,7 @@ public class PropManager : MonoBehaviour
                     //position of object
                     float scaledWidth = (widthTerrain * terrain.terrainSlice.transform.localScale.x);
                     float offset = (float)(((i) * (widthTerrain / maxObjectsOnASlice)) - (widthTerrain / 2) + (float)(widthTerrain / maxObjectsOnASlice)/2);
-                    Debug.Log(offset +", " + ((float)(widthTerrain / (maxObjectsOnASlice*2))));
+                    //Debug.Log(offset +", " + ((float)(widthTerrain / (maxObjectsOnASlice*2))));
                     
 
                     if (array[typeOfTerrain, i] == 1)
