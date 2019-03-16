@@ -120,6 +120,7 @@ public class ChaserController : MonoBehaviour
     void KillPlayer()
     {
         animator.SetTrigger("killPlayer");
+        gManager.PlayerDeath();
     }
 
     public void KillPlayerAnimationCallback()
