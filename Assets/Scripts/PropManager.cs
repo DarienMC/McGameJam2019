@@ -4,21 +4,23 @@ using UnityEngine;
 
 public class PropManager : MonoBehaviour
 {
-    public GameObject obstacle;
-    public GameObject obstacle2;
+    public GameObject porthole1;
+    public GameObject porthole2;
+    public GameObject snowBank1;
+    public GameObject cone;
     public GameObject powerUp;
     public int maxObjectsOnASlice;
-    private int nbrPresets = 20;
+    private int nbrPresets = 1;
     //must be in pourcentage
     public int spawingObjectSliceChance;
 
     private float widthTerrain = 10.0F;
-    private enum Obstacle { beer, jumpObs, avoidObs, nothing, jumpBeerObs };
+    private enum Obstacle { beer, jumpObs1, jumpObs2, avoidObs, nothing, jumpBeerObs };
 
 
     Obstacle[,] array = new Obstacle[,]
     {
-        {Obstacle.beer, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing},
+        {Obstacle.jumpObs2, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing},
         {Obstacle.nothing, Obstacle.beer, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing},
         {Obstacle.nothing, Obstacle.nothing, Obstacle.beer, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing},
         {Obstacle.nothing, Obstacle.nothing, Obstacle.nothing, Obstacle.beer, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing},
@@ -28,19 +30,19 @@ public class PropManager : MonoBehaviour
         {Obstacle.beer, Obstacle.nothing, Obstacle.nothing, Obstacle.beer, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing},
         {Obstacle.nothing, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing, Obstacle.beer, Obstacle.nothing, Obstacle.beer},
         {Obstacle.nothing, Obstacle.nothing, Obstacle.nothing, Obstacle.beer, Obstacle.beer, Obstacle.nothing, Obstacle.nothing},
-        {Obstacle.jumpObs, Obstacle.jumpObs, Obstacle.avoidObs, Obstacle.avoidObs, Obstacle.avoidObs, Obstacle.avoidObs, Obstacle.avoidObs},
-        {Obstacle.jumpObs, Obstacle.nothing,  Obstacle.nothing, Obstacle.avoidObs, Obstacle.avoidObs, Obstacle.avoidObs,  Obstacle.nothing},
-        {Obstacle.jumpObs, Obstacle.nothing,  Obstacle.nothing, Obstacle.avoidObs, Obstacle.avoidObs, Obstacle.avoidObs,  Obstacle.nothing},
-        {Obstacle.jumpObs, Obstacle.nothing,  Obstacle.nothing, Obstacle.avoidObs, Obstacle.avoidObs, Obstacle.avoidObs,  Obstacle.nothing},
-        {Obstacle.jumpObs, Obstacle.nothing,  Obstacle.nothing, Obstacle.avoidObs, Obstacle.avoidObs, Obstacle.avoidObs,  Obstacle.nothing},
-        {Obstacle.jumpObs, Obstacle.nothing,  Obstacle.nothing, Obstacle.avoidObs, Obstacle.avoidObs, Obstacle.avoidObs,  Obstacle.nothing},
-        {Obstacle.jumpObs, Obstacle.nothing,  Obstacle.nothing, Obstacle.avoidObs, Obstacle.avoidObs, Obstacle.avoidObs,  Obstacle.nothing},
-        {Obstacle.jumpObs, Obstacle.nothing,  Obstacle.nothing, Obstacle.avoidObs, Obstacle.avoidObs, Obstacle.avoidObs,  Obstacle.nothing},
-        {Obstacle.jumpObs, Obstacle.nothing,  Obstacle.nothing, Obstacle.avoidObs, Obstacle.avoidObs, Obstacle.avoidObs,  Obstacle.nothing},
-        {Obstacle.jumpObs, Obstacle.nothing,  Obstacle.nothing, Obstacle.avoidObs, Obstacle.avoidObs, Obstacle.avoidObs,  Obstacle.nothing},
-        {Obstacle.jumpObs, Obstacle.nothing,  Obstacle.nothing, Obstacle.avoidObs, Obstacle.avoidObs, Obstacle.avoidObs,  Obstacle.nothing},
-        {Obstacle.jumpObs, Obstacle.nothing,  Obstacle.nothing, Obstacle.avoidObs, Obstacle.avoidObs, Obstacle.avoidObs,  Obstacle.nothing},
-        {Obstacle.jumpObs, Obstacle.nothing,  Obstacle.nothing, Obstacle.avoidObs, Obstacle.avoidObs, Obstacle.avoidObs,  Obstacle.nothing},
+        {Obstacle.jumpObs1, Obstacle.jumpObs1, Obstacle.avoidObs, Obstacle.avoidObs, Obstacle.avoidObs, Obstacle.avoidObs, Obstacle.avoidObs},
+        {Obstacle.jumpObs2, Obstacle.nothing,  Obstacle.nothing, Obstacle.avoidObs, Obstacle.avoidObs, Obstacle.avoidObs,  Obstacle.nothing},
+        {Obstacle.jumpObs2, Obstacle.nothing,  Obstacle.nothing, Obstacle.avoidObs, Obstacle.avoidObs, Obstacle.avoidObs,  Obstacle.nothing},
+        {Obstacle.jumpObs1, Obstacle.nothing,  Obstacle.nothing, Obstacle.avoidObs, Obstacle.avoidObs, Obstacle.avoidObs,  Obstacle.nothing},
+        {Obstacle.jumpObs1, Obstacle.nothing,  Obstacle.nothing, Obstacle.avoidObs, Obstacle.avoidObs, Obstacle.avoidObs,  Obstacle.nothing},
+        {Obstacle.jumpObs2, Obstacle.nothing,  Obstacle.nothing, Obstacle.avoidObs, Obstacle.avoidObs, Obstacle.avoidObs,  Obstacle.nothing},
+        {Obstacle.jumpObs2, Obstacle.nothing,  Obstacle.nothing, Obstacle.avoidObs, Obstacle.avoidObs, Obstacle.avoidObs,  Obstacle.nothing},
+        {Obstacle.jumpObs1, Obstacle.nothing,  Obstacle.nothing, Obstacle.avoidObs, Obstacle.avoidObs, Obstacle.avoidObs,  Obstacle.nothing},
+        {Obstacle.jumpObs1, Obstacle.nothing,  Obstacle.nothing, Obstacle.avoidObs, Obstacle.avoidObs, Obstacle.avoidObs,  Obstacle.nothing},
+        {Obstacle.jumpObs2, Obstacle.nothing,  Obstacle.nothing, Obstacle.avoidObs, Obstacle.avoidObs, Obstacle.avoidObs,  Obstacle.nothing},
+        {Obstacle.jumpObs2, Obstacle.nothing,  Obstacle.nothing, Obstacle.avoidObs, Obstacle.avoidObs, Obstacle.avoidObs,  Obstacle.nothing},
+        {Obstacle.jumpObs1, Obstacle.nothing,  Obstacle.nothing, Obstacle.avoidObs, Obstacle.avoidObs, Obstacle.avoidObs,  Obstacle.nothing},
+        {Obstacle.jumpObs1, Obstacle.nothing,  Obstacle.nothing, Obstacle.avoidObs, Obstacle.avoidObs, Obstacle.avoidObs,  Obstacle.nothing},
 
     };
 
@@ -75,15 +77,21 @@ public class PropManager : MonoBehaviour
                    
                     
 
-                    if (array[typeOfTerrain, i] == Obstacle.jumpObs)
+                    if (array[typeOfTerrain, i] == Obstacle.jumpObs1)
                     {   
-                        GameObject instance = Instantiate(obstacle, new Vector3(offset, -1, -20), Quaternion.identity);
+                        GameObject instance = Instantiate(porthole1, new Vector3(offset, -0.45f, -20), Quaternion.identity);
+                        terrain.AttachProp(instance.transform);
+                    }
+
+                    else if(array[typeOfTerrain, i] == Obstacle.jumpObs2)
+                    {
+                        GameObject instance = Instantiate(porthole2, new Vector3(offset, -0.40f, -20), Quaternion.identity);
                         terrain.AttachProp(instance.transform);
                     }
 
                     else if (array[typeOfTerrain, i] == Obstacle.avoidObs)
                     {
-                        GameObject instance = Instantiate(obstacle2, new Vector3(offset, 0, -20), obstacle2.transform.rotation);
+                        GameObject instance = Instantiate(cone, new Vector3(offset, 0, -20), cone.transform.rotation);
                         //instance.transform.rotation = 
                         terrain.AttachProp(instance.transform);
                     }
@@ -96,7 +104,7 @@ public class PropManager : MonoBehaviour
 
                     else if (array[typeOfTerrain, i] == Obstacle.jumpBeerObs)
                     {
-                        GameObject instance = Instantiate(obstacle, new Vector3(offset, -1, -20), Quaternion.identity);
+                        GameObject instance = Instantiate(porthole1, new Vector3(offset, 0, -20), Quaternion.identity);
                         terrain.AttachProp(instance.transform);
                         GameObject instance2 = Instantiate(powerUp, new Vector3(offset, 2, -20), Quaternion.identity);
                         terrain.AttachProp(instance2.transform);
