@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ScrollingTerrain : MonoBehaviour
 {
-    public float scrollingSpeed = 1.0f;
+    public float scrollingSpeed = -1.0f;
     public int numberOfSlices = 2;
     public GameObject terrainSlice;
 
@@ -22,8 +22,11 @@ public class ScrollingTerrain : MonoBehaviour
     {
         foreach (Transform child in transform)
         {
+            // Scrolling
             child.Translate(0, 0, -scrollingSpeed * Time.deltaTime);
-            if (child.transform.position.z < -sliceLength)
+            
+            // Check if beyond sight range
+            if (child.transform.position.z > sliceLength * (numberOfSlices - 1))
             {
                 child.transform.SetParent(null);
                 Destroy(child.gameObject);
@@ -32,6 +35,7 @@ public class ScrollingTerrain : MonoBehaviour
         }
     }
 
+    // Create a new terrain slice behind the camera.
     void InstantiateSlice()
     {
         GameObject instance = Instantiate(terrainSlice);
@@ -39,10 +43,8 @@ public class ScrollingTerrain : MonoBehaviour
         {
             sliceLength = instance.GetComponent<Collider>().bounds.size.z;
         }
-        else
-        {
-            instance.transform.Translate(Vector3.forward * sliceLength * transform.childCount);
-        }
+        float offset = sliceLength * (numberOfSlices - transform.childCount - 2);
+        instance.transform.Translate(Vector3.forward * offset);
         instance.transform.SetParent(transform);
     }
 }
