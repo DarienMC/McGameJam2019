@@ -22,7 +22,6 @@ public class ChaserController : MonoBehaviour
 
     public GameObject bullet;
     public Vector3 bulletOffset = Vector3.zero + Vector3.back;
-    public float targetingOffset = 1.75f;
     public float bulletSpeed = 25.0f;
     public float fireDelay = 1.0f;
 
@@ -99,9 +98,20 @@ public class ChaserController : MonoBehaviour
         );
 
         // Shoot
-        Vector3 direction = (targetPosition + Vector3.up * targetingOffset - transform.position).normalized;
         GameObject instance = Instantiate(bullet, transform.position + bulletOffset, Quaternion.identity);
-        instance.GetComponent<Rigidbody>().velocity = direction * bulletSpeed;
+        float distanceToTarget = (targetPosition - instance.transform.position).magnitude;
+        float time = distanceToTarget / bulletSpeed;
+        Vector3 gravityOffset = Vector3.zero;
+        Vector3 velocity = Vector3.zero;
+        for (float i = 0; i < time; i += Time.fixedDeltaTime)
+        {
+            velocity += -Physics.gravity * Time.fixedDeltaTime;
+            gravityOffset += velocity * Time.fixedDeltaTime;
+        }
+        Vector3 direction = (targetPosition + gravityOffset - instance.transform.position).normalized;
+        instance.GetComponent<ChaserBullet>().velocity = direction * bulletSpeed;
+        
+        // Fire delay
         nextFire = Time.time + fireDelay;
         reticleAnimator.CrossFade("Charging", 0.0f);
         reticleAnimator.speed = 1 / fireDelay;

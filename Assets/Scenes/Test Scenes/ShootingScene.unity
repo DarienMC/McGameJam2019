@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.5748171, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -835,8 +835,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1701823887}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: 10}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 1.5, z: 20}
+  m_LocalScale: {x: 1, y: 3, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
@@ -853,7 +853,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4854ade84f885c743b1aaaecd140f106, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputAxis: Horizontal 2
+  inputAxis: Horizontal
   inputFire: Fire1
   canvas: {fileID: 1459307132}
   reticle: {fileID: 892445186}
@@ -862,8 +862,7 @@ MonoBehaviour:
   aimDecelaration: 0.2
   maxReticlePosition: 400
   bullet: {fileID: 6342032733102113240, guid: 8502a7435b60dda879f5ad21fb97b115, type: 3}
-  bulletOffset: {x: 0, y: 0, z: -1}
-  targetingOffset: 1.75
+  bulletOffset: {x: 0, y: 2, z: -1}
   bulletSpeed: 25
   fireDelay: 1
   player: {fileID: 1664758630}
