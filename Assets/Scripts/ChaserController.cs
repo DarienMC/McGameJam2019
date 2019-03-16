@@ -23,12 +23,14 @@ public class ChaserController : MonoBehaviour
     public Vector3 bulletOffset = Vector3.zero + Vector3.back;
     public float targetingOffset = 2.0f;
     public float bulletSpeed = 25.0f;
+    public float fireDelay = 1.0f;
 
     public Transform player;
 
     private Rigidbody rb;
     private float aimSpeed = 0;
     private float reticleHeight = 0;
+    private float nextFire = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -64,6 +66,11 @@ public class ChaserController : MonoBehaviour
 
     void Shoot()
     {
+        if (Time.time < nextFire)
+        {
+            return;
+        }
+
         // Find target position
         Vector2 canvasPosition = canvas.GetComponent<RectTransform>().anchoredPosition
             + reticle.rectTransform.anchoredPosition;
@@ -82,5 +89,6 @@ public class ChaserController : MonoBehaviour
         Vector3 direction = (targetPosition + Vector3.up * targetingOffset - transform.position).normalized;
         GameObject instance = Instantiate(bullet, transform.position + bulletOffset, Quaternion.identity);
         instance.GetComponent<Rigidbody>().velocity = direction * bulletSpeed;
+        nextFire = Time.time + fireDelay;
     }
 }
