@@ -8,9 +8,12 @@ public class ScrollingTerrain : MonoBehaviour
     public int numberOfSlices = 2;
     public GameObject terrainSlice;
 
+    public GameObject upcomingSlice;
+
     private Player2Movement player2Movement;
 
     private float sliceLength;
+    
     private float scrollSpeedMultiplier = 1;
     private bool scrollSpeedModified = false;
     private float scrollSpeedModifiedTimer;
@@ -40,6 +43,7 @@ public class ScrollingTerrain : MonoBehaviour
 
     void FixedUpdate()
     {
+        // Move all the terrain slices
         foreach (Transform child in transform)
         {
             // Scrolling
@@ -66,6 +70,16 @@ public class ScrollingTerrain : MonoBehaviour
         float offset = sliceLength * (numberOfSlices - transform.childCount - 2);
         instance.transform.Translate(Vector3.forward * offset);
         instance.transform.SetParent(transform);
+        upcomingSlice = instance;
+    }
+
+    // Attach the prop to the terrain so that it moves along with it.
+    public void AttachProp(Transform prop)
+    {
+       // Vector3 actualScale = prop.transform.localScale;
+        prop.SetParent(upcomingSlice.transform);
+        prop.transform.position = new Vector3(prop.transform.position.x * upcomingSlice.transform.localScale.x, prop.transform.position.y, prop.transform.position.z);
+       // prop.transform.localScale = new Vector3( prop.transform.localScale.x * upcomingSlice.transform.localScale.x , prop.transform.localScale.y, prop.transform.localScale.z);
     }
 
     public void ModifyScrollSpeed(float speedMultiplier, float time, bool speedUp)

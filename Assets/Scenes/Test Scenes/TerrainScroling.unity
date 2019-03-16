@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -204,6 +204,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1398050551}
   - component: {fileID: 1398050552}
+  - component: {fileID: 1398050553}
   m_Layer: 0
   m_Name: Terrain
   m_TagString: Untagged
@@ -241,6 +242,26 @@ MonoBehaviour:
   numberOfSlices: 5
   terrainSlice: {fileID: 4303972411548769825, guid: 45f706ace22f4f1d4adbc90293859287,
     type: 3}
+  upcomingSlice: {fileID: 0}
+--- !u!114 &1398050553
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1398050550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0cdcc0a5f929c394ac0a8d3851cd27c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  obstacle: {fileID: 4373243737097853209, guid: 588a8e79a68c18142bcacd1e0d72df09,
+    type: 3}
+  obstacle2: {fileID: 491403955009135054, guid: 7796852c5dc8b614186f58b09c9851ea,
+    type: 3}
+  powerUp: {fileID: 1165479827385020534, guid: cbafbe55a3b74c54fb652c71f2a8d3be, type: 3}
+  maxObjectsOnASlice: 5
+  spawingObjectSliceChance: 50
 --- !u!1 &2118693123
 GameObject:
   m_ObjectHideFlags: 0
