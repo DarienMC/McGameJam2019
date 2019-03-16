@@ -237,8 +237,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2486e47572b6cc20b063841b28bdb81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrollingSpeed: 3
-  numberOfSlices: 6
+  scrollingSpeed: -3
+  numberOfSlices: 5
   terrainSlice: {fileID: 4303972411548769825, guid: 45f706ace22f4f1d4adbc90293859287,
     type: 3}
 --- !u!1 &2118693123
