@@ -303,6 +303,7 @@ GameObject:
   m_Component:
   - component: {fileID: 545473505}
   - component: {fileID: 545473504}
+  - component: {fileID: 545473506}
   m_Layer: 0
   m_Name: Terrain
   m_TagString: Untagged
@@ -343,6 +344,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &545473506
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 545473503}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0cdcc0a5f929c394ac0a8d3851cd27c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  obstacle: {fileID: 4373243737097853209, guid: 588a8e79a68c18142bcacd1e0d72df09,
+    type: 3}
+  obstacle2: {fileID: 491403955009135054, guid: 7796852c5dc8b614186f58b09c9851ea,
+    type: 3}
+  powerUp: {fileID: 1165479827385020534, guid: cbafbe55a3b74c54fb652c71f2a8d3be, type: 3}
+  maxObjectsOnASlice: 5
+  spawingObjectSliceChance: 50
 --- !u!1001 &801833619
 PrefabInstance:
   m_ObjectHideFlags: 0
