@@ -13,7 +13,10 @@ public class ChaserController : MonoBehaviour
     // UI references
     public Canvas canvas;
     public Image reticle;
-    
+
+    //Audio Clips
+    public AudioClip fireChaserBulletSound;
+
     // Aiming parameters
     public float maxAimSpeed = 200;
     public float aimAccelaration = 100;
@@ -31,6 +34,7 @@ public class ChaserController : MonoBehaviour
     private Rigidbody rb;
     private Animator reticleAnimator;
     private Animator animator;
+    private AudioSource audioSource;
     private float aimSpeed = 0;
     private float reticleHeight = 0;
     private float nextFire = 0;
@@ -42,6 +46,7 @@ public class ChaserController : MonoBehaviour
         reticleAnimator = canvas.transform.GetChild(0).GetComponent<Animator>();
         animator = GetComponent<Animator>();
         gManager = FindObjectOfType<GManager>();
+        audioSource = GetComponent<AudioSource>();
 
         reticleHeight = reticle.rectTransform.anchoredPosition.y;
     }
@@ -115,6 +120,8 @@ public class ChaserController : MonoBehaviour
         nextFire = Time.time + fireDelay;
         reticleAnimator.CrossFade("Charging", 0.0f);
         reticleAnimator.speed = 1 / fireDelay;
+
+        audioSource.PlayOneShot(fireChaserBulletSound);
     }
 
     void KillPlayer()

@@ -70,7 +70,6 @@ MonoBehaviour:
   maxReticlePosition: 400
   bullet: {fileID: 6342032733102113240, guid: 8502a7435b60dda879f5ad21fb97b115, type: 3}
   bulletOffset: {x: 0, y: 0, z: -1}
-  targetingOffset: 2
   bulletSpeed: 25
   fireDelay: 1
   player: {fileID: 0}
