@@ -10,7 +10,8 @@ public class ChaserController : MonoBehaviour
     public string inputAxis = "Horizontal";
     public string inputFire = "Fire1";
    
-    // UI references
+    // References
+    public Transform player;
     public Canvas canvas;
     public Image reticle;
     
@@ -24,8 +25,9 @@ public class ChaserController : MonoBehaviour
     public Vector3 bulletOffset = Vector3.zero + Vector3.back;
     public float bulletSpeed = 25.0f;
     public float fireDelay = 1.0f;
+    public GameObject laser;
 
-    public Transform player;
+    internal bool canFireLaser = true;
 
     private GManager gManager;
     private Rigidbody rb;
@@ -50,9 +52,16 @@ public class ChaserController : MonoBehaviour
     void Update()
     {
         MoveReticle();
-        if (Input.GetButtonDown(inputFire))
+        if (Input.GetButtonDown(inputFire) && Time.time > nextFire)
         {
-            Shoot();
+            if (canFireLaser)
+            {
+                FireLaser();
+            }
+            else
+            {
+                Shoot();
+            }
         }
 
         if(player.transform.position.z == transform.position.z)
@@ -76,14 +85,8 @@ public class ChaserController : MonoBehaviour
         reticle.rectTransform.anchoredPosition = new Vector2(xCoord, reticleHeight);
     }
 
-    void Shoot()
+    Vector3 ComputeTargetPosition()
     {
-        if (Time.time < nextFire)
-        {
-            return;
-        }
-
-        // Find target position
         Vector2 canvasPosition = canvas.GetComponent<RectTransform>().anchoredPosition
             + reticle.rectTransform.anchoredPosition;
         Vector2 pixelPosition = RectTransformUtility.PixelAdjustPoint(canvasPosition, transform, canvas);
@@ -91,11 +94,20 @@ public class ChaserController : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(new Vector3(pixelPosition.x, pixelPosition.y, 0.0f));
         RaycastHit hit;
         Physics.Raycast(ray, out hit);
-        Vector3 targetPosition = new Vector3(
+        return new Vector3(
             hit.point.x,
             player.position.y,
             player.position.z
         );
+    }
+
+    void Shoot()
+    {
+        canFireLaser = false;
+        nextFire = Time.time + fireDelay;
+
+        // Find target position
+        Vector3 targetPosition = ComputeTargetPosition();
 
         // Shoot
         GameObject instance = Instantiate(bullet, transform.position + bulletOffset, Quaternion.identity);
@@ -115,6 +127,13 @@ public class ChaserController : MonoBehaviour
         nextFire = Time.time + fireDelay;
         reticleAnimator.CrossFade("Charging", 0.0f);
         reticleAnimator.speed = 1 / fireDelay;
+    }
+
+    void FireLaser()
+    {
+        Vector3 targetPosition = ComputeTargetPosition();
+        GameObject instance = Instantiate(laser, transform.position + Vector3.back, Quaternion.identity);
+        instance.GetComponent<Laser>().Set(instance.transform.position, targetPosition);
     }
 
     void KillPlayer()
