@@ -7,6 +7,8 @@ public class Player1 : MonoBehaviour
 {
     public float speed;
     public float jumpForce;
+    public float fallMultiplier;
+    public float lowJumpMultiplier;
 
     // Input variables
     private float horizontal;
@@ -27,7 +29,7 @@ public class Player1 : MonoBehaviour
     void Update()
     {
         horizontal = Input.GetAxis("Horizontal");
-        jump = Input.GetButtonDown("Jump");
+        jump = Input.GetButton("Jump");
     }
 
     private void FixedUpdate()
@@ -38,6 +40,20 @@ public class Player1 : MonoBehaviour
         {
             rb.AddForce(new Vector3(0, jumpForce, 0));
             grounded = false;
+        }
+
+        if (!grounded)
+        {
+            // if falling...
+            if (rb.velocity.y < 0)
+            {
+                // ... fall faster like mario
+                rb.velocity += Vector3.up * Physics.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
+            }
+            else if (rb.velocity.y > 0 && !Input.GetButton("Jump"))
+            {
+                rb.velocity += Vector3.up * Physics.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
+            }
         }
     }
 
