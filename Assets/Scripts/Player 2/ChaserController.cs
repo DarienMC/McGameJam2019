@@ -27,7 +27,7 @@ public class ChaserController : MonoBehaviour
     public float fireDelay = 1.0f;
     public GameObject laser;
 
-    internal bool canFireLaser = true;
+    public bool canFireLaser = false;
 
     private GManager gManager;
     private Rigidbody rb;
@@ -103,9 +103,6 @@ public class ChaserController : MonoBehaviour
 
     void Shoot()
     {
-        canFireLaser = false;
-        nextFire = Time.time + fireDelay;
-
         // Find target position
         Vector3 targetPosition = ComputeTargetPosition();
 
@@ -131,9 +128,13 @@ public class ChaserController : MonoBehaviour
 
     void FireLaser()
     {
+        canFireLaser = false;
+        nextFire = Time.time + fireDelay;
         Vector3 targetPosition = ComputeTargetPosition();
         GameObject instance = Instantiate(laser, transform.position + Vector3.back, Quaternion.identity);
         instance.GetComponent<Laser>().Set(instance.transform.position, targetPosition);
+        reticleAnimator.CrossFade("Charging", 0.0f);
+        reticleAnimator.speed = 1 / fireDelay;
     }
 
     void KillPlayer()
