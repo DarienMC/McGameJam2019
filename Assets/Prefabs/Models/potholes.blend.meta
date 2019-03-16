@@ -38,6 +38,7 @@ ModelImporter:
     2100008: Material
     2100010: Material_010
     2100012: Material_016
+    2100014: Material_003
     2300000: Cube_001
     2300002: Cube_002
     2300004: Cube_003
@@ -79,7 +80,6 @@ ModelImporter:
     4300024: Cube_009
     7400000: Default Take
     9500000: //RootNode
-    2186277476908879412: ImportLogs
   externalObjects: {}
   materials:
     importMaterials: 1

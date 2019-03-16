@@ -14,7 +14,7 @@ public class PropManager : MonoBehaviour
     //must be in pourcentage
     public int spawingObjectSliceChance;
 
-    private float widthTerrain = 10.0F;
+    private float widthTerrain = 20.0f;
     private enum Obstacle { beer, jumpObs1, jumpObs2, avoidObs, nothing, jumpBeerObs };
 
 
@@ -57,6 +57,7 @@ public class PropManager : MonoBehaviour
     // Generate props (obstacles and powerups) at regular intervals.
     IEnumerator GenerateProps()
     {
+        widthTerrain = texture.GetComponent<Renderer>().bounds.size.z*maxObjectsOnASlice;
         
         while (true)
         {
@@ -79,13 +80,13 @@ public class PropManager : MonoBehaviour
 
                     if (array[typeOfTerrain, i] == Obstacle.jumpObs1)
                     {   
-                        GameObject instance = Instantiate(porthole1, new Vector3(offset, -0.45f, -20), Quaternion.identity);
+                        GameObject instance = Instantiate(porthole1, new Vector3(offset, -0.45f, -20), porthole1.transform.rotation);
                         terrain.AttachProp(instance.transform);
                     }
 
                     else if(array[typeOfTerrain, i] == Obstacle.jumpObs2)
                     {
-                        GameObject instance = Instantiate(porthole2, new Vector3(offset, -0.40f, -20), Quaternion.identity);
+                        GameObject instance = Instantiate(porthole2, new Vector3(offset, -0.40f, -20), porthole2.transform.rotation);
                         terrain.AttachProp(instance.transform);
                     }
 
@@ -104,14 +105,14 @@ public class PropManager : MonoBehaviour
 
                     else if (array[typeOfTerrain, i] == Obstacle.jumpBeerObs)
                     {
-                        GameObject instance = Instantiate(porthole1, new Vector3(offset, -0.45F, -20), Quaternion.identity);
+                        GameObject instance = Instantiate(porthole1, new Vector3(offset, -0.45F, -20), porthole1.transform.rotation);
                         terrain.AttachProp(instance.transform);
                         GameObject instance2 = Instantiate(powerUp, new Vector3(offset, 2, -20), Quaternion.identity);
                         terrain.AttachProp(instance2.transform);
                     }
                     else
                     {
-                        GameObject instance = Instantiate(texture, new Vector3(offset, -0.50f, -20), Quaternion.identity);
+                        GameObject instance = Instantiate(texture, new Vector3(offset, -0.50f, -20), texture.transform.rotation);
                         terrain.AttachProp(instance.transform);
                     }
 
