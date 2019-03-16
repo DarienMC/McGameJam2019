@@ -86,13 +86,18 @@ public class Player1Powerups : MonoBehaviour, DelegateTimer
             SlowDown();
             audioSource.PlayOneShot(hitByObstacleSound);
         }
-        else if (other.transform.tag == "ChaserBullet")
+     
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.transform.tag == "ChaserBullet")
         {
             audioSource.PlayOneShot(hitByChaserBulletSound);
             Debug.Log("Player was hit by ChaserBullet");
-            Destroy(other.gameObject);
+            Destroy(collision.gameObject);
             SlowDown();
-            
+
         }
     }
 
