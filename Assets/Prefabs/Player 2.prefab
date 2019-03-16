@@ -62,6 +62,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputAxis: Horizontal 2
   inputFire: Fire1
+  player: {fileID: 0}
   canvas: {fileID: 0}
   reticle: {fileID: 0}
   maxAimSpeed: 250
@@ -70,10 +71,9 @@ MonoBehaviour:
   maxReticlePosition: 400
   bullet: {fileID: 6342032733102113240, guid: 8502a7435b60dda879f5ad21fb97b115, type: 3}
   bulletOffset: {x: 0, y: 0, z: -1}
-  targetingOffset: 2
   bulletSpeed: 25
   fireDelay: 1
-  player: {fileID: 0}
+  laser: {fileID: 5175098786157381628, guid: 62a421eab4cb44ca99a8c4fe5704b910, type: 3}
 --- !u!114 &75868974
 MonoBehaviour:
   m_ObjectHideFlags: 0
