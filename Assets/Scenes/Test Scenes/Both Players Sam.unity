@@ -683,9 +683,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 386dd874c8e39bc4d9229978aea96eb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timerLimit: 400
+  timerLimit: 40000000
   runner: {fileID: 2059754411}
   chaser: {fileID: 2017280419}
+  separationForChaserVictory: 0
+  separationForRunnerVictory: 60
 --- !u!1 &2128486858
 GameObject:
   m_ObjectHideFlags: 0
