@@ -7,6 +7,8 @@ public class Player1Powerups : MonoBehaviour, DelegateTimer
     public float speedUpMultiplier;
     public float slowDownMultiplier;
     public float speedUpTime;
+    public float respawnHeight = 0.1179351f + 0.2f;
+    public Animator anim;
     public GameObject obstacleHitVFX;
 
     private ScrollingTerrain scrollingTerrain;
@@ -65,6 +67,12 @@ public class Player1Powerups : MonoBehaviour, DelegateTimer
         scrollingTerrain.ModifyScrollSpeed(slowDownMultiplier, speedUpTime, ScrollingTerrain.ScrollModificationType.BackToNormal, this);
     }
 
+    void Respawn()
+    {
+        transform.position = new Vector3(transform.position.x, respawnHeight, transform.position.z);
+        anim.SetTrigger("respawn");
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.transform.tag == "PowerUp")
@@ -77,6 +85,19 @@ public class Player1Powerups : MonoBehaviour, DelegateTimer
             Destroy(other.gameObject);
             SlowDown();
             Instantiate(obstacleHitVFX, other.transform.position, Quaternion.identity);
+        }
+        else if(other.transform.tag == "Pothole")
+        {
+            anim.SetTrigger("potholeFall");
+            SlowDown();
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if(other.tag == "Pothole")
+        {
+            Respawn();
         }
     }
 

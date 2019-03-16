@@ -168,7 +168,7 @@ GameObject:
   - component: {fileID: 6283484544983341269}
   m_Layer: 0
   m_Name: Pothole_Wide
-  m_TagString: Obstacle
+  m_TagString: Pothole
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
