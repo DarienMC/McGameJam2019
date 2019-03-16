@@ -8,23 +8,40 @@ public class PropManager : MonoBehaviour
     public GameObject obstacle2;
     public GameObject powerUp;
     public int maxObjectsOnASlice;
-    private int nbrPresets = 9;
+    private int nbrPresets = 20;
     //must be in pourcentage
     public int spawingObjectSliceChance;
 
     private float widthTerrain = 10.0F;
+    private enum Obstacle { beer, jumpObs, avoidObs, nothing, jumpBeerObs };
 
-    int[,] array = new int[,]
+
+    Obstacle[,] array = new Obstacle[,]
     {
-        {3, 1, 1, 1, 2, 1, 1},
-        {0, 1, 0, 0, 1, 1, 1},
-        {0, 0, 1, 1, 0, 1, 1},
-        {2, 0, 0, 0, 0, 1, 1},
-        {0, 2, 3, 0, 0, 1, 1},
-        {0, 0, 2, 3, 0, 1, 1},
-        {2, 0, 0, 3, 0, 1, 1},
-        {0, 3, 0, 0, 0, 1, 1},
-        {0, 0, 3, 0, 0, 1, 1},
+        {Obstacle.beer, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing},
+        {Obstacle.nothing, Obstacle.beer, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing},
+        {Obstacle.nothing, Obstacle.nothing, Obstacle.beer, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing},
+        {Obstacle.nothing, Obstacle.nothing, Obstacle.nothing, Obstacle.beer, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing},
+        {Obstacle.nothing, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing, Obstacle.beer, Obstacle.nothing, Obstacle.nothing},
+        {Obstacle.nothing, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing, Obstacle.beer, Obstacle.nothing},
+        {Obstacle.nothing, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing, Obstacle.beer},
+        {Obstacle.beer, Obstacle.nothing, Obstacle.nothing, Obstacle.beer, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing},
+        {Obstacle.nothing, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing, Obstacle.beer, Obstacle.nothing, Obstacle.beer},
+        {Obstacle.nothing, Obstacle.nothing, Obstacle.nothing, Obstacle.beer, Obstacle.beer, Obstacle.nothing, Obstacle.nothing},
+        {Obstacle.jumpObs, Obstacle.jumpObs, Obstacle.avoidObs, Obstacle.avoidObs, Obstacle.avoidObs, Obstacle.avoidObs, Obstacle.avoidObs},
+        {Obstacle.jumpObs, Obstacle.nothing,  Obstacle.nothing, Obstacle.avoidObs, Obstacle.avoidObs, Obstacle.avoidObs,  Obstacle.nothing},
+        {Obstacle.jumpObs, Obstacle.nothing,  Obstacle.nothing, Obstacle.avoidObs, Obstacle.avoidObs, Obstacle.avoidObs,  Obstacle.nothing},
+        {Obstacle.jumpObs, Obstacle.nothing,  Obstacle.nothing, Obstacle.avoidObs, Obstacle.avoidObs, Obstacle.avoidObs,  Obstacle.nothing},
+        {Obstacle.jumpObs, Obstacle.nothing,  Obstacle.nothing, Obstacle.avoidObs, Obstacle.avoidObs, Obstacle.avoidObs,  Obstacle.nothing},
+        {Obstacle.jumpObs, Obstacle.nothing,  Obstacle.nothing, Obstacle.avoidObs, Obstacle.avoidObs, Obstacle.avoidObs,  Obstacle.nothing},
+        {Obstacle.jumpObs, Obstacle.nothing,  Obstacle.nothing, Obstacle.avoidObs, Obstacle.avoidObs, Obstacle.avoidObs,  Obstacle.nothing},
+        {Obstacle.jumpObs, Obstacle.nothing,  Obstacle.nothing, Obstacle.avoidObs, Obstacle.avoidObs, Obstacle.avoidObs,  Obstacle.nothing},
+        {Obstacle.jumpObs, Obstacle.nothing,  Obstacle.nothing, Obstacle.avoidObs, Obstacle.avoidObs, Obstacle.avoidObs,  Obstacle.nothing},
+        {Obstacle.jumpObs, Obstacle.nothing,  Obstacle.nothing, Obstacle.avoidObs, Obstacle.avoidObs, Obstacle.avoidObs,  Obstacle.nothing},
+        {Obstacle.jumpObs, Obstacle.nothing,  Obstacle.nothing, Obstacle.avoidObs, Obstacle.avoidObs, Obstacle.avoidObs,  Obstacle.nothing},
+        {Obstacle.jumpObs, Obstacle.nothing,  Obstacle.nothing, Obstacle.avoidObs, Obstacle.avoidObs, Obstacle.avoidObs,  Obstacle.nothing},
+        {Obstacle.jumpObs, Obstacle.nothing,  Obstacle.nothing, Obstacle.avoidObs, Obstacle.avoidObs, Obstacle.avoidObs,  Obstacle.nothing},
+
     };
 
     ScrollingTerrain terrain;
@@ -55,30 +72,38 @@ public class PropManager : MonoBehaviour
                     //position of object
                     float scaledWidth = (widthTerrain * terrain.terrainSlice.transform.localScale.x);
                     float offset = (float)(((i) * (widthTerrain / maxObjectsOnASlice)) - (widthTerrain / 2) + (float)(widthTerrain / maxObjectsOnASlice)/2);
-                    Debug.Log(offset +", " + ((float)(widthTerrain / (maxObjectsOnASlice*2))));
+                   
                     
 
-                    if (array[typeOfTerrain, i] == 1)
+                    if (array[typeOfTerrain, i] == Obstacle.jumpObs)
                     {   
                         GameObject instance = Instantiate(obstacle, new Vector3(offset, 2, -20), Quaternion.identity);
                         terrain.AttachProp(instance.transform);
                     }
 
-                    else if (array[typeOfTerrain, i] == 2)
+                    else if (array[typeOfTerrain, i] == Obstacle.avoidObs)
                     {
                         GameObject instance = Instantiate(obstacle2, new Vector3(offset, 2, -20), Quaternion.identity);
                         terrain.AttachProp(instance.transform);
                     }
 
-                    else if (array[typeOfTerrain, i] == 3)
+                    else if (array[typeOfTerrain, i] == Obstacle.beer)
                     {
-                        GameObject instance = Instantiate(powerUp, new Vector3(offset, 2, -20), Quaternion.identity);
+                        GameObject instance = Instantiate(powerUp, new Vector3(offset, 0.2F, -20), Quaternion.identity);
                         terrain.AttachProp(instance.transform);
+                    }
+
+                    else if (array[typeOfTerrain, i] == Obstacle.jumpBeerObs)
+                    {
+                        GameObject instance = Instantiate(obstacle, new Vector3(offset, 2, -20), Quaternion.identity);
+                        terrain.AttachProp(instance.transform);
+                        GameObject instance2 = Instantiate(powerUp, new Vector3(offset, 2, -20), Quaternion.identity);
+                        terrain.AttachProp(instance2.transform);
                     }
 
                 }
             }
-            yield return new WaitForSeconds(1.0f);
+            yield return new WaitForSeconds(2.0f);
         }
     }
 }
