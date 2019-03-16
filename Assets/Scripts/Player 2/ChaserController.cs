@@ -13,7 +13,7 @@ public class ChaserController : MonoBehaviour
     // References
     public Transform player;
     public Canvas canvas;
-    public Image reticle;
+    public Reticle reticle;
     
     // Aiming parameters
     public float maxAimSpeed = 200;
@@ -27,30 +27,54 @@ public class ChaserController : MonoBehaviour
     public float fireDelay = 1.0f;
     public GameObject laser;
 
-    public bool canFireLaser = false;
-
+    private RectTransform reticleTransform;
     private GManager gManager;
     private Rigidbody rb;
-    private Animator reticleAnimator;
     private Animator animator;
     private float aimSpeed = 0;
-    private float reticleHeight = 0;
     private float nextFire = 0;
+    private float reticleHeight = 0;
+
+    private bool _canFireLaser = false;
+    public bool canFireLaser
+    {
+        get
+        {
+            return _canFireLaser;
+        }
+        set
+        {
+            _canFireLaser = value;
+            if (_canFireLaser)
+            {
+                reticle.EmpowerReticle();
+            }
+            else
+            {
+                reticle.ResetReticle();
+            }
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        reticleAnimator = canvas.transform.GetChild(0).GetComponent<Animator>();
+        reticle = canvas.transform.GetChild(0).GetComponent<Reticle>();
         animator = GetComponent<Animator>();
         gManager = FindObjectOfType<GManager>();
-
-        reticleHeight = reticle.rectTransform.anchoredPosition.y;
+        reticleTransform = reticle.GetComponent<RectTransform>();
+        reticleHeight = reticleTransform.anchoredPosition.y;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.F1))
+        {
+            canFireLaser = true;
+        }
+
         MoveReticle();
         if (Input.GetButtonDown(inputFire) && Time.time > nextFire)
         {
@@ -78,17 +102,17 @@ public class ChaserController : MonoBehaviour
         aimSpeed = Mathf.Min(aimSpeed, maxAimSpeed);
         aimSpeed = Mathf.Max(aimSpeed, -maxAimSpeed);
         
-        reticle.rectTransform.anchoredPosition += new Vector2(aimSpeed*Time.deltaTime, reticleHeight);
-        float xCoord = reticle.rectTransform.anchoredPosition.x;
+        reticleTransform.anchoredPosition += new Vector2(aimSpeed*Time.deltaTime, reticleHeight);
+        float xCoord = reticleTransform.anchoredPosition.x;
         xCoord = Mathf.Min(xCoord, maxReticlePosition);
         xCoord = Mathf.Max(xCoord, -maxReticlePosition);
-        reticle.rectTransform.anchoredPosition = new Vector2(xCoord, reticleHeight);
+        reticleTransform.anchoredPosition = new Vector2(xCoord, reticleHeight);
     }
 
     Vector3 ComputeTargetPosition()
     {
         Vector2 canvasPosition = canvas.GetComponent<RectTransform>().anchoredPosition
-            + reticle.rectTransform.anchoredPosition;
+            + reticleTransform.anchoredPosition;
         Vector2 pixelPosition = RectTransformUtility.PixelAdjustPoint(canvasPosition, transform, canvas);
         float distance = Vector3.Distance(player.position, Camera.main.transform.position);
         Ray ray = Camera.main.ScreenPointToRay(new Vector3(pixelPosition.x, pixelPosition.y, 0.0f));
@@ -122,8 +146,7 @@ public class ChaserController : MonoBehaviour
         
         // Fire delay
         nextFire = Time.time + fireDelay;
-        reticleAnimator.CrossFade("Charging", 0.0f);
-        reticleAnimator.speed = 1 / fireDelay;
+        reticle.Charge(fireDelay);
     }
 
     void FireLaser()
@@ -133,8 +156,7 @@ public class ChaserController : MonoBehaviour
         Vector3 targetPosition = ComputeTargetPosition();
         GameObject instance = Instantiate(laser, transform.position + Vector3.back, Quaternion.identity);
         instance.GetComponent<Laser>().Set(instance.transform.position, targetPosition);
-        reticleAnimator.CrossFade("Charging", 0.0f);
-        reticleAnimator.speed = 1 / fireDelay;
+        reticle.Charge(fireDelay);
     }
 
     void KillPlayer()
