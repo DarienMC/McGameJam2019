@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(Animator))]
 public class ChaserController : MonoBehaviour
 {
     // Input
@@ -27,8 +28,10 @@ public class ChaserController : MonoBehaviour
 
     public Transform player;
 
+    private GManager gManager;
     private Rigidbody rb;
     private Animator reticleAnimator;
+    private Animator animator;
     private float aimSpeed = 0;
     private float reticleHeight = 0;
     private float nextFire = 0;
@@ -38,6 +41,9 @@ public class ChaserController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         reticleAnimator = canvas.transform.GetChild(0).GetComponent<Animator>();
+        animator = GetComponent<Animator>();
+        gManager = FindObjectOfType<GManager>();
+
         reticleHeight = reticle.rectTransform.anchoredPosition.y;
     }
 
@@ -48,6 +54,11 @@ public class ChaserController : MonoBehaviour
         if (Input.GetButtonDown(inputFire))
         {
             Shoot();
+        }
+
+        if(player.transform.position.z == transform.position.z)
+        {
+            KillPlayer();
         }
     }
 
@@ -94,5 +105,15 @@ public class ChaserController : MonoBehaviour
         nextFire = Time.time + fireDelay;
         reticleAnimator.CrossFade("Charging", 0.0f);
         reticleAnimator.speed = 1 / fireDelay;
+    }
+
+    void KillPlayer()
+    {
+        animator.SetTrigger("killPlayer");
+    }
+
+    public void KillPlayerAnimationCallback()
+    {
+        gManager.PlayerDeath();
     }
 }
