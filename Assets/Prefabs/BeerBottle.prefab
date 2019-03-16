@@ -319,7 +319,7 @@ GameObject:
   - component: {fileID: 8387887026925115166}
   - component: {fileID: 8387887026915801340}
   m_Layer: 0
-  m_Name: bottle_corked
+  m_Name: BeerBottle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -353,7 +353,7 @@ Animator:
   m_GameObject: {fileID: 8387887026925275966}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: f81615371a3508a44a74c597a9b17921, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b430322bf529fc141a75c3517f46ef4f, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
