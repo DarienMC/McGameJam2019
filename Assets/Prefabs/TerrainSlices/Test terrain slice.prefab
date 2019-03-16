@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3369773174810312280}
   m_Layer: 9
   m_Name: Test terrain slice
-  m_TagString: Untagged
+  m_TagString: Terrain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

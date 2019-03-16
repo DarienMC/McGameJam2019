@@ -5,6 +5,8 @@ using UnityEngine;
 public class Player2Movement : MonoBehaviour
 {
     public float relativeSpeed;
+    public float maxZDistance;
+    public float minZDistance;
 
     private bool movingBackwards = false;
     private bool movingForwards = false;
@@ -22,11 +24,13 @@ public class Player2Movement : MonoBehaviour
     {
         if (movingBackwards)
         {
-            transform.position -= new Vector3(0, 0, relativeSpeed);
+            if(transform.position.z - relativeSpeed >= minZDistance)
+                transform.position -= new Vector3(0, 0, relativeSpeed);
         }
         else if (movingForwards)
         {
-            transform.position += new Vector3(0, 0, relativeSpeed);
+            if (transform.position.z + relativeSpeed <= maxZDistance)
+                transform.position += new Vector3(0, 0, relativeSpeed);
         }
 
         if(movingForwards || movingBackwards)
