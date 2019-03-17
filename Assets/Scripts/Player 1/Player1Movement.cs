@@ -116,4 +116,9 @@ public class Player1Movement : MonoBehaviour
         rb.velocity += Vector3.up * jumpForce;
         audioSource.PlayOneShot(jumpSound);
     }
+
+    public jumpStatus GetJumpStatus()
+    {
+        return myJumpStatus;
+    }
 }

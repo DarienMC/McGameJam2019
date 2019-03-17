@@ -46,12 +46,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   propManager: {fileID: 5561119691336779349}
   scrollingSpeed: -3
-  numberOfSlices: 100
+  numberOfSlices: 150
   bufferedSlices: 20
   sliceLength: 1.8
   terrainSlice: {fileID: 4001852757161897722, guid: f0b9a63aefa9b334bb0169bfab858bcd,
     type: 3}
   obstacleLinesMinDistance: 3
+  buildingSize: 5
+  buildings:
+  - {fileID: 5341045434011331380, guid: fc4d026c00a65e1489c9e287c7c86430, type: 3}
 --- !u!114 &5561119691336779349
 MonoBehaviour:
   m_ObjectHideFlags: 0
