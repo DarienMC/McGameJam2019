@@ -101,7 +101,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speedUpMultiplier: 5
   slowDownMultiplier: 0.5
-  speedUpTime: 5
+  speedUpTime: 3
   respawnHeight: 0.5
   anim: {fileID: 3730212121493423974}
   obstacleHitVFX: {fileID: 100018, guid: a40b64bf23366dc42a892af2c6ff6140, type: 3}
