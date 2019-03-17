@@ -8,6 +8,8 @@ TagManager:
   - Terrain
   - PowerUp
   - Obstacle
+  - FxTemporaire
+  - Pothole
   layers:
   - Default
   - TransparentFX
