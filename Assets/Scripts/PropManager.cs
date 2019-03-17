@@ -4,81 +4,126 @@ using UnityEngine;
 
 public class PropManager : MonoBehaviour
 {
-    public GameObject obstacle;
-    public GameObject obstacle2;
+    public ScrollingTerrain terrain;
+    public GameObject porthole1;
+    public GameObject porthole2;
+    public GameObject cone;
     public GameObject powerUp;
-    public int maxObjectsOnASlice;
-    private int nbrPresets = 9;
-    //must be in pourcentage
+    public GameObject texture;
+    //must be in percentage
     public int spawingObjectSliceChance;
 
-    private float widthTerrain = 10.0F;
+    private int maxObjectsOnASlice = 7;
+    private int nbrPresets = 30;
+    private float widthTerrain;
+    private enum Obstacle { beer, jumpObs1, jumpObs2, avoidObs, nothing, jumpBeerObs };
 
-    int[,] array = new int[,]
+
+    Obstacle[,] array = new Obstacle[,]
     {
-        {3, 1, 1, 1, 2, 1, 1},
-        {0, 1, 0, 0, 1, 1, 1},
-        {0, 0, 1, 1, 0, 1, 1},
-        {2, 0, 0, 0, 0, 1, 1},
-        {0, 2, 3, 0, 0, 1, 1},
-        {0, 0, 2, 3, 0, 1, 1},
-        {2, 0, 0, 3, 0, 1, 1},
-        {0, 3, 0, 0, 0, 1, 1},
-        {0, 0, 3, 0, 0, 1, 1},
+        {Obstacle.beer, Obstacle.nothing, Obstacle.nothing, Obstacle.jumpObs2, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing},
+        {Obstacle.nothing, Obstacle.beer, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing},
+        {Obstacle.nothing, Obstacle.nothing, Obstacle.beer, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing},
+        {Obstacle.nothing, Obstacle.nothing, Obstacle.nothing, Obstacle.beer, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing},
+        {Obstacle.nothing, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing, Obstacle.beer, Obstacle.nothing, Obstacle.nothing},
+        {Obstacle.nothing, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing, Obstacle.beer, Obstacle.nothing},
+        {Obstacle.nothing, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing, Obstacle.beer},
+        {Obstacle.beer, Obstacle.nothing, Obstacle.nothing, Obstacle.beer, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing},
+        {Obstacle.nothing, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing, Obstacle.beer, Obstacle.nothing, Obstacle.beer},
+        {Obstacle.beer, Obstacle.nothing, Obstacle.nothing, Obstacle.beer, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing},
+        {Obstacle.jumpObs2, Obstacle.nothing, Obstacle.avoidObs, Obstacle.avoidObs, Obstacle.avoidObs, Obstacle.avoidObs, Obstacle.avoidObs},
+        {Obstacle.avoidObs, Obstacle.jumpObs1,  Obstacle.nothing, Obstacle.nothing, Obstacle.nothing, Obstacle.avoidObs,  Obstacle.avoidObs},
+        {Obstacle.nothing, Obstacle.avoidObs,  Obstacle.avoidObs, Obstacle.avoidObs, Obstacle.avoidObs, Obstacle.avoidObs,  Obstacle.jumpBeerObs},
+        {Obstacle.nothing, Obstacle.avoidObs,  Obstacle.avoidObs, Obstacle.avoidObs, Obstacle.avoidObs, Obstacle.avoidObs,  Obstacle.jumpBeerObs},
+        {Obstacle.jumpObs2, Obstacle.nothing,  Obstacle.avoidObs, Obstacle.avoidObs, Obstacle.nothing, Obstacle.nothing,  Obstacle.nothing},
+        {Obstacle.avoidObs, Obstacle.avoidObs,  Obstacle.jumpObs1, Obstacle.nothing, Obstacle.avoidObs, Obstacle.nothing,  Obstacle.avoidObs},
+        {Obstacle.avoidObs, Obstacle.nothing,  Obstacle.nothing, Obstacle.avoidObs, Obstacle.jumpObs1, Obstacle.jumpObs2,  Obstacle.nothing},
+        {Obstacle.jumpBeerObs, Obstacle.jumpObs1,  Obstacle.jumpObs2, Obstacle.avoidObs, Obstacle.avoidObs, Obstacle.nothing,  Obstacle.nothing},
+        {Obstacle.avoidObs, Obstacle.nothing,  Obstacle.avoidObs, Obstacle.nothing, Obstacle.avoidObs, Obstacle.nothing,  Obstacle.nothing},
+        {Obstacle.beer, Obstacle.nothing,  Obstacle.avoidObs, Obstacle.beer, Obstacle.nothing, Obstacle.nothing,  Obstacle.nothing},
+        {Obstacle.nothing, Obstacle.nothing,  Obstacle.nothing, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing,  Obstacle.nothing},
+        {Obstacle.nothing, Obstacle.nothing,  Obstacle.nothing, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing,  Obstacle.nothing},
+        {Obstacle.nothing, Obstacle.nothing,  Obstacle.nothing, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing,  Obstacle.nothing},
+        {Obstacle.nothing, Obstacle.nothing,  Obstacle.nothing, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing,  Obstacle.nothing},
+        {Obstacle.nothing, Obstacle.nothing,  Obstacle.nothing, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing,  Obstacle.nothing},
+        {Obstacle.nothing, Obstacle.nothing,  Obstacle.nothing, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing,  Obstacle.nothing},
+        {Obstacle.nothing, Obstacle.nothing,  Obstacle.nothing, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing,  Obstacle.nothing},
+        {Obstacle.nothing, Obstacle.nothing,  Obstacle.nothing, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing,  Obstacle.nothing},
+        {Obstacle.nothing, Obstacle.nothing,  Obstacle.nothing, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing,  Obstacle.nothing}
     };
-
-    ScrollingTerrain terrain;
 
     void Start()
     {
-        terrain = GetComponent<ScrollingTerrain>();
-        StartCoroutine(GenerateProps());
+        widthTerrain = texture.GetComponent<Renderer>().bounds.size.z * maxObjectsOnASlice;
     }
 
-
-    // Generate props (obstacles and powerups) at regular intervals.
-    IEnumerator GenerateProps()
+    void GenerateObstacle(GameObject gameobject, Vector3 offset)
     {
-        yield return new WaitForSeconds(1.0f);
-        while (true)
+        GameObject instance = Instantiate(gameobject, gameObject.transform.position + offset, gameobject.transform.rotation);
+        terrain.AttachProp(instance.transform);
+    }
+
+    void ReplaceFloor(GameObject gameObject, int childIndex)
+    {
+        GameObject replacement = Instantiate(gameObject, gameObject.transform.position, gameObject.transform.rotation);
+        Transform current = terrain.previousSlice.GetChild(childIndex);
+        replacement.transform.position = current.position;
+        replacement.transform.parent = current.parent;
+        current.SetParent(null);
+        Destroy(current.gameObject);
+    }
+
+    void ReplaceFloorLarge(GameObject gameObject, int childIndex)
+    {
+        GameObject replacement = Instantiate(gameObject, gameObject.transform.position, gameObject.transform.rotation);
+        Transform left = terrain.previousSlice.GetChild(childIndex - 1);
+        Transform right = terrain.previousSlice.GetChild(childIndex);
+        replacement.transform.position = left.position + new Vector3(0.0f, 0.0f, 1.0f) * terrain.sliceLength;
+        replacement.transform.parent = left.parent;
+        left.SetParent(null);
+        Destroy(left.gameObject);
+        right.SetParent(null);
+        Destroy(right.gameObject);
+    }
+
+    public void GenerateLine(Transform slice)
+    {
+        int isSpawingLine = Random.Range(0, 100);
+
+        //spawn obstacles
+        if (isSpawingLine <= spawingObjectSliceChance)
         {
-            int typeOfLine = Random.Range(0, 100);
-            
+            //getting a preset
+            int typeOfTerrain = Random.Range(0, nbrPresets - 1);
 
-            if (typeOfLine < spawingObjectSliceChance)
+            for (int i = 0; i < maxObjectsOnASlice; i++)
             {
-                //getting a preset
-                int typeOfTerrain = Random.Range(0, nbrPresets);
-
-                for (int i = 0; i < maxObjectsOnASlice; i++)
+                if (array[typeOfTerrain, i] == Obstacle.jumpObs1)
                 {
-                    //position of object
-                    float scaledWidth = (widthTerrain * terrain.terrainSlice.transform.localScale.x);
-                    float offset = (float)(((i) * (widthTerrain / maxObjectsOnASlice)) - (widthTerrain / 2) + (float)(widthTerrain / maxObjectsOnASlice)/2);
-                    //Debug.Log(offset +", " + ((float)(widthTerrain / (maxObjectsOnASlice*2))));
-                    
+                    ReplaceFloor(porthole1, i);
+                }
 
-                    if (array[typeOfTerrain, i] == 1)
-                    {   
-                        GameObject instance = Instantiate(obstacle, new Vector3(offset, 2, -20), Quaternion.identity);
-                        terrain.AttachProp(instance.transform);
-                    }
+                //else if (array[typeOfTerrain, i] == Obstacle.jumpObs2 && i % 2 == 1)
+                //{
+                //    ReplaceFloorLarge(porthole2, i);
+                //}
 
-                    else if (array[typeOfTerrain, i] == 2)
-                    {
-                        GameObject instance = Instantiate(obstacle2, new Vector3(offset, 2, -20), Quaternion.identity);
-                        terrain.AttachProp(instance.transform);
-                    }
+                else if (array[typeOfTerrain, i] == Obstacle.avoidObs)
+                {
+                    GenerateObstacle(cone, slice.GetChild(i).transform.position);
+                }
 
-                    else if (array[typeOfTerrain, i] == 3)
-                    {
-                        GameObject instance = Instantiate(powerUp, new Vector3(offset, 2, -20), Quaternion.identity);
-                        terrain.AttachProp(instance.transform);
-                    }
+                else if (array[typeOfTerrain, i] == Obstacle.beer)
+                {
+                    GenerateObstacle(powerUp, slice.GetChild(i).transform.position);
+                }
 
+                else if (array[typeOfTerrain, i] == Obstacle.jumpBeerObs)
+                {
+                    GameObject instance2 = Instantiate(powerUp, slice.GetChild(i).transform.position + Vector3.up * 2, Quaternion.identity);
+                    terrain.AttachProp(instance2.transform);
                 }
             }
-            yield return new WaitForSeconds(1.0f);
         }
     }
 }

@@ -7,11 +7,16 @@ public class Player1Powerups : MonoBehaviour, DelegateTimer
     public float speedUpMultiplier;
     public float slowDownMultiplier;
     public float speedUpTime;
+    public float respawnHeight = 0.1179351f + 0.2f;
+    public Animator anim;
     public GameObject obstacleHitVFX;
 
     //Audio Clips
     public AudioClip hitByChaserBulletSound;
+    public AudioClip hitByLaserSound;
     public AudioClip hitByObstacleSound;
+    public AudioClip hitByConeSound;
+    public AudioClip hitByPotholeSound;
     public AudioClip powerUpSound;
 
     private ScrollingTerrain scrollingTerrain;
@@ -73,6 +78,12 @@ public class Player1Powerups : MonoBehaviour, DelegateTimer
         scrollingTerrain.ModifyScrollSpeed(slowDownMultiplier, speedUpTime, ScrollingTerrain.ScrollModificationType.BackToNormal, this);
     }
 
+    void Respawn()
+    {
+        transform.position = new Vector3(transform.position.x, respawnHeight, transform.position.z);
+        anim.SetTrigger("respawn");
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.transform.tag == "PowerUp")
@@ -88,17 +99,46 @@ public class Player1Powerups : MonoBehaviour, DelegateTimer
             Instantiate(obstacleHitVFX, other.transform.position, Quaternion.identity);
             audioSource.PlayOneShot(hitByObstacleSound);
         }
-     
+
+        if (other.transform.tag == "Laser")
+        {
+            Destroy(other.gameObject);
+            SlowDown();
+            audioSource.PlayOneShot(hitByLaserSound);
+            Debug.Log("Player was hit by Laser");
+        }
+        else if (other.transform.tag == "Cone")
+        {
+            Destroy(other.gameObject);
+            SlowDown();
+            Instantiate(obstacleHitVFX, other.transform.position, Quaternion.identity);
+            audioSource.PlayOneShot(hitByConeSound);
+        }
+        else if (other.transform.tag == "Pothole")
+        {
+            anim.SetTrigger("potholeFall");
+            audioSource.PlayOneShot(hitByPotholeSound);
+            SlowDown();
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.transform.tag == "ChaserBullet")
         {
-            audioSource.PlayOneShot(hitByChaserBulletSound);
-            Debug.Log("Player was hit by ChaserBullet");
             Destroy(collision.gameObject);
             SlowDown();
+            audioSource.PlayOneShot(hitByChaserBulletSound);
+            Debug.Log("Player was hit by ChaserBullet");
+
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if(other.tag == "Pothole")
+        {
+            Respawn();
         }
     }
 
