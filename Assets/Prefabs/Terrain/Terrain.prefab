@@ -47,7 +47,7 @@ MonoBehaviour:
   propManager: {fileID: 5561119691336779349}
   scrollingSpeed: -3
   numberOfSlices: 150
-  bufferedSlices: 20
+  bufferedSlices: 10
   sliceLength: 1.8
   terrainSlice: {fileID: 4001852757161897722, guid: f0b9a63aefa9b334bb0169bfab858bcd,
     type: 3}
@@ -67,6 +67,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0cdcc0a5f929c394ac0a8d3851cd27c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  decoration1: {fileID: 8399232423066652301, guid: 3f1c3711d21131e4089df6cb16254926,
+    type: 3}
+  decoration2: {fileID: 7618767636199724761, guid: 525fc408172606b44a3fe8b76d31c276,
+    type: 3}
+  decoration3: {fileID: 4314370599957397646, guid: f6295d74c4c777942be28f5ca43719d1,
+    type: 3}
   terrain: {fileID: 5561119691336779348}
   porthole1: {fileID: 8497657119899702418, guid: c7489cb3f632f464782bcffe13913eb6,
     type: 3}
