@@ -53,16 +53,10 @@ public class PropManager : MonoBehaviour
         widthTerrain = texture.GetComponent<Renderer>().bounds.size.z * maxObjectsOnASlice;
     }
 
-    void GenerateObstacle(GameObject gameobject, Vector3 offset)
+    void GenerateObstacle(GameObject gameobject, Vector3 position)
     {
-        GameObject instance = Instantiate(gameobject, gameObject.transform.position + offset, gameobject.transform.rotation);
+        GameObject instance = Instantiate(gameobject, gameObject.transform.position + position, gameobject.transform.rotation);
         terrain.AttachProp(instance.transform);
-        if (instance.transform.position.x > 6 || instance.transform.position.x < -6)
-        {
-            instance.transform.SetParent(null);
-            Destroy(instance);
-            Debug.Log("Destroyed");
-        }
     }
 
     void ReplaceFloor(GameObject gameObject, int childIndex)
@@ -100,41 +94,48 @@ public class PropManager : MonoBehaviour
             int typeOfTerrain = Random.Range(0, nbrPresets - 1);
             bool foundBeer = false;
 
+            int portHoleGenerated = 0;
             for (int i = 0; i < maxObjectsOnASlice; ++i)
             {
+                float offset = -5.4f + 1.8f * i;
+                Vector3 position = new Vector3(offset, 0.2f, slice.position.z);
+
                 if (array[typeOfTerrain, i] == Obstacle.jumpObs1)
                 {
-                    ReplaceFloor(porthole1, i);
+                    ReplaceFloor(porthole1, i - portHoleGenerated);
+                    portHoleGenerated += 1;
                 }
 
                 else if (array[typeOfTerrain, i] == Obstacle.jumpObs2 && i % 2 == 1)
                 {
-                    ReplaceFloorLarge(porthole2, i);
+                    ReplaceFloorLarge(porthole2, i - portHoleGenerated);
+                    portHoleGenerated += 2;
                 }
 
                 else if (array[typeOfTerrain, i] == Obstacle.avoidObs)
                 {
-                    GenerateObstacle(cone, slice.GetChild(i).transform.position + Vector3.up * 0.2f);
+                    GenerateObstacle(cone, position);
                 }
 
                 else if (array[typeOfTerrain, i] == Obstacle.beer)
                 {
                     if (beerDelay >= distanceBetweenBeers)
                     {
-                        GenerateObstacle(powerUp, slice.GetChild(i).transform.position + Vector3.up * 0.2f);
+                        GenerateObstacle(powerUp, position);
                         foundBeer = true;
                         beerDelay = 0;
                     }
                     else
-                        this.GenerateObstacle(cone, slice.GetChild(i).transform.position + Vector3.up * 0.2f);
+                        this.GenerateObstacle(cone, position);
                 }
 
                 else if (array[typeOfTerrain, i] == Obstacle.jumpBeerObs)
                 {
-                    ReplaceFloor(porthole1, i);
+                    ReplaceFloor(porthole1, i - portHoleGenerated);
+                    portHoleGenerated += 1;
                     if (beerDelay >= distanceBetweenBeers)
                     {
-                        GameObject instance2 = Instantiate(powerUp, slice.GetChild(i).transform.position + Vector3.up * 2, Quaternion.identity);
+                        GameObject instance2 = Instantiate(powerUp, position + Vector3.up * 2, Quaternion.identity);
                         terrain.AttachProp(instance2.transform);
                         foundBeer = true;
                         beerDelay = 0;
