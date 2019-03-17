@@ -11,8 +11,10 @@ public class PropManager : MonoBehaviour
     public GameObject powerUp;
     public GameObject texture;
     //must be in percentage
-    public int spawingObjectSliceChance;
+    public float spawingObjectSliceChance;
     public int distanceBetweenBeers;
+    public float maxSpawingObjectSliceChance;
+    public float deltaSpawningObjectSliceChance;
 
     private int maxObjectsOnASlice = 7;
     private int nbrPresets = 25;
@@ -51,6 +53,12 @@ public class PropManager : MonoBehaviour
     void Start()
     {
         widthTerrain = texture.GetComponent<Renderer>().bounds.size.z * maxObjectsOnASlice;
+    }
+
+    private void FixedUpdate()
+    {
+        if(!(spawingObjectSliceChance + deltaSpawningObjectSliceChance >= maxSpawingObjectSliceChance))
+            spawingObjectSliceChance = spawingObjectSliceChance + deltaSpawningObjectSliceChance;
     }
 
     void GenerateObstacle(GameObject gameobject, Vector3 offset)
