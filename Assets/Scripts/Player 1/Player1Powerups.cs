@@ -105,7 +105,6 @@ public class Player1Powerups : MonoBehaviour, DelegateTimer
 
         if (other.transform.tag == "Laser")
         {
-            Destroy(other.gameObject);
             SlowDown();
             audioSource.PlayOneShot(hitByLaserSound);
             Debug.Log("Player was hit by Laser");
