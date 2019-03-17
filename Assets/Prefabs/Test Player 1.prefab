@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1152038002807615410}
+  - component: {fileID: 2974403172462755640}
   - component: {fileID: 1152038002807615413}
   - component: {fileID: 1152038002807615409}
   - component: {fileID: 1152038002807615414}
@@ -37,6 +38,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &2974403172462755640
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1152038002807615415}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 3
+  m_Direction: 1
+  m_Center: {x: 0, y: 1.25, z: 0}
 --- !u!65 &1152038002807615413
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -46,10 +61,10 @@ BoxCollider:
   m_GameObject: {fileID: 1152038002807615415}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 2.8313837, z: 0.5184157}
-  m_Center: {x: 0, y: 1.2977569, z: 0.025218248}
+  m_Size: {x: 0.88721734, y: 2.5120528, z: 0.4599474}
+  m_Center: {x: 0, y: 1.4574224, z: 0.02521827}
 --- !u!114 &1152038002807615409
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -328,6 +343,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1152038002807615410}
     m_Modifications:
+    - target: {fileID: 100004, guid: b4b5f44b2d628cb4caa8623dc68818d8, type: 3}
+      propertyPath: m_Name
+      value: MainPlayer_Mesh
+      objectReference: {fileID: 0}
+    - target: {fileID: 100004, guid: b4b5f44b2d628cb4caa8623dc68818d8, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: b4b5f44b2d628cb4caa8623dc68818d8, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: b4b5f44b2d628cb4caa8623dc68818d8, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: b4b5f44b2d628cb4caa8623dc68818d8, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0
@@ -371,22 +402,6 @@ PrefabInstance:
     - target: {fileID: 400004, guid: b4b5f44b2d628cb4caa8623dc68818d8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 100004, guid: b4b5f44b2d628cb4caa8623dc68818d8, type: 3}
-      propertyPath: m_Name
-      value: MainPlayer_Mesh
-      objectReference: {fileID: 0}
-    - target: {fileID: 100004, guid: b4b5f44b2d628cb4caa8623dc68818d8, type: 3}
-      propertyPath: m_Layer
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: b4b5f44b2d628cb4caa8623dc68818d8, type: 3}
-      propertyPath: m_Layer
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 100002, guid: b4b5f44b2d628cb4caa8623dc68818d8, type: 3}
-      propertyPath: m_Layer
-      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b4b5f44b2d628cb4caa8623dc68818d8, type: 3}
