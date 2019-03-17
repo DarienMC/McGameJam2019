@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GManager : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class GManager : MonoBehaviour
     //References
     public GameObject runner;
     public GameObject chaser;
+    public Text timerText;
+
     public float separationForChaserVictory;
     public float separationForRunnerVictory;
 
@@ -21,13 +24,15 @@ public class GManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        SetTimerText();
     }
 
     // Update is called once per frame
     void Update()
     {
         timePassed += Time.deltaTime;
+        SetTimerText();
+
         playerDistance = chaser.transform.position.z - runner.transform.position.z;
 
         //Win States
@@ -44,6 +49,7 @@ public class GManager : MonoBehaviour
             Debug.Log("Chaser wins by time!");
             PlayerDeath();
         }
+        
 
     }
 
@@ -55,6 +61,15 @@ public class GManager : MonoBehaviour
     public void PlayerWin() {
         Debug.Log("Runner wins!");
         SceneManager.LoadScene(0);
+    }
+
+    private void SetTimerText()
+    {
+        int timeOnTimer = Mathf.FloorToInt(timerLimit - timePassed);
+        if (timeOnTimer >= 0) 
+        {
+            timerText.text = timeOnTimer.ToString();
+        }
     }
 
     private IEnumerator WaitForPlayerDeath() {
