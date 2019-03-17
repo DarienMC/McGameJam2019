@@ -146,11 +146,11 @@ public class ChaserController : MonoBehaviour
         float time = distanceToTarget / bulletSpeed;
         Vector3 gravityOffset = Vector3.zero;
         Vector3 velocity = Vector3.zero;
-        /*for (float i = 0; i < time; i += Time.fixedDeltaTime)
+        for (float i = 0; i < time; i += Time.fixedDeltaTime)
         {
             velocity += -Physics.gravity * Time.fixedDeltaTime;
             gravityOffset += velocity * Time.fixedDeltaTime;
-        }*/
+        }
         Vector3 direction = (targetPosition + gravityOffset - instance.transform.position).normalized;
         instance.GetComponent<ChaserBullet>().velocity = direction * bulletSpeed;
         
