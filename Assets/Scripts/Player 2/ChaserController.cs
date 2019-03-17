@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(Animator))]
 public class ChaserController : MonoBehaviour
 {
     // Input
@@ -32,11 +31,12 @@ public class ChaserController : MonoBehaviour
     public float bulletSpeed = 25.0f;
     public float fireDelay = 1.0f;
     public GameObject laser;
+    public Animator animator;
 
     private RectTransform reticleTransform;
     private GManager gManager;
     private Rigidbody rb;
-    private Animator animator;
+    
     private AudioSource audioSource;
     private float aimSpeed = 0;
     private float nextFire = 0;
@@ -96,11 +96,6 @@ public class ChaserController : MonoBehaviour
                 Shoot();
                 audioSource.PlayOneShot(fireChaserBulletSound);
             }
-        }
-
-        if(player.transform.position.z == transform.position.z)
-        {
-            KillPlayer();
         }
     }
 
@@ -169,11 +164,10 @@ public class ChaserController : MonoBehaviour
         reticle.Charge(fireDelay);
     }
 
-    void KillPlayer()
+    public void KillPlayer()
     {
         animator.SetTrigger("killPlayer");
         audioSource.PlayOneShot(killPlayerSound);
-        gManager.PlayerDeath();
     }
 
     public void KillPlayerAnimationCallback()
