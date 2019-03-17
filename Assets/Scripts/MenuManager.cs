@@ -9,13 +9,8 @@ public class MenuManager : MonoBehaviour
 {
     public Button button;
 
-    // Start is called before the first frame update
-    void Start()
+    public void LoadGameScene()
     {
-        button.onClick.AddListener(TaskOnClick);
-    }
-
-    void TaskOnClick() {
-        SceneManager.LoadScene("Both Players Sam");
+        SceneManager.LoadScene(1);
     }
 }
