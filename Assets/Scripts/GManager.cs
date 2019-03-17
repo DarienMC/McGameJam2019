@@ -64,7 +64,6 @@ public class GManager : MonoBehaviour
         winText.text = "Chaser wins!";
         winText.enabled = true;
         StartCoroutine(Wait());
-        SceneManager.LoadScene(0);
     }
 
     public void PlayerWin() {
@@ -72,7 +71,6 @@ public class GManager : MonoBehaviour
         winText.text = "Runner Wins!";
         winText.enabled = true;
         StartCoroutine(Wait());
-        SceneManager.LoadScene(0);
     }
 
     private void SetTimerText()
@@ -80,13 +78,13 @@ public class GManager : MonoBehaviour
         int timeOnTimer = Mathf.FloorToInt(timerLimit - timePassed);
         if (timeOnTimer >= 0) 
         {
-            timerText.text = timeOnTimer.ToString();
+            timerText.text = timeOnTimer.ToString() + "s left";
         }
     }
 
     private void SetDistanceTrackingText()
     {
-        distanceTrackingText.text = Mathf.FloorToInt(playerDistance - separationForChaserVictory).ToString() + "m out of " + Mathf.FloorToInt(separationForRunnerVictory - separationForChaserVictory).ToString() + "m";
+        distanceTrackingText.text = Mathf.Max(0, Mathf.FloorToInt(playerDistance - separationForChaserVictory)).ToString() + "m distance"/* + Mathf.FloorToInt(separationForRunnerVictory - separationForChaserVictory).ToString() + "m"*/;
     }
 
     private IEnumerator Wait() {
