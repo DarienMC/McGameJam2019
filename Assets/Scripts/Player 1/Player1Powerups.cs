@@ -10,6 +10,7 @@ public class Player1Powerups : MonoBehaviour, DelegateTimer
     public float respawnHeight = 0.1179351f + 0.2f;
     public Animator anim;
     public GameObject obstacleHitVFX;
+    public float jumpCooldown = 0.5f;
 
     //Audio Clips
     public AudioClip hitByChaserBulletSound;
@@ -19,10 +20,12 @@ public class Player1Powerups : MonoBehaviour, DelegateTimer
     public AudioClip hitByPotholeSound;
     public AudioClip powerUpSound;
 
+
     private ScrollingTerrain scrollingTerrain;
     private bool poweredUp = false;
     private bool slowedDown = false;
     private AudioSource audioSource;
+    private float jumpTimePassed = 0;
 
      
     // Start is called before the first frame update
