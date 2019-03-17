@@ -57,7 +57,6 @@ public class Player1Movement : MonoBehaviour
             if (jump && timeUntilNextJump <= 0)
             {
                 grounded = false;
-                timeUntilNextJump = jumpCooldown;
                 Jump();
                 myJumpStatus = jumpStatus.jumpingState;
             }
@@ -65,9 +64,10 @@ public class Player1Movement : MonoBehaviour
 
         if (myJumpStatus == jumpStatus.jumpingState)
         {
-            if (grounded)
+            if (grounded && timeUntilNextJump <= 0)
             {
                 myJumpStatus = jumpStatus.runningState;
+                timeUntilNextJump = jumpCooldown;
             }
             if (!grounded)
             {
