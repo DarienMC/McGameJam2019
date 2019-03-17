@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1141814761
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1141814762}
+  m_Layer: 10
+  m_Name: Attack target
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1141814762
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1141814761}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1152038002807615410}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1152038002807615415
 GameObject:
   m_ObjectHideFlags: 0
@@ -34,6 +64,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7770063472589992023}
+  - {fileID: 1141814762}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -66,7 +97,7 @@ MonoBehaviour:
   jumpForce: 7
   fallMultiplier: 5
   lowJumpMultiplier: 4
-  jumpCooldown: 2
+  jumpCooldown: 0.5
   jumpSound: {fileID: 8300000, guid: fc47cf78e9c09de41a963f441d43062e, type: 3}
   landingSound: {fileID: 8300000, guid: d4dd0ea2e9531f44eb2d10e7838183ff, type: 3}
   hitSound: {fileID: 8300000, guid: bfe98a6dd44a2124eada2fe980150fb9, type: 3}
@@ -105,7 +136,6 @@ MonoBehaviour:
   respawnHeight: 0.5
   anim: {fileID: 3730212121493423974}
   obstacleHitVFX: {fileID: 100018, guid: a40b64bf23366dc42a892af2c6ff6140, type: 3}
-  jumpCooldown: 0.5
   hitByChaserBulletSound: {fileID: 8300000, guid: 9edbb52355b52694aaba0f323da03418,
     type: 3}
   hitByLaserSound: {fileID: 8300000, guid: bfe98a6dd44a2124eada2fe980150fb9, type: 3}
@@ -113,6 +143,7 @@ MonoBehaviour:
   hitByConeSound: {fileID: 8300000, guid: 8c3db4baa4e348e4cb67d56b0ea20f47, type: 3}
   hitByPotholeSound: {fileID: 8300000, guid: 472b9340bd03ad34c819ee44ca2fc8c9, type: 3}
   powerUpSound: {fileID: 8300000, guid: 9fe88a2401f8d2241809ac4955fbebc9, type: 3}
+  potholeFallEffect: {fileID: 100008, guid: 84b9404521ba94049b96da31e88db549, type: 3}
 --- !u!82 &1149251692
 AudioSource:
   m_ObjectHideFlags: 0
