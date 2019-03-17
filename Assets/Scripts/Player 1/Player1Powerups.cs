@@ -7,6 +7,8 @@ public class Player1Powerups : MonoBehaviour, DelegateTimer
     public float speedUpMultiplier;
     public float slowDownMultiplier;
     public float speedUpTime;
+    public float respawnHeight = 0.1179351f + 0.2f;
+    public Animator anim;
     public GameObject obstacleHitVFX;
 
     //Audio Clips
@@ -76,6 +78,12 @@ public class Player1Powerups : MonoBehaviour, DelegateTimer
         scrollingTerrain.ModifyScrollSpeed(slowDownMultiplier, speedUpTime, ScrollingTerrain.ScrollModificationType.BackToNormal, this);
     }
 
+    void Respawn()
+    {
+        transform.position = new Vector3(transform.position.x, respawnHeight, transform.position.z);
+        anim.SetTrigger("respawn");
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.transform.tag == "PowerUp")
@@ -99,7 +107,18 @@ public class Player1Powerups : MonoBehaviour, DelegateTimer
             audioSource.PlayOneShot(hitByLaserSound);
             Debug.Log("Player was hit by Laser");
         }
-
+        else if (other.transform.tag == "Cone")
+        {
+            Destroy(other.gameObject);
+            SlowDown();
+            Instantiate(obstacleHitVFX, other.transform.position, Quaternion.identity);
+            audioSource.PlayOneShot(hitByConeSound);
+        }
+        else if (other.transform.tag == "Pothole")
+        {
+            anim.SetTrigger("potholeFall");
+            SlowDown();
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -112,22 +131,14 @@ public class Player1Powerups : MonoBehaviour, DelegateTimer
             Debug.Log("Player was hit by ChaserBullet");
 
         }
-        else if (collision.transform.tag == "Obstacle")
-        {
-            Destroy(collision.gameObject);
-            SlowDown();
-            Instantiate(obstacleHitVFX, collision.transform.position, Quaternion.identity);
-            audioSource.PlayOneShot(hitByObstacleSound);
-        }
+    }
 
-        else if (collision.transform.tag == "Cone")
+    private void OnTriggerExit(Collider other)
+    {
+        if(other.tag == "Pothole")
         {
-            Destroy(collision.gameObject);
-            SlowDown();
-            Instantiate(obstacleHitVFX, collision.transform.position, Quaternion.identity);
-            audioSource.PlayOneShot(hitByConeSound);
+            Respawn();
         }
-
     }
 
     public void TimerFinishedCallback()
