@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -701,6 +701,30 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 653895c453868964588a8fbd8ea0c3de, type: 3}
+--- !u!114 &894117621 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1761407210, guid: 653895c453868964588a8fbd8ea0c3de,
+    type: 3}
+  m_PrefabInstance: {fileID: 894117620}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &894117622 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1684725214, guid: 653895c453868964588a8fbd8ea0c3de,
+    type: 3}
+  m_PrefabInstance: {fileID: 894117620}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1141814761
 GameObject:
   m_ObjectHideFlags: 0
@@ -982,6 +1006,16 @@ PrefabInstance:
       propertyPath: timerText
       value: 
       objectReference: {fileID: 1807737153}
+    - target: {fileID: 162164913741201384, guid: 44b07568a92d82842ac8f6c6081e2452,
+        type: 3}
+      propertyPath: winText
+      value: 
+      objectReference: {fileID: 894117622}
+    - target: {fileID: 162164913741201384, guid: 44b07568a92d82842ac8f6c6081e2452,
+        type: 3}
+      propertyPath: distanceTrackingText
+      value: 
+      objectReference: {fileID: 894117621}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 44b07568a92d82842ac8f6c6081e2452, type: 3}
 --- !u!1001 &1152038003228749687
