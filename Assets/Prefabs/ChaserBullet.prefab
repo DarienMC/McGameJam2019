@@ -129,11 +129,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6342032733102113244}
     m_Modifications:
-    - target: {fileID: 1007672376719889752, guid: 9211458a207c18543a021dfaba1b4061,
-        type: 3}
-      propertyPath: m_Name
-      value: shotglass
-      objectReference: {fileID: 0}
     - target: {fileID: 1007672376719788408, guid: 9211458a207c18543a021dfaba1b4061,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -189,11 +184,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1007672376719889752, guid: 9211458a207c18543a021dfaba1b4061,
+        type: 3}
+      propertyPath: m_Name
+      value: shotglass
+      objectReference: {fileID: 0}
     - target: {fileID: 1007672376727283352, guid: 9211458a207c18543a021dfaba1b4061,
         type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: b430322bf529fc141a75c3517f46ef4f, type: 2}
+      objectReference: {fileID: 9100000, guid: 5e4e0e7901a85ec4ba65e4bdcd70bbef, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9211458a207c18543a021dfaba1b4061, type: 3}
 --- !u!4 &2668311185430144861 stripped
