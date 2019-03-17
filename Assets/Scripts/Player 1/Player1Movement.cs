@@ -9,6 +9,7 @@ public class Player1Movement : MonoBehaviour
     public float jumpForce;
     public float fallMultiplier;
     public float lowJumpMultiplier;
+    public float jumpCooldown = 0.5f;
 
     public AudioClip jumpSound;
     public AudioClip landingSound;
@@ -23,6 +24,7 @@ public class Player1Movement : MonoBehaviour
 
     private bool grounded = false;
     private int lastMovementDirection = 1; // -1 left, 0 none, 1 right
+    private float timeUntilNextJump;
 
     //State machine
     public enum jumpStatus {runningState, jumpingState };
@@ -49,12 +51,16 @@ public class Player1Movement : MonoBehaviour
     private void FixedUpdate()
     {
         rb.AddForce(new Vector3(horizontal * speed, 0, 0));
+        timeUntilNextJump -= Time.fixedDeltaTime;
 
         /**STATE MACHINE**/
         if (myJumpStatus == jumpStatus.runningState)
         {
-            if (jump)
+
+            if (jump && timeUntilNextJump <= 0)
             {
+                grounded = false;
+                timeUntilNextJump = jumpCooldown;
                 Jump();
                 myJumpStatus = jumpStatus.jumpingState;
             }
@@ -106,7 +112,6 @@ public class Player1Movement : MonoBehaviour
     }
    
     private void Jump() {
-        grounded = false;
         rb.AddForce(0f, 0f, 0f);
         //rb.AddForce(new Vector3(0, jumpForce, 0), ForceMode.Impulse);
         rb.velocity += Vector3.up * jumpForce;
