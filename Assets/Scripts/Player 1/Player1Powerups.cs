@@ -132,6 +132,7 @@ public class Player1Powerups : MonoBehaviour, DelegateTimer
             Destroy(collision.gameObject);
             SlowDown();
             audioSource.PlayOneShot(hitByChaserBulletSound);
+            Instantiate(obstacleHitVFX, collision.transform.position, Quaternion.identity);
             Debug.Log("Player was hit by ChaserBullet");
 
         }
