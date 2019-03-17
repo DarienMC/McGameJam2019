@@ -117,6 +117,7 @@ public class Player1Powerups : MonoBehaviour, DelegateTimer
         else if (other.transform.tag == "Pothole")
         {
             anim.SetTrigger("potholeFall");
+            audioSource.PlayOneShot(hitByPotholeSound);
             SlowDown();
         }
     }

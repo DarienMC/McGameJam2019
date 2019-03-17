@@ -108,7 +108,7 @@ MonoBehaviour:
   hitByLaserSound: {fileID: 8300000, guid: bfe98a6dd44a2124eada2fe980150fb9, type: 3}
   hitByObstacleSound: {fileID: 8300000, guid: 9dad3673bf486b940bb6c2ed0ad6cec6, type: 3}
   hitByConeSound: {fileID: 8300000, guid: 8c3db4baa4e348e4cb67d56b0ea20f47, type: 3}
-  hitByPotholeSound: {fileID: 8300000, guid: e637a5cbd32f9fa40ada016187d8d5bc, type: 3}
+  hitByPotholeSound: {fileID: 8300000, guid: 472b9340bd03ad34c819ee44ca2fc8c9, type: 3}
   powerUpSound: {fileID: 8300000, guid: 9fe88a2401f8d2241809ac4955fbebc9, type: 3}
 --- !u!82 &1149251692
 AudioSource:
@@ -128,7 +128,7 @@ AudioSource:
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 0
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
