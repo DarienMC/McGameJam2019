@@ -14,7 +14,7 @@ public class Reticle : MonoBehaviour
     private RectTransform rectTransform;
     private float standardScaling;
 
-    void Start()
+    void Awake()
     {
         animator = GetComponent<Animator>();
         image = GetComponent<Image>();

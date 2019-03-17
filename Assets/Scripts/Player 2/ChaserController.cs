@@ -39,7 +39,7 @@ public class ChaserController : MonoBehaviour
     
     private AudioSource audioSource;
     private float aimSpeed = 0;
-    private float nextFire = 0;
+    private float nextFire = Mathf.Infinity;
     private float reticleHeight = 0;
 
     private bool _canFireLaser = false;
@@ -73,6 +73,8 @@ public class ChaserController : MonoBehaviour
         reticleTransform = reticle.GetComponent<RectTransform>();
         reticleHeight = reticleTransform.anchoredPosition.y;
         audioSource = GetComponent<AudioSource>();
+        reticle.Charge(fireDelay * 3);
+        nextFire = Time.time + fireDelay * 3;
     }
 
     // Update is called once per frame
