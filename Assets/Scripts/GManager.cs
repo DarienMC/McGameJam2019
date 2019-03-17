@@ -88,7 +88,6 @@ public class GManager : MonoBehaviour
         StartCoroutine(Wait());
 
         FindObjectOfType<ChaserController>().KillPlayer();
-        StartCoroutine(Wait());
         gameEnding = true;
     }
 
