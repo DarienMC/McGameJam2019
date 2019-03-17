@@ -28,7 +28,7 @@ public class Player1Powerups : MonoBehaviour, DelegateTimer
     private bool slowedDown = false;
     private AudioSource audioSource;
 
-     
+
     // Start is called before the first frame update
     void Start()
     {
@@ -53,16 +53,11 @@ public class Player1Powerups : MonoBehaviour, DelegateTimer
 
     void SpeedUp()
     {
-        if (!slowedDown)
+        if (!poweredUp)
         {
-            if (!poweredUp)
-            {
-                poweredUp = true;
-                scrollingTerrain.ModifyScrollSpeed(speedUpMultiplier, speedUpTime, ScrollingTerrain.ScrollModificationType.SpeedUp, this);
-            }
+            poweredUp = true;
+            scrollingTerrain.ModifyScrollSpeed(speedUpMultiplier, speedUpTime, ScrollingTerrain.ScrollModificationType.SpeedUp, this);
         }
-        else
-            NormalSpeed();
     }
 
     void SlowDown()
@@ -144,7 +139,7 @@ public class Player1Powerups : MonoBehaviour, DelegateTimer
 
     private void OnTriggerExit(Collider other)
     {
-        if(other.tag == "Pothole")
+        if (other.tag == "Pothole")
         {
             Respawn();
         }
