@@ -69,7 +69,7 @@ public class GManager : MonoBehaviour
             //Win States
             if (playerDistance <= separationForChaserVictory)
             {
-                Debug.Log("Chaser wins by catching up!");
+                Debug.Log("The devil wins!");
                 PlayerDeath();
             }
 
@@ -80,7 +80,7 @@ public class GManager : MonoBehaviour
 
             if (timerLimit <= timePassed)
             {
-                Debug.Log("Chaser wins by time!");
+                Debug.Log("The devil wins!");
                 PlayerDeath();
             }
         }
@@ -90,8 +90,8 @@ public class GManager : MonoBehaviour
     public void PlayerDeath()
     {
         int x = Random.Range(0, 2);
-        Debug.Log("Chaser wins!");
-        winText.text = "Chaser wins!";
+        Debug.Log("The devil wins!");
+        winText.text = "The devil wins!";
         winText.enabled = true;
         chaserAudioSource.PlayOneShot(chaserWinClip);
         StartCoroutine(Wait());
@@ -102,8 +102,8 @@ public class GManager : MonoBehaviour
 
     public void PlayerWin() {
         int x = Random.Range(0, 2);
-        Debug.Log("Runner wins!");
-        winText.text = "Runner Wins!";
+        Debug.Log("The damned wins!");
+        winText.text = "The damned Wins!";
         winText.enabled = true;
         runnerAudioSource.PlayOneShot(runnerWinClip);
         StartCoroutine(Wait());
