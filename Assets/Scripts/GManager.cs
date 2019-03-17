@@ -22,6 +22,9 @@ public class GManager : MonoBehaviour
 
     private float timePassed = 0.0f;
     private float playerDistance;
+    
+    public Animator transitionAnimator;
+    public float transitionDuration = 1;
     private bool gameEnding = false;
 
     // Start is called before the first frame update
@@ -29,6 +32,7 @@ public class GManager : MonoBehaviour
     {
         SetTimerText();
         winText.enabled = false;
+        transitionAnimator.CrossFadeInFixedTime("Transparent", transitionDuration);
     }
 
     // Update is called once per frame
@@ -97,7 +101,10 @@ public class GManager : MonoBehaviour
     }
 
     private IEnumerator Wait() {
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(4);
+        transitionAnimator.CrossFadeInFixedTime("Opaque", transitionDuration);
+        yield return new WaitForSeconds(transitionDuration);
+        yield return new WaitForSeconds(1);
         SceneManager.LoadScene(0);
     }
 }

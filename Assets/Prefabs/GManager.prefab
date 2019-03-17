@@ -53,6 +53,8 @@ MonoBehaviour:
   distanceTrackingText: {fileID: 0}
   separationForChaserVictory: 1
   separationForRunnerVictory: 90
+  transitionAnimator: {fileID: 0}
+  transitionDuration: 0.5
 --- !u!82 &162164913741201386
 AudioSource:
   m_ObjectHideFlags: 0
@@ -161,3 +163,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b68985dc88b13764f891dc8842b9db71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  loopableBgm: {fileID: 8300000, guid: 625f62cfd5616b84c99bcd22ec2e8b55, type: 3}
