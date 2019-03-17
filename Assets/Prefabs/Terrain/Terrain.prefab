@@ -44,11 +44,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2486e47572b6cc20b063841b28bdb81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  propManager: {fileID: 5561119691336779349}
   scrollingSpeed: -3
-  numberOfSlices: 5
-  terrainSlice: {fileID: 4303972411548769825, guid: 45f706ace22f4f1d4adbc90293859287,
+  numberOfSlices: 100
+  bufferedSlices: 20
+  sliceLength: 1.8
+  terrainSlice: {fileID: 4001852757161897722, guid: f0b9a63aefa9b334bb0169bfab858bcd,
     type: 3}
-  upcomingSlice: {fileID: 0}
+  obstacleLinesMinDistance: 3
 --- !u!114 &5561119691336779349
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61,6 +64,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0cdcc0a5f929c394ac0a8d3851cd27c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  terrain: {fileID: 5561119691336779348}
   porthole1: {fileID: 8497657119899702418, guid: c7489cb3f632f464782bcffe13913eb6,
     type: 3}
   porthole2: {fileID: 6700228823386100026, guid: 5c1296745c5d43f4187e8dd89818d9ed,
@@ -69,4 +73,3 @@ MonoBehaviour:
   powerUp: {fileID: 8387887026925275966, guid: 5953525ab47fe7641a346940a227c0fa, type: 3}
   texture: {fileID: 407097602574985468, guid: 78d41efceb8cd7e47a65fc7485d3fae0, type: 3}
   spawingObjectSliceChance: 70
-  lengthSpawningArea: 3
