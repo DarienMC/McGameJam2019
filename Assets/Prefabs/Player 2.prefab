@@ -75,7 +75,7 @@ MonoBehaviour:
   reticle: {fileID: 0}
   fireChaserBulletSound: {fileID: 8300000, guid: 1119b2c455944e24b97452a7ded2a437,
     type: 3}
-  fireLaserSound: {fileID: 8300000, guid: 32d07eb0d6d74c84a903973d1fb496c1, type: 3}
+  fireLaserSound: {fileID: 8300000, guid: 6f81f64aa92e49a43a28b2f87866764f, type: 3}
   killPlayerSound: {fileID: 8300000, guid: 9f7cd89f5fdb27541818fae10ff1ce94, type: 3}
   maxAimSpeed: 700
   aimAccelaration: 500
@@ -87,6 +87,7 @@ MonoBehaviour:
   bulletSpeed: 25
   fireDelay: 1
   laser: {fileID: 5175098786157381628, guid: 62a421eab4cb44ca99a8c4fe5704b910, type: 3}
+  animator: {fileID: 0}
 --- !u!114 &75868974
 MonoBehaviour:
   m_ObjectHideFlags: 0

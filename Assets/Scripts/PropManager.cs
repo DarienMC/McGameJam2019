@@ -21,7 +21,7 @@ public class PropManager : MonoBehaviour
     public float deltaSpawningObjectSliceChance;
 
     private int maxObjectsOnASlice = 7;
-    private int nbrPresets = 25;
+    private int nbrPresets = 35;
     private float widthTerrain;
     private enum Obstacle { beer, jumpObs1, jumpObs2, avoidObs, nothing, jumpBeerObs };
     private int beerDelay = 0;
@@ -51,7 +51,18 @@ public class PropManager : MonoBehaviour
         {Obstacle.jumpBeerObs, Obstacle.jumpObs1,  Obstacle.avoidObs, Obstacle.avoidObs, Obstacle.nothing, Obstacle.beer,  Obstacle.nothing},
         {Obstacle.avoidObs, Obstacle.avoidObs,  Obstacle.nothing, Obstacle.jumpObs2, Obstacle.jumpObs1, Obstacle.nothing,  Obstacle.jumpObs1},
         {Obstacle.nothing, Obstacle.jumpObs2,  Obstacle.nothing, Obstacle.jumpObs2, Obstacle.avoidObs, Obstacle.avoidObs,  Obstacle.nothing},
-        {Obstacle.avoidObs, Obstacle.avoidObs,  Obstacle.avoidObs, Obstacle.jumpObs1, Obstacle.nothing, Obstacle.nothing,  Obstacle.nothing}
+        {Obstacle.nothing, Obstacle.avoidObs,  Obstacle.jumpObs1, Obstacle.jumpObs2, Obstacle.nothing, Obstacle.nothing,  Obstacle.nothing},
+        {Obstacle.nothing, Obstacle.avoidObs,  Obstacle.nothing, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing,  Obstacle.nothing},
+        {Obstacle.avoidObs, Obstacle.nothing,  Obstacle.nothing, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing,  Obstacle.nothing},
+        {Obstacle.nothing, Obstacle.nothing,  Obstacle.nothing, Obstacle.jumpObs1, Obstacle.jumpObs2, Obstacle.avoidObs,  Obstacle.nothing},
+        {Obstacle.nothing, Obstacle.nothing,  Obstacle.avoidObs, Obstacle.nothing, Obstacle.avoidObs, Obstacle.nothing,  Obstacle.nothing},
+        {Obstacle.nothing, Obstacle.avoidObs,  Obstacle.avoidObs, Obstacle.nothing, Obstacle.nothing, Obstacle.avoidObs,  Obstacle.avoidObs},
+        {Obstacle.jumpObs2, Obstacle.nothing,  Obstacle.nothing, Obstacle.avoidObs, Obstacle.avoidObs, Obstacle.nothing,  Obstacle.avoidObs},
+        {Obstacle.nothing, Obstacle.avoidObs,  Obstacle.nothing, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing,  Obstacle.nothing},
+        {Obstacle.nothing, Obstacle.nothing,  Obstacle.avoidObs, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing,  Obstacle.nothing},
+        {Obstacle.nothing, Obstacle.nothing,  Obstacle.nothing, Obstacle.avoidObs, Obstacle.nothing, Obstacle.nothing,  Obstacle.nothing},
+        {Obstacle.nothing, Obstacle.avoidObs,  Obstacle.nothing, Obstacle.nothing, Obstacle.nothing, Obstacle.nothing,  Obstacle.avoidObs},
+        {Obstacle.nothing, Obstacle.avoidObs,  Obstacle.nothing, Obstacle.nothing, Obstacle.avoidObs, Obstacle.nothing,  Obstacle.nothing},
     };
 
     void Start()
