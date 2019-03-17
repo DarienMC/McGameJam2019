@@ -4,25 +4,31 @@ using UnityEngine;
 
 public class ScrollingTerrain : MonoBehaviour
 {
+    public PropManager propManager;
     public float scrollingSpeed = -1.0f;
-    public int numberOfSlices = 2;
+    public int numberOfSlices = 100;
+    public int bufferedSlices = 20;
+    public float sliceLength = 1.8f;
     public GameObject terrainSlice;
-
-    public GameObject upcomingSlice;
+    public int obstacleLinesMinDistance = 3;
 
     private Player2Movement player2Movement;
 
     public enum ScrollModificationType { SpeedUp, SlowDown, BackToNormal}
-    private float sliceLength;
     
+    private int currentSliceLine = 0;
     private float scrollSpeedMultiplier = 1;
     private bool scrollSpeedModified = false;
     private float scrollSpeedModifiedTimer;
+    internal Transform previousSlice = null;
+    private Vector3 firstSlicePosition;
 
     void Start()
     {
+        propManager = GetComponent<PropManager>();
         player2Movement = FindObjectOfType<Player2Movement>();
 
+        firstSlicePosition = Vector3.forward * ((numberOfSlices - bufferedSlices) * sliceLength);
         for (int i = 1; i <= numberOfSlices; ++i)
         {
             InstantiateSlice();
@@ -51,7 +57,7 @@ public class ScrollingTerrain : MonoBehaviour
             child.Translate(0, 0, -scrollingSpeed * Time.deltaTime * scrollSpeedMultiplier);
             
             // Check if beyond sight range
-            if (child.transform.position.z > sliceLength * (numberOfSlices - 1))
+            if (child.transform.position.z > firstSlicePosition.z)
             {
                 child.transform.SetParent(null);
                 Destroy(child.gameObject);
@@ -64,24 +70,27 @@ public class ScrollingTerrain : MonoBehaviour
     void InstantiateSlice()
     {
         GameObject instance = Instantiate(terrainSlice);
-        if (transform.childCount == 0)
+        if (previousSlice == null)
         {
-            sliceLength = instance.GetComponent<BoxCollider>().bounds.size.z;
+            instance.transform.position = firstSlicePosition;
         }
-        float offset = sliceLength * (numberOfSlices - transform.childCount - 2);
-        instance.transform.Translate(Vector3.forward * offset);
+        else
+        {
+            instance.transform.position = previousSlice.position + Vector3.back * sliceLength;
+        }
         instance.transform.SetParent(transform);
-        upcomingSlice = instance;
+        previousSlice = instance.transform;
+        currentSliceLine = (currentSliceLine + 1) % obstacleLinesMinDistance;
+        if (currentSliceLine == 0)
+        {
+            propManager.GenerateLine(instance.transform);
+        }
     }
 
     // Attach the prop to the terrain so that it moves along with it.
     public void AttachProp(Transform prop)
     {
-       // Vector3 actualScale = prop.transform.localScale;
-        prop.SetParent(upcomingSlice.transform);
-        prop.transform.position = new Vector3(prop.transform.position.x * upcomingSlice.transform.localScale.x, prop.transform.position.y * upcomingSlice.transform.localScale.y, prop.transform.position.z * upcomingSlice.transform.localScale.z);
-        prop.transform.localScale = new Vector3(1.0F, 1.0F, 1.0F);
-        // prop.transform.localScale = new Vector3( prop.transform.localScale.x * upcomingSlice.transform.localScale.x , prop.transform.localScale.y, prop.transform.localScale.z);
+        prop.SetParent(previousSlice.transform);
     }
 
     public void ModifyScrollSpeed(float speedMultiplier, float time, ScrollModificationType speedModificationType, DelegateTimer timerCallback)

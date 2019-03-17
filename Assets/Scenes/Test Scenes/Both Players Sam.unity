@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.5748171, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -282,7 +282,22 @@ PrefabInstance:
     - target: {fileID: 2512515201579813395, guid: 79703e4cc537ba54ea3bf2a29a37b9e7,
         type: 3}
       propertyPath: numberOfSlices
-      value: 15
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 2512515201579813395, guid: 79703e4cc537ba54ea3bf2a29a37b9e7,
+        type: 3}
+      propertyPath: bufferedSlices
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 2512515201579813395, guid: 79703e4cc537ba54ea3bf2a29a37b9e7,
+        type: 3}
+      propertyPath: scrollingSpeed
+      value: -3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2512515201579813395, guid: 79703e4cc537ba54ea3bf2a29a37b9e7,
+        type: 3}
+      propertyPath: obstacleLinesMinDistance
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 79703e4cc537ba54ea3bf2a29a37b9e7, type: 3}
@@ -318,11 +333,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2486e47572b6cc20b063841b28bdb81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  propManager: {fileID: 545473506}
   scrollingSpeed: -3
-  numberOfSlices: 15
-  terrainSlice: {fileID: 4303972411548769825, guid: 45f706ace22f4f1d4adbc90293859287,
+  numberOfSlices: 100
+  bufferedSlices: 20
+  sliceLength: 1.8
+  terrainSlice: {fileID: 4001852757161897722, guid: f0b9a63aefa9b334bb0169bfab858bcd,
     type: 3}
-  upcomingSlice: {fileID: 0}
+  obstacleLinesMinDistance: 3
 --- !u!4 &545473505
 Transform:
   m_ObjectHideFlags: 0
@@ -350,6 +368,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0cdcc0a5f929c394ac0a8d3851cd27c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  terrain: {fileID: 545473504}
   porthole1: {fileID: 8497657119899702418, guid: c7489cb3f632f464782bcffe13913eb6,
     type: 3}
   porthole2: {fileID: 6700228823386100026, guid: 5c1296745c5d43f4187e8dd89818d9ed,
@@ -358,7 +377,6 @@ MonoBehaviour:
   powerUp: {fileID: 8387887026925275966, guid: 5953525ab47fe7641a346940a227c0fa, type: 3}
   texture: {fileID: 407097602574985468, guid: 78d41efceb8cd7e47a65fc7485d3fae0, type: 3}
   spawingObjectSliceChance: 70
-  lengthSpawningArea: 3
 --- !u!1001 &801833619
 PrefabInstance:
   m_ObjectHideFlags: 0
