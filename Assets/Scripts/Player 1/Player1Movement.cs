@@ -106,10 +106,10 @@ public class Player1Movement : MonoBehaviour
     }
    
     private void Jump() {
+        grounded = false;
         rb.AddForce(0f, 0f, 0f);
         //rb.AddForce(new Vector3(0, jumpForce, 0), ForceMode.Impulse);
         rb.velocity += Vector3.up * jumpForce;
-        grounded = false;
         audioSource.PlayOneShot(jumpSound);
     }
 }
