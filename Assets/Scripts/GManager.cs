@@ -25,8 +25,15 @@ public class GManager : MonoBehaviour
 
     private float timePassed = 0.0f;
     private float playerDistance;
+
     private AudioSource runnerAudioSource;
     private AudioSource chaserAudioSource;
+
+    
+    public Animator transitionAnimator;
+    public float transitionDuration = 1;
+    private bool gameEnding = false;
+
 
     // Start is called before the first frame update
     void Start()
@@ -35,6 +42,7 @@ public class GManager : MonoBehaviour
         winText.enabled = false;
         runnerAudioSource = runner.GetComponent<AudioSource>();
         chaserAudioSource = chaser.GetComponent<AudioSource>();
+        transitionAnimator.CrossFadeInFixedTime("Transparent", transitionDuration);
     }
 
     // Update is called once per frame
@@ -47,21 +55,26 @@ public class GManager : MonoBehaviour
 
         playerDistance = chaser.transform.position.z - runner.transform.position.z;
 
-        //Win States
-        if (playerDistance <= separationForChaserVictory) {
-            Debug.Log("Chaser wins by catching up!");
-            PlayerDeath();
-        }
+        if (!gameEnding)
+        {
+            //Win States
+            if (playerDistance <= separationForChaserVictory)
+            {
+                Debug.Log("Chaser wins by catching up!");
+                PlayerDeath();
+            }
 
-        if (playerDistance >= separationForRunnerVictory) {
-            PlayerWin();
-        }
+            if (playerDistance >= separationForRunnerVictory)
+            {
+                PlayerWin();
+            }
 
-        if (timerLimit <= timePassed) {
-            Debug.Log("Chaser wins by time!");
-            PlayerDeath();
+            if (timerLimit <= timePassed)
+            {
+                Debug.Log("Chaser wins by time!");
+                PlayerDeath();
+            }
         }
-        
 
     }
 
@@ -73,6 +86,10 @@ public class GManager : MonoBehaviour
         winText.enabled = true;
         chaserAudioSource.PlayOneShot(chaserWinClip);
         StartCoroutine(Wait());
+
+        FindObjectOfType<ChaserController>().KillPlayer();
+        StartCoroutine(Wait());
+        gameEnding = true;
     }
 
     public void PlayerWin() {
@@ -82,6 +99,7 @@ public class GManager : MonoBehaviour
         winText.enabled = true;
         runnerAudioSource.PlayOneShot(runnerWinClip);
         StartCoroutine(Wait());
+        gameEnding = true;
     }
 
     private void SetTimerText()
@@ -89,17 +107,20 @@ public class GManager : MonoBehaviour
         int timeOnTimer = Mathf.FloorToInt(timerLimit - timePassed);
         if (timeOnTimer >= 0) 
         {
-            timerText.text = timeOnTimer.ToString();
+            timerText.text = timeOnTimer.ToString() + " s left";
         }
     }
 
     private void SetDistanceTrackingText()
     {
-        distanceTrackingText.text = Mathf.FloorToInt(playerDistance - separationForChaserVictory).ToString() + "m out of " + Mathf.FloorToInt(separationForRunnerVictory - separationForChaserVictory).ToString() + "m";
+        distanceTrackingText.text = Mathf.Max(0, Mathf.FloorToInt(playerDistance - separationForChaserVictory)).ToString() + " m distance"/* + Mathf.FloorToInt(separationForRunnerVictory - separationForChaserVictory).ToString() + "m"*/;
     }
 
     private IEnumerator Wait() {
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(4);
+        transitionAnimator.CrossFadeInFixedTime("Opaque", transitionDuration);
+        yield return new WaitForSeconds(transitionDuration);
+        yield return new WaitForSeconds(1);
         SceneManager.LoadScene(0);
     }
 }
