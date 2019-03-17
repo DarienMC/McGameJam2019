@@ -120,6 +120,6 @@ public class GManager : MonoBehaviour
         transitionAnimator.CrossFadeInFixedTime("Opaque", transitionDuration);
         yield return new WaitForSeconds(transitionDuration);
         yield return new WaitForSeconds(1);
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(1);
     }
 }
