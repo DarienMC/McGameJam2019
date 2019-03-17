@@ -81,7 +81,7 @@ public class GManager : MonoBehaviour
             if (timerLimit <= timePassed)
             {
                 Debug.Log("The devil wins!");
-                PlayerDeath();
+                PlayerWin();
             }
         }
 

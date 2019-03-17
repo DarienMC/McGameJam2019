@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 386dd874c8e39bc4d9229978aea96eb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timerLimit: 400
+  timerLimit: 120
   runner: {fileID: 0}
   chaser: {fileID: 0}
   timerText: {fileID: 0}
