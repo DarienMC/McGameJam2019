@@ -64,7 +64,6 @@ public class GManager : MonoBehaviour
         winText.text = "Chaser wins!";
         winText.enabled = true;
         StartCoroutine(Wait());
-        SceneManager.LoadScene(0);
     }
 
     public void PlayerWin() {
@@ -72,7 +71,6 @@ public class GManager : MonoBehaviour
         winText.text = "Runner Wins!";
         winText.enabled = true;
         StartCoroutine(Wait());
-        SceneManager.LoadScene(0);
     }
 
     private void SetTimerText()
