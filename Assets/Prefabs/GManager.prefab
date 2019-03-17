@@ -46,5 +46,5 @@ MonoBehaviour:
   timerLimit: 4000
   runner: {fileID: 0}
   chaser: {fileID: 0}
-  separationForChaserVictory: 0
+  separationForChaserVictory: 0.6
   separationForRunnerVictory: 65

@@ -10,11 +10,16 @@ public class Player1Movement : MonoBehaviour
     public float fallMultiplier;
     public float lowJumpMultiplier;
 
+    public AudioClip jumpSound;
+    public AudioClip landingSound;
+    public AudioClip hitSound;
+
     // Input variables
     private float horizontal;
     private bool jump;
 
     private Rigidbody rb;
+    private AudioSource audioSource;
 
     private bool grounded = false;
     private int lastMovementDirection = 1; // -1 left, 0 none, 1 right
@@ -23,6 +28,7 @@ public class Player1Movement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -38,8 +44,7 @@ public class Player1Movement : MonoBehaviour
 
         if(jump && grounded)
         {
-            rb.AddForce(new Vector3(0, jumpForce, 0));
-            grounded = false;
+            Jump();
         }
 
         if (!grounded)
@@ -74,6 +79,13 @@ public class Player1Movement : MonoBehaviour
         if(collision.gameObject.layer == 9)
         {
             grounded = true;
+            audioSource.PlayOneShot(landingSound);
         }
+    }
+
+    private void Jump() {
+        rb.AddForce(new Vector3(0, jumpForce, 0));
+        grounded = false;
+        audioSource.PlayOneShot(jumpSound);
     }
 }

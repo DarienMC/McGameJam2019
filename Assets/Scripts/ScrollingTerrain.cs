@@ -23,7 +23,7 @@ public class ScrollingTerrain : MonoBehaviour
     internal Transform previousSlice = null;
     private Vector3 firstSlicePosition;
 
-    void Start()
+    void Awake()
     {
         propManager = GetComponent<PropManager>();
         player2Movement = FindObjectOfType<Player2Movement>();

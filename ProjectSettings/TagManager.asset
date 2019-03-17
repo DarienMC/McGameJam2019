@@ -9,6 +9,8 @@ TagManager:
   - PowerUp
   - Obstacle
   - FxTemporaire
+  - Laser
+  - Cone
   - Pothole
   layers:
   - Default
