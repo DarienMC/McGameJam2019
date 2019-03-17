@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: dc49c1273fc0c4a4698a69f34808f078
+guid: 3f1c04a16b0f0f5408d1dc2cbfb41af6
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
@@ -8,28 +8,40 @@ ModelImporter:
     100004: Cube_001
     100006: Cube_002
     100008: Cube_003
+    100010: Cube_004
+    100012: Cube_009
     400000: //RootNode
     400002: Cube
     400004: Cube_001
     400006: Cube_002
     400008: Cube_003
-    2100000: Material
-    2100002: Material_001
+    400010: Cube_004
+    400012: Cube_009
+    2100000: Material_001
+    2100002: Material
     2100004: Material_002
-    2100006: Material_003
-    2100008: Material_004
+    2100006: Material_007
+    2100008: Material_014
+    2100010: Material_015
+    2100012: Material_008
     2300000: Cube
     2300002: Cube_001
     2300004: Cube_002
     2300006: Cube_003
+    2300008: Cube_004
+    2300010: Cube_009
     3300000: Cube
     3300002: Cube_001
     3300004: Cube_002
     3300006: Cube_003
+    3300008: Cube_004
+    3300010: Cube_009
     4300000: Cube
     4300002: Cube_001
     4300004: Cube_002
     4300006: Cube_003
+    4300008: Cube_009
+    4300010: Cube_004
     7400000: Default Take
     9500000: //RootNode
     2186277476908879412: ImportLogs
