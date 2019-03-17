@@ -16,22 +16,32 @@ public class GManager : MonoBehaviour
     public Text timerText;
     public Text winText;
     public Text distanceTrackingText;
+    public AudioClip chaserWinClip;
+    public AudioClip runnerWinClip;
+   
 
     public float separationForChaserVictory;
     public float separationForRunnerVictory;
 
     private float timePassed = 0.0f;
     private float playerDistance;
+
+    private AudioSource runnerAudioSource;
+    private AudioSource chaserAudioSource;
+
     
     public Animator transitionAnimator;
     public float transitionDuration = 1;
     private bool gameEnding = false;
+
 
     // Start is called before the first frame update
     void Start()
     {
         SetTimerText();
         winText.enabled = false;
+        runnerAudioSource = runner.GetComponent<AudioSource>();
+        chaserAudioSource = chaser.GetComponent<AudioSource>();
         transitionAnimator.CrossFadeInFixedTime("Transparent", transitionDuration);
     }
 
@@ -70,18 +80,24 @@ public class GManager : MonoBehaviour
 
     public void PlayerDeath()
     {
+        int x = Random.Range(0, 2);
         Debug.Log("Chaser wins!");
         winText.text = "Chaser wins!";
         winText.enabled = true;
+        chaserAudioSource.PlayOneShot(chaserWinClip);
+        StartCoroutine(Wait());
+
         FindObjectOfType<ChaserController>().KillPlayer();
         StartCoroutine(Wait());
         gameEnding = true;
     }
 
     public void PlayerWin() {
+        int x = Random.Range(0, 2);
         Debug.Log("Runner wins!");
         winText.text = "Runner Wins!";
         winText.enabled = true;
+        runnerAudioSource.PlayOneShot(runnerWinClip);
         StartCoroutine(Wait());
         gameEnding = true;
     }
