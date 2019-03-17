@@ -62,7 +62,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61e883f1fe46b5641817d8cecb4da2ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 50
+  speed: 30
   jumpForce: 7
   fallMultiplier: 5
   lowJumpMultiplier: 4
@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbe52ed35d0de674a862624c1dbaff63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedUpMultiplier: 10
+  speedUpMultiplier: 5
   slowDownMultiplier: 0.5
   speedUpTime: 5
   respawnHeight: 0.5
