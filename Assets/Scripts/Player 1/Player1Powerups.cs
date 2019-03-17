@@ -20,6 +20,7 @@ public class Player1Powerups : MonoBehaviour, DelegateTimer
     public AudioClip hitByPotholeSound;
     public AudioClip powerUpSound;
 
+    public GameObject potholeFallEffect;
 
     private ScrollingTerrain scrollingTerrain;
     private Player1Movement player1Movement;
@@ -121,6 +122,7 @@ public class Player1Powerups : MonoBehaviour, DelegateTimer
         {
             if (player1Movement.GetJumpStatus() != Player1Movement.jumpStatus.jumpingState)
             {
+                Instantiate(potholeFallEffect, transform.position, Quaternion.identity);
                 anim.SetTrigger("potholeFall");
                 audioSource.PlayOneShot(hitByPotholeSound);
                 SlowDown();

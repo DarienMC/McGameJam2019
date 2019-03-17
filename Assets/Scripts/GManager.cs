@@ -22,12 +22,17 @@ public class GManager : MonoBehaviour
 
     private float timePassed = 0.0f;
     private float playerDistance;
+    
+    public Animator transitionAnimator;
+    public float transitionDuration = 1;
+    private bool gameEnding = false;
 
     // Start is called before the first frame update
     void Start()
     {
         SetTimerText();
         winText.enabled = false;
+        transitionAnimator.CrossFadeInFixedTime("Transparent", transitionDuration);
     }
 
     // Update is called once per frame
@@ -40,21 +45,26 @@ public class GManager : MonoBehaviour
 
         playerDistance = chaser.transform.position.z - runner.transform.position.z;
 
-        //Win States
-        if (playerDistance <= separationForChaserVictory) {
-            Debug.Log("Chaser wins by catching up!");
-            PlayerDeath();
-        }
+        if (!gameEnding)
+        {
+            //Win States
+            if (playerDistance <= separationForChaserVictory)
+            {
+                Debug.Log("Chaser wins by catching up!");
+                PlayerDeath();
+            }
 
-        if (playerDistance >= separationForRunnerVictory) {
-            PlayerWin();
-        }
+            if (playerDistance >= separationForRunnerVictory)
+            {
+                PlayerWin();
+            }
 
-        if (timerLimit <= timePassed) {
-            Debug.Log("Chaser wins by time!");
-            PlayerDeath();
+            if (timerLimit <= timePassed)
+            {
+                Debug.Log("Chaser wins by time!");
+                PlayerDeath();
+            }
         }
-        
 
     }
 
@@ -63,7 +73,9 @@ public class GManager : MonoBehaviour
         Debug.Log("Chaser wins!");
         winText.text = "Chaser wins!";
         winText.enabled = true;
+        FindObjectOfType<ChaserController>().KillPlayer();
         StartCoroutine(Wait());
+        gameEnding = true;
     }
 
     public void PlayerWin() {
@@ -71,6 +83,7 @@ public class GManager : MonoBehaviour
         winText.text = "Runner Wins!";
         winText.enabled = true;
         StartCoroutine(Wait());
+        gameEnding = true;
     }
 
     private void SetTimerText()
@@ -88,7 +101,10 @@ public class GManager : MonoBehaviour
     }
 
     private IEnumerator Wait() {
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(4);
+        transitionAnimator.CrossFadeInFixedTime("Opaque", transitionDuration);
+        yield return new WaitForSeconds(transitionDuration);
+        yield return new WaitForSeconds(1);
         SceneManager.LoadScene(0);
     }
 }
