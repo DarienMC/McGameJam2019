@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Player1Movement))]
 public class Player1Powerups : MonoBehaviour, DelegateTimer
 {
     public float speedUpMultiplier;
@@ -10,7 +11,6 @@ public class Player1Powerups : MonoBehaviour, DelegateTimer
     public float respawnHeight = 0.1179351f + 0.2f;
     public Animator anim;
     public GameObject obstacleHitVFX;
-    public float jumpCooldown = 0.5f;
 
     //Audio Clips
     public AudioClip hitByChaserBulletSound;
@@ -22,10 +22,10 @@ public class Player1Powerups : MonoBehaviour, DelegateTimer
 
 
     private ScrollingTerrain scrollingTerrain;
+    private Player1Movement player1Movement;
     private bool poweredUp = false;
     private bool slowedDown = false;
     private AudioSource audioSource;
-    private float jumpTimePassed = 0;
 
      
     // Start is called before the first frame update
@@ -33,6 +33,7 @@ public class Player1Powerups : MonoBehaviour, DelegateTimer
     {
         scrollingTerrain = FindObjectOfType<ScrollingTerrain>();
         audioSource = GetComponent<AudioSource>();
+        player1Movement = GetComponent<Player1Movement>();
     }
 
     // Update is called once per frame
@@ -105,7 +106,6 @@ public class Player1Powerups : MonoBehaviour, DelegateTimer
 
         if (other.transform.tag == "Laser")
         {
-            Destroy(other.gameObject);
             SlowDown();
             audioSource.PlayOneShot(hitByLaserSound);
             Debug.Log("Player was hit by Laser");
@@ -119,9 +119,12 @@ public class Player1Powerups : MonoBehaviour, DelegateTimer
         }
         else if (other.transform.tag == "Pothole")
         {
-            anim.SetTrigger("potholeFall");
-            audioSource.PlayOneShot(hitByPotholeSound);
-            SlowDown();
+            if (player1Movement.GetJumpStatus() != Player1Movement.jumpStatus.jumpingState)
+            {
+                anim.SetTrigger("potholeFall");
+                audioSource.PlayOneShot(hitByPotholeSound);
+                SlowDown();
+            }
         }
     }
 

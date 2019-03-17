@@ -49,8 +49,10 @@ MonoBehaviour:
   runner: {fileID: 0}
   chaser: {fileID: 0}
   timerText: {fileID: 0}
-  separationForChaserVictory: 5
-  separationForRunnerVictory: 65
+  winText: {fileID: 0}
+  distanceTrackingText: {fileID: 0}
+  separationForChaserVictory: 1
+  separationForRunnerVictory: 90
 --- !u!82 &162164913741201386
 AudioSource:
   m_ObjectHideFlags: 0

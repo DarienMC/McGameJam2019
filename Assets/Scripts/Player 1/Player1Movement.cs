@@ -43,9 +43,6 @@ public class Player1Movement : MonoBehaviour
     {
         horizontal = Input.GetAxis("Horizontal");
         jump = Input.GetButton("Jump");
-
-      
-
     }
 
     private void FixedUpdate()
@@ -106,8 +103,10 @@ public class Player1Movement : MonoBehaviour
     {
         if(collision.gameObject.layer == 9)
         {
+            if(!grounded)
+                audioSource.PlayOneShot(landingSound);
+
             grounded = true;
-            audioSource.PlayOneShot(landingSound);
         }
     }
    
@@ -116,5 +115,10 @@ public class Player1Movement : MonoBehaviour
         //rb.AddForce(new Vector3(0, jumpForce, 0), ForceMode.Impulse);
         rb.velocity += Vector3.up * jumpForce;
         audioSource.PlayOneShot(jumpSound);
+    }
+
+    public jumpStatus GetJumpStatus()
+    {
+        return myJumpStatus;
     }
 }

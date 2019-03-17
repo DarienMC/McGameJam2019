@@ -23,6 +23,12 @@ public class ScrollingTerrain : MonoBehaviour
     internal Transform previousSlice = null;
     private Vector3 firstSlicePosition;
 
+    public int buildingSize = 5;
+    public GameObject[] buildings;
+    private int currentBuildingIndex = 0;
+
+    private bool spawningObstacles = false;
+
     void Awake()
     {
         propManager = GetComponent<PropManager>();
@@ -33,6 +39,7 @@ public class ScrollingTerrain : MonoBehaviour
         {
             InstantiateSlice();
         }
+        spawningObstacles = true;
     }
 
     private void Update()
@@ -69,6 +76,7 @@ public class ScrollingTerrain : MonoBehaviour
     // Create a new terrain slice behind the camera.
     void InstantiateSlice()
     {
+        // Generate terrain slice
         GameObject instance = Instantiate(terrainSlice);
         if (previousSlice == null)
         {
@@ -80,11 +88,33 @@ public class ScrollingTerrain : MonoBehaviour
         }
         instance.transform.SetParent(transform);
         previousSlice = instance.transform;
-        currentSliceLine = (currentSliceLine + 1) % obstacleLinesMinDistance;
-        if (currentSliceLine == 0)
+        
+        // Generate obstacles
+        if (spawningObstacles)
         {
-            propManager.GenerateLine(instance.transform);
+            currentSliceLine = (currentSliceLine + 1) % obstacleLinesMinDistance;
+            if (currentSliceLine == 0)
+            {
+                propManager.GenerateLine(instance.transform);
+            }
         }
+
+        // Generate buildings
+        currentBuildingIndex = (currentBuildingIndex + 1) % buildingSize;
+        if (currentBuildingIndex == 0)
+        {
+            GameObject building = buildings[Random.Range(0, buildings.Length)];
+            Vector3 buildingPosition = instance.transform.position + building.transform.position + Vector3.right * 10.975f;
+            GameObject buildingInstance = Instantiate(building, buildingPosition, building.transform.rotation);
+            buildingInstance.transform.SetParent(instance.transform);
+
+            building = buildings[Random.Range(0, buildings.Length)];
+            buildingPosition = instance.transform.position + building.transform.position + Vector3.left * 10.975f;
+            buildingInstance = Instantiate(building, buildingPosition, building.transform.rotation * Quaternion.Euler(0.0f, 180.0f, 0.0f));
+            buildingInstance.transform.SetParent(instance.transform);
+        }
+        
+        propManager.GenerateDecoration(instance.transform);
     }
 
     // Attach the prop to the terrain so that it moves along with it.

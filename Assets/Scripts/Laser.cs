@@ -30,12 +30,12 @@ public class Laser : MonoBehaviour
             float currentRatio = previousRatio + spawnSpeed * Time.deltaTime;
             current = Vector3.Lerp(from, to, currentRatio);
             previousRatio = currentRatio;
-            if (Physics.CheckCapsule(from, current, collider.radius / 2, LayerMask.GetMask("Player")))
+            /*if (Physics.CheckCapsule(from, current, collider.radius / 2, LayerMask.GetMask("Player")))
             {
                 RaycastHit hit;
                 Physics.Raycast(from, to - from, out hit, Mathf.Infinity, LayerMask.GetMask("Player"));
                 current = hit.point;
-            }
+            }*/
             line.SetPosition(0, from);
             line.SetPosition(1, current);
             float length = Vector3.Distance(line.GetPosition(0), line.GetPosition(1));
@@ -53,12 +53,12 @@ public class Laser : MonoBehaviour
             float currentRatio = previousRatio - spawnSpeed * Time.deltaTime;
             current = Vector3.Lerp(from, to, currentRatio);
             previousRatio = currentRatio;
-            if (Physics.CheckCapsule(from, current, collider.radius / 2, LayerMask.GetMask("Player")))
+            /*if (Physics.CheckCapsule(from, current, collider.radius / 2, LayerMask.GetMask("Player")))
             {
                 RaycastHit hit;
                 Physics.Raycast(from, to - from, out hit, Vector3.Distance(from, current), LayerMask.GetMask("Player"));
                 current = hit.point;
-            }
+            }*/
             line.SetPosition(0, from);
             line.SetPosition(1, current);
             float length = Vector3.Distance(line.GetPosition(0), line.GetPosition(1));

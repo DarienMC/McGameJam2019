@@ -474,6 +474,7 @@ GameObject:
   - component: {fileID: 8497657119896701074}
   - component: {fileID: 8497657119897700946}
   - component: {fileID: 1523080307199854694}
+  - component: {fileID: 1624176503925671448}
   m_Layer: 0
   m_Name: Pothole_Normal
   m_TagString: Pothole
@@ -557,8 +558,21 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8497657119899702418}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
+  m_IsTrigger: 0
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1.80061, y: 1.8006104, z: 0.30936804}
   m_Center: {x: 0, y: 0.00000047683716, z: 0.034683987}
+--- !u!65 &1624176503925671448
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8497657119899702418}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.0937877, y: 1.222416, z: 2.383761}
+  m_Center: {x: 0.089559555, y: -0.058461964, z: 1.0928466}

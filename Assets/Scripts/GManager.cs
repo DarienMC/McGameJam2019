@@ -14,6 +14,8 @@ public class GManager : MonoBehaviour
     public GameObject runner;
     public GameObject chaser;
     public Text timerText;
+    public Text winText;
+    public Text distanceTrackingText;
 
     public float separationForChaserVictory;
     public float separationForRunnerVictory;
@@ -25,6 +27,7 @@ public class GManager : MonoBehaviour
     void Start()
     {
         SetTimerText();
+        winText.enabled = false;
     }
 
     // Update is called once per frame
@@ -32,6 +35,8 @@ public class GManager : MonoBehaviour
     {
         timePassed += Time.deltaTime;
         SetTimerText();
+
+        SetDistanceTrackingText();
 
         playerDistance = chaser.transform.position.z - runner.transform.position.z;
 
@@ -55,11 +60,18 @@ public class GManager : MonoBehaviour
 
     public void PlayerDeath()
     {
-        StartCoroutine(WaitForPlayerDeath());
+        Debug.Log("Chaser wins!");
+        winText.text = "Chaser wins!";
+        winText.enabled = true;
+        StartCoroutine(Wait());
+        SceneManager.LoadScene(0);
     }
 
     public void PlayerWin() {
         Debug.Log("Runner wins!");
+        winText.text = "Runner Wins!";
+        winText.enabled = true;
+        StartCoroutine(Wait());
         SceneManager.LoadScene(0);
     }
 
@@ -72,8 +84,12 @@ public class GManager : MonoBehaviour
         }
     }
 
-    private IEnumerator WaitForPlayerDeath() {
-        Debug.Log("Chaser wins!");
+    private void SetDistanceTrackingText()
+    {
+        distanceTrackingText.text = Mathf.FloorToInt(playerDistance - separationForChaserVictory).ToString() + "m out of " + Mathf.FloorToInt(separationForRunnerVictory - separationForChaserVictory).ToString() + "m";
+    }
+
+    private IEnumerator Wait() {
         yield return new WaitForSeconds(5);
         SceneManager.LoadScene(0);
     }
