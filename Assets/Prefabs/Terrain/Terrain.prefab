@@ -72,4 +72,7 @@ MonoBehaviour:
   cone: {fileID: 5394210651598569019, guid: b96d397ef49f0654588d29dba4fe3066, type: 3}
   powerUp: {fileID: 8387887026925275966, guid: 5953525ab47fe7641a346940a227c0fa, type: 3}
   texture: {fileID: 407097602574985468, guid: 78d41efceb8cd7e47a65fc7485d3fae0, type: 3}
-  spawingObjectSliceChance: 70
+  spawingObjectSliceChance: 30
+  distanceBetweenBeers: 3
+  maxSpawingObjectSliceChance: 70
+  deltaSpawningObjectSliceChance: 0.01
