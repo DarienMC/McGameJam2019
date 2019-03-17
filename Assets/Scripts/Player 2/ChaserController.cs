@@ -167,7 +167,6 @@ public class ChaserController : MonoBehaviour
     public void KillPlayer()
     {
         animator.SetTrigger("killPlayer");
-        audioSource.PlayOneShot(killPlayerSound);
     }
 
     public void KillPlayerAnimationCallback()

@@ -52,6 +52,8 @@ MonoBehaviour:
   timerText: {fileID: 0}
   winText: {fileID: 0}
   distanceTrackingText: {fileID: 0}
+  chaserWinClip: {fileID: 8300000, guid: e6bcb1268fee71a44a6715d1774ceefa, type: 3}
+  runnerWinClip: {fileID: 8300000, guid: 0dc8beaf0303a9845b53ef843c9772e5, type: 3}
   separationForChaserVictory: 1
   separationForRunnerVictory: 90
   transitionAnimator: {fileID: 0}
