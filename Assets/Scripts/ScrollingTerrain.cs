@@ -98,13 +98,13 @@ public class ScrollingTerrain : MonoBehaviour
         if (currentBuildingIndex == 0)
         {
             GameObject building = buildings[Random.Range(0, buildings.Length)];
-            Vector3 buildingPosition = instance.transform.position + building.transform.position + Vector3.right * (8.1f + building.GetComponent<Renderer>().bounds.size.x / 2);
+            Vector3 buildingPosition = instance.transform.position + building.transform.position + Vector3.right * 10.975f;
             GameObject buildingInstance = Instantiate(building, buildingPosition, building.transform.rotation);
             buildingInstance.transform.SetParent(instance.transform);
 
             building = buildings[Random.Range(0, buildings.Length)];
-            buildingPosition = instance.transform.position + building.transform.position + Vector3.left * (8.1f + building.GetComponent<Renderer>().bounds.size.x / 2);
-            buildingInstance = Instantiate(building, buildingPosition, building.transform.rotation);
+            buildingPosition = instance.transform.position + building.transform.position + Vector3.left * 10.975f;
+            buildingInstance = Instantiate(building, buildingPosition, building.transform.rotation * Quaternion.Euler(0.0f, 180.0f, 0.0f));
             buildingInstance.transform.SetParent(instance.transform);
         }
     }

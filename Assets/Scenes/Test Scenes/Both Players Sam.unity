@@ -294,28 +294,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5561119691336779348, guid: 1db0dc02fb581db43ab2a431a0618e8d,
-        type: 3}
-      propertyPath: buildings.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5561119691336779348, guid: 1db0dc02fb581db43ab2a431a0618e8d,
-        type: 3}
-      propertyPath: buildings.Array.data[0]
-      value: 
-      objectReference: {fileID: 2204762158772379301, guid: eb47b65f83bb70748a4e271174661ba9,
-        type: 3}
-    - target: {fileID: 5561119691336779348, guid: 1db0dc02fb581db43ab2a431a0618e8d,
-        type: 3}
-      propertyPath: buildings.Array.data[1]
-      value: 
-      objectReference: {fileID: 2204762158772379301, guid: 5d3529cb7589cc04a98feef99e66b090,
-        type: 3}
-    - target: {fileID: 5561119691336779349, guid: 1db0dc02fb581db43ab2a431a0618e8d,
-        type: 3}
-      propertyPath: distanceBetweenBeers
-      value: 3
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1db0dc02fb581db43ab2a431a0618e8d, type: 3}
 --- !u!1 &480028604 stripped
