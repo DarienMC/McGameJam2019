@@ -389,8 +389,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4267a88509119f343a93610747887b91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameScene:
-    m_Handle: 0
   button: {fileID: 2039542484}
 --- !u!4 &1174628621
 Transform:
