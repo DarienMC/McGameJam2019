@@ -27,7 +27,8 @@ public class ChaserController : MonoBehaviour
     public float maxReticlePosition = 400f;
 
     public GameObject bullet;
-    public Vector3 bulletOffset = Vector3.zero + Vector3.back;
+    public Vector3 bulletOffset = Vector3.back;
+    public Vector3 laserOffset = Vector3.back;
     public float bulletSpeed = 25.0f;
     public float fireDelay = 1.0f;
     public GameObject laser;
@@ -145,11 +146,11 @@ public class ChaserController : MonoBehaviour
         float time = distanceToTarget / bulletSpeed;
         Vector3 gravityOffset = Vector3.zero;
         Vector3 velocity = Vector3.zero;
-        for (float i = 0; i < time; i += Time.fixedDeltaTime)
+        /*for (float i = 0; i < time; i += Time.fixedDeltaTime)
         {
             velocity += -Physics.gravity * Time.fixedDeltaTime;
             gravityOffset += velocity * Time.fixedDeltaTime;
-        }
+        }*/
         Vector3 direction = (targetPosition + gravityOffset - instance.transform.position).normalized;
         instance.GetComponent<ChaserBullet>().velocity = direction * bulletSpeed;
         
@@ -163,10 +164,9 @@ public class ChaserController : MonoBehaviour
         canFireLaser = false;
         nextFire = Time.time + fireDelay;
         Vector3 targetPosition = ComputeTargetPosition();
-        GameObject instance = Instantiate(laser, transform.position + Vector3.back, Quaternion.identity);
-        instance.GetComponent<Laser>().Set(instance.transform.position, targetPosition);
+        GameObject instance = Instantiate(laser, transform.position + laserOffset, Quaternion.identity);
+        instance.GetComponent<Laser>().Set(instance.transform.position + laserOffset, targetPosition);
         reticle.Charge(fireDelay);
-
     }
 
     void KillPlayer()
