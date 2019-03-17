@@ -68,7 +68,7 @@ MonoBehaviour:
   lowJumpMultiplier: 4
   jumpCooldown: 2
   jumpSound: {fileID: 8300000, guid: fc47cf78e9c09de41a963f441d43062e, type: 3}
-  landingSound: {fileID: 8300000, guid: fce86d9e5318004458ded95a409f6a48, type: 3}
+  landingSound: {fileID: 8300000, guid: d4dd0ea2e9531f44eb2d10e7838183ff, type: 3}
   hitSound: {fileID: 8300000, guid: bfe98a6dd44a2124eada2fe980150fb9, type: 3}
   myJumpStatus: 0
 --- !u!54 &1152038002807615414
