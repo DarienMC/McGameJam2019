@@ -89,7 +89,7 @@ GameObject:
   - component: {fileID: 7618767636198755039}
   - component: {fileID: 7618767636197787679}
   m_Layer: 0
-  m_Name: Sphere_001
+  m_Name: Snow2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -104,7 +104,7 @@ Transform:
   m_GameObject: {fileID: 7618767636199724761}
   m_LocalRotation: {x: 0.098279424, y: 0.7002437, z: 0.7002436, w: -0.098279424}
   m_LocalPosition: {x: -0.12932682, y: 0.32140756, z: 4.179621}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.8, y: 1, z: 1}
   m_Children:
   - {fileID: 7618767636199557883}
   - {fileID: 7618767636199557877}

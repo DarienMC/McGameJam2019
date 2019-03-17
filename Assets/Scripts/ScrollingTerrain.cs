@@ -85,6 +85,7 @@ public class ScrollingTerrain : MonoBehaviour
         {
             propManager.GenerateLine(instance.transform);
         }
+        propManager.GenerateDecoration(instance.transform);
     }
 
     // Attach the prop to the terrain so that it moves along with it.
