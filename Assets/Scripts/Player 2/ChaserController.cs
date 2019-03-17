@@ -180,4 +180,12 @@ public class ChaserController : MonoBehaviour
     {
         gManager.PlayerDeath();
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "PowerUp")
+        {
+            canFireLaser = true;
+        }
+    }
 }
