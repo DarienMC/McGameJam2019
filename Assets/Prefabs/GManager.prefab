@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 162164913741201384}
   - component: {fileID: 162164913741201386}
   - component: {fileID: 162164913741201385}
+  - component: {fileID: 4401047775244293710}
   m_Layer: 0
   m_Name: GManager
   m_TagString: Untagged
@@ -164,3 +165,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loopableBgm: {fileID: 8300000, guid: 625f62cfd5616b84c99bcd22ec2e8b55, type: 3}
+--- !u!114 &4401047775244293710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 162164913741201390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad65a03e2ba19b346ad04e5fcb9723f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RotationPerSecond: 1
