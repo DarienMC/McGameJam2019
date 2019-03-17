@@ -48,6 +48,15 @@ public class GManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
+        else if (Input.GetKeyDown(KeyCode.F11))
+        {
+            SceneManager.LoadScene(1);
+        }
+
         timePassed += Time.deltaTime;
         SetTimerText();
 
