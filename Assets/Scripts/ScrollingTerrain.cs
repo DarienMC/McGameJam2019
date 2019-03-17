@@ -27,6 +27,8 @@ public class ScrollingTerrain : MonoBehaviour
     public GameObject[] buildings;
     private int currentBuildingIndex = 0;
 
+    private bool spawningObstacles = false;
+
     void Awake()
     {
         propManager = GetComponent<PropManager>();
@@ -37,6 +39,7 @@ public class ScrollingTerrain : MonoBehaviour
         {
             InstantiateSlice();
         }
+        spawningObstacles = true;
     }
 
     private void Update()
@@ -87,10 +90,13 @@ public class ScrollingTerrain : MonoBehaviour
         previousSlice = instance.transform;
         
         // Generate obstacles
-        currentSliceLine = (currentSliceLine + 1) % obstacleLinesMinDistance;
-        if (currentSliceLine == 0)
+        if (spawningObstacles)
         {
-            propManager.GenerateLine(instance.transform);
+            currentSliceLine = (currentSliceLine + 1) % obstacleLinesMinDistance;
+            if (currentSliceLine == 0)
+            {
+                propManager.GenerateLine(instance.transform);
+            }
         }
 
         // Generate buildings

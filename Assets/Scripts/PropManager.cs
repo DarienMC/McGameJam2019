@@ -161,14 +161,14 @@ public class PropManager : MonoBehaviour
 
     public void GenerateDecoration(Transform slice)
     {
-        int generateSnow = Random.Range(0, 10);
+        int generateSnow = Random.Range(0, 8);
         if (generateSnow < 2)
         {
             int typeOfSnow = Random.Range(0, 4);
 
             float offset = -5.4f + 1.8f * -1;
-            float randomOffset = Random.Range(0.5f, 2f);
-            Vector3 position = new Vector3(offset - randomOffset, 0.2f, slice.position.z);
+            float randomOffset = Random.Range(0.8f, 1.5f);
+            Vector3 position = new Vector3(offset - randomOffset, 0.5f, slice.position.z);
             if (typeOfSnow == 0)
             {
                 //generate at -1
@@ -188,15 +188,15 @@ public class PropManager : MonoBehaviour
 
         }
 
-        generateSnow = Random.Range(0, 10);
+        generateSnow = Random.Range(0, 8);
         if (generateSnow < 2)
         {
             int typeOfSnow = Random.Range(0, 3);
             //generate at maxObjectsOnASlice
 
             float offset = -5.4f + 1.8f * maxObjectsOnASlice;
-            float randomOffset = Random.Range(1f, 2.5f);
-            Vector3 position = new Vector3(offset + randomOffset, 0.2f, slice.position.z);
+            float randomOffset = Random.Range(0.8f, 1.5f);
+            Vector3 position = new Vector3(offset + randomOffset, 0.5f, slice.position.z);
             if (typeOfSnow == 0)
             {
                 //generate at -1
