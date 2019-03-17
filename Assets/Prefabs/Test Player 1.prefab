@@ -78,12 +78,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 50
-  jumpForce: 300
+  jumpForce: 7
   fallMultiplier: 5
   lowJumpMultiplier: 4
+  jumpCooldown: 2
   jumpSound: {fileID: 8300000, guid: fc47cf78e9c09de41a963f441d43062e, type: 3}
   landingSound: {fileID: 8300000, guid: fce86d9e5318004458ded95a409f6a48, type: 3}
   hitSound: {fileID: 8300000, guid: bfe98a6dd44a2124eada2fe980150fb9, type: 3}
+  myJumpStatus: 0
 --- !u!54 &1152038002807615414
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -118,6 +120,7 @@ MonoBehaviour:
   respawnHeight: 0.5
   anim: {fileID: 5197335283165443495}
   obstacleHitVFX: {fileID: 100018, guid: a40b64bf23366dc42a892af2c6ff6140, type: 3}
+  jumpCooldown: 0.5
   hitByChaserBulletSound: {fileID: 8300000, guid: 9edbb52355b52694aaba0f323da03418,
     type: 3}
   hitByLaserSound: {fileID: 8300000, guid: bfe98a6dd44a2124eada2fe980150fb9, type: 3}
