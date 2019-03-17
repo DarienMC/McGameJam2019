@@ -78,13 +78,13 @@ public class GManager : MonoBehaviour
         int timeOnTimer = Mathf.FloorToInt(timerLimit - timePassed);
         if (timeOnTimer >= 0) 
         {
-            timerText.text = timeOnTimer.ToString() + "s left";
+            timerText.text = timeOnTimer.ToString() + " s left";
         }
     }
 
     private void SetDistanceTrackingText()
     {
-        distanceTrackingText.text = Mathf.Max(0, Mathf.FloorToInt(playerDistance - separationForChaserVictory)).ToString() + "m distance"/* + Mathf.FloorToInt(separationForRunnerVictory - separationForChaserVictory).ToString() + "m"*/;
+        distanceTrackingText.text = Mathf.Max(0, Mathf.FloorToInt(playerDistance - separationForChaserVictory)).ToString() + " m distance"/* + Mathf.FloorToInt(separationForRunnerVictory - separationForChaserVictory).ToString() + "m"*/;
     }
 
     private IEnumerator Wait() {
