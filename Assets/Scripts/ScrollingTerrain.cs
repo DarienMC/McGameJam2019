@@ -107,6 +107,8 @@ public class ScrollingTerrain : MonoBehaviour
             buildingInstance = Instantiate(building, buildingPosition, building.transform.rotation * Quaternion.Euler(0.0f, 180.0f, 0.0f));
             buildingInstance.transform.SetParent(instance.transform);
         }
+        
+        propManager.GenerateDecoration(instance.transform);
     }
 
     // Attach the prop to the terrain so that it moves along with it.

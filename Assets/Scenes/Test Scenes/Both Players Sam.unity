@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -227,6 +227,75 @@ Canvas:
     type: 3}
   m_PrefabInstance: {fileID: 894117620}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &366935716
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2622781309036167058, guid: df3f06bf41ad10e4baf04a37495213a2,
+        type: 3}
+      propertyPath: m_Name
+      value: Invisible Floor
+      objectReference: {fileID: 0}
+    - target: {fileID: 2622781309036167065, guid: df3f06bf41ad10e4baf04a37495213a2,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2622781309036167065, guid: df3f06bf41ad10e4baf04a37495213a2,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2622781309036167065, guid: df3f06bf41ad10e4baf04a37495213a2,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2622781309036167065, guid: df3f06bf41ad10e4baf04a37495213a2,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2622781309036167065, guid: df3f06bf41ad10e4baf04a37495213a2,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2622781309036167065, guid: df3f06bf41ad10e4baf04a37495213a2,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2622781309036167065, guid: df3f06bf41ad10e4baf04a37495213a2,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2622781309036167065, guid: df3f06bf41ad10e4baf04a37495213a2,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2622781309036167065, guid: df3f06bf41ad10e4baf04a37495213a2,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2622781309036167065, guid: df3f06bf41ad10e4baf04a37495213a2,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2622781309036167065, guid: df3f06bf41ad10e4baf04a37495213a2,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: df3f06bf41ad10e4baf04a37495213a2, type: 3}
 --- !u!1001 &444329456
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -294,6 +363,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5561119691336779349, guid: 1db0dc02fb581db43ab2a431a0618e8d,
+        type: 3}
+      propertyPath: distanceBetweenBeers
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5561119691336779349, guid: 1db0dc02fb581db43ab2a431a0618e8d,
+        type: 3}
+      propertyPath: decoration1
+      value: 
+      objectReference: {fileID: 8399232423066652301, guid: 3f1c3711d21131e4089df6cb16254926,
+        type: 3}
+    - target: {fileID: 5561119691336779349, guid: 1db0dc02fb581db43ab2a431a0618e8d,
+        type: 3}
+      propertyPath: decoration2
+      value: 
+      objectReference: {fileID: 7618767636199724761, guid: 525fc408172606b44a3fe8b76d31c276,
+        type: 3}
+    - target: {fileID: 5561119691336779349, guid: 1db0dc02fb581db43ab2a431a0618e8d,
+        type: 3}
+      propertyPath: decoration3
+      value: 
+      objectReference: {fileID: 4314370599957397646, guid: f6295d74c4c777942be28f5ca43719d1,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1db0dc02fb581db43ab2a431a0618e8d, type: 3}
 --- !u!1 &480028604 stripped

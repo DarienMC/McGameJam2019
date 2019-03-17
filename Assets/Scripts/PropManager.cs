@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class PropManager : MonoBehaviour
 {
+    public GameObject decoration1;
+    public GameObject decoration2;
+    public GameObject decoration3;
+
     public ScrollingTerrain terrain;
     public GameObject porthole1;
     public GameObject porthole2;
@@ -153,5 +157,60 @@ public class PropManager : MonoBehaviour
             if (foundBeer == false)
                 beerDelay++;
         }
+    }
+
+    public void GenerateDecoration(Transform slice)
+    {
+        int generateSnow = Random.Range(0, 10);
+        if (generateSnow < 2)
+        {
+            int typeOfSnow = Random.Range(0, 4);
+
+            float offset = -5.4f + 1.8f * -1;
+            float randomOffset = Random.Range(0.5f, 2f);
+            Vector3 position = new Vector3(offset - randomOffset, 0.2f, slice.position.z);
+            if (typeOfSnow == 0)
+            {
+                //generate at -1
+                GenerateObstacle(decoration1, position);
+            }
+
+            if (typeOfSnow == 1)
+            {
+                //generate at -1
+                GenerateObstacle(decoration2, position);
+            }
+            if (typeOfSnow == 2)
+            {
+                //generate at -1
+                GenerateObstacle(decoration3, position);
+            }
+
+        }
+
+        generateSnow = Random.Range(0, 10);
+        if (generateSnow < 2)
+        {
+            int typeOfSnow = Random.Range(0, 3);
+            //generate at maxObjectsOnASlice
+
+            float offset = -5.4f + 1.8f * maxObjectsOnASlice;
+            float randomOffset = Random.Range(1f, 2.5f);
+            Vector3 position = new Vector3(offset + randomOffset, 0.2f, slice.position.z);
+            if (typeOfSnow == 0)
+            {
+                //generate at -1
+                GenerateObstacle(decoration1, position);
+            }
+
+            if (typeOfSnow == 2)
+            {
+                //generate at -1
+                GenerateObstacle(decoration3, position);
+            }
+
+
+        }
+
     }
 }
