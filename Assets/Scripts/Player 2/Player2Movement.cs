@@ -26,12 +26,12 @@ public class Player2Movement : MonoBehaviour
         if (movingBackwards)
         {
             if(transform.position.z - relativeSpeed >= minZDistance)
-                transform.position -= new Vector3(0, 0, relativeSpeed);
+                transform.position -= new Vector3(0, 0, relativeSpeed * Time.deltaTime);
         }
         else if (movingForwards)
         {
             if (transform.position.z + relativeSpeed <= maxZDistance)
-                transform.position += new Vector3(0, 0, relativeSpeed);
+                transform.position += new Vector3(0, 0, relativeSpeed * Time.deltaTime);
         }
 
         if(movingForwards || movingBackwards)
