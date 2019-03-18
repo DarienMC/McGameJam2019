@@ -18,10 +18,6 @@ public class GManager : MonoBehaviour
     public Text distanceTrackingText;
     public AudioClip chaserWinClip;
     public AudioClip runnerWinClip;
-   
-
-    public float separationForChaserVictory;
-    public float separationForRunnerVictory;
 
     private float timePassed = 0.0f;
     private float playerDistance;
@@ -32,7 +28,7 @@ public class GManager : MonoBehaviour
     
     public Animator transitionAnimator;
     public float transitionDuration = 1;
-    private bool gameEnding = false;
+    internal bool gameEnding = false;
 
 
     // Start is called before the first frame update
@@ -66,21 +62,8 @@ public class GManager : MonoBehaviour
 
         if (!gameEnding)
         {
-            //Win States
-            if (playerDistance <= separationForChaserVictory)
-            {
-                Debug.Log("The devil wins!");
-                PlayerDeath();
-            }
-
-            if (playerDistance >= separationForRunnerVictory)
-            {
-                PlayerWin();
-            }
-
             if (timerLimit <= timePassed)
             {
-                Debug.Log("The devil wins!");
                 PlayerWin();
             }
         }
@@ -89,25 +72,24 @@ public class GManager : MonoBehaviour
 
     public void PlayerDeath()
     {
+        gameEnding = true;
         int x = Random.Range(0, 2);
         Debug.Log("The devil wins!");
         winText.text = "The devil wins!";
         winText.enabled = true;
         chaserAudioSource.PlayOneShot(chaserWinClip);
-        StartCoroutine(Wait());
-
         FindObjectOfType<ChaserController>().KillPlayer();
-        gameEnding = true;
+        StartCoroutine(Wait());
     }
 
     public void PlayerWin() {
+        gameEnding = true;
         int x = Random.Range(0, 2);
         Debug.Log("The damned wins!");
         winText.text = "The damned Wins!";
         winText.enabled = true;
         runnerAudioSource.PlayOneShot(runnerWinClip);
         StartCoroutine(Wait());
-        gameEnding = true;
     }
 
     private void SetTimerText()
@@ -121,7 +103,7 @@ public class GManager : MonoBehaviour
 
     private void SetDistanceTrackingText()
     {
-        distanceTrackingText.text = Mathf.Max(0, Mathf.FloorToInt(playerDistance - separationForChaserVictory)).ToString() + " m distance"/* + Mathf.FloorToInt(separationForRunnerVictory - separationForChaserVictory).ToString() + "m"*/;
+        distanceTrackingText.text = Mathf.Max(0, Mathf.FloorToInt(playerDistance)).ToString() + " m distance"/* + Mathf.FloorToInt(separationForRunnerVictory - separationForChaserVictory).ToString() + "m"*/;
     }
 
     private IEnumerator Wait() {

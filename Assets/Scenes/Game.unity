@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.5015716, g: 0.33531272, b: 0.5311812, a: 1}
+  m_IndirectSpecularColor: {r: 0.5472201, g: 0.36747745, b: 0.5794621, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -266,6 +266,14 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 75868974, guid: 0ca942f1363f87d47b12c84bd4ada5d5, type: 3}
+      propertyPath: runner
+      value: 
+      objectReference: {fileID: 1152038003228749688}
+    - target: {fileID: 75868974, guid: 0ca942f1363f87d47b12c84bd4ada5d5, type: 3}
+      propertyPath: maxDistance
+      value: 75
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0ca942f1363f87d47b12c84bd4ada5d5, type: 3}
@@ -1156,6 +1164,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: GManager
       objectReference: {fileID: 0}
+    - target: {fileID: 162164913741201390, guid: 44b07568a92d82842ac8f6c6081e2452,
+        type: 3}
+      propertyPath: m_TagString
+      value: GameController
+      objectReference: {fileID: 0}
     - target: {fileID: 162164913741201391, guid: 44b07568a92d82842ac8f6c6081e2452,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1241,6 +1254,11 @@ PrefabInstance:
       propertyPath: transitionAnimator
       value: 
       objectReference: {fileID: 894117623}
+    - target: {fileID: 162164913741201384, guid: 44b07568a92d82842ac8f6c6081e2452,
+        type: 3}
+      propertyPath: timerLimit
+      value: 120
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 44b07568a92d82842ac8f6c6081e2452, type: 3}
 --- !u!1001 &1152038003228749687

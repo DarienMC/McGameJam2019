@@ -4,20 +4,22 @@ using UnityEngine;
 
 public class Player2Movement : MonoBehaviour
 {
+    public Transform runner;
     public float relativeSpeed;
-    public float maxZDistance;
-    public float minZDistance;
+    public float maxDistance;
+    public float minDistance;
 
     private bool movingBackwards = false;
     private bool movingForwards = false;
     private DelegateTimer timerCallbackObject;
 
     private float moveTimer = 0;
+    private GManager gManager;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        gManager = GameObject.FindWithTag("GameController").GetComponent<GManager>();
     }
 
     // Update is called once per frame
@@ -25,13 +27,27 @@ public class Player2Movement : MonoBehaviour
     {
         if (movingBackwards)
         {
-            if(transform.position.z - relativeSpeed >= minZDistance)
-                transform.position -= new Vector3(0, 0, relativeSpeed * Time.deltaTime);
+            transform.position -= new Vector3(0, 0, relativeSpeed * Time.deltaTime);
+            if (transform.position.z - runner.position.z <= minDistance)
+            {
+                transform.position = new Vector3(transform.position.x, transform.position.y, runner.position.z + minDistance);
+                if (!gManager.gameEnding)
+                {
+                    gManager.PlayerDeath();
+                }
+            }
         }
         else if (movingForwards)
         {
-            if (transform.position.z + relativeSpeed <= maxZDistance)
-                transform.position += new Vector3(0, 0, relativeSpeed * Time.deltaTime);
+            transform.position += new Vector3(0, 0, relativeSpeed * Time.deltaTime);
+            if (transform.position.z - runner.position.z >= maxDistance)
+            {
+                transform.position = new Vector3(transform.position.x, transform.position.y, runner.position.z + maxDistance);
+                if (!gManager.gameEnding)
+                {
+                    gManager.PlayerWin();
+                }
+            }
         }
 
         if(movingForwards || movingBackwards)
