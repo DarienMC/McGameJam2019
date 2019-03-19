@@ -41,7 +41,7 @@ A - Jump
 ### Programming
 - [Darien Muse-Charbonneau](https://github.com/DarienMC)
 - [Jesus Imery](https://github.com/Yisas)
-- [Sabina Sasu](https://github.com/Sabina.Sasu)
+- [Sabina Sasu](https://github.com/SabiSasu)
 - [Samuel Proulx](https://github.com/proulxsamuel)
 
 ### Sound design
